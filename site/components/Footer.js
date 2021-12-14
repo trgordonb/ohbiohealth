@@ -9,8 +9,6 @@ export async function getServerSideProps(ctx) {
     const resZH = await fetch('https://cms.ohbiohealth.club/documents?_locale=zh-Hant&&type=contact', {
         method: 'GET', ...options
     })
-    console.log(resEN)
-    console.log(resZH)
     const dataEN = await resEN.json()
     const dataZH = await resZH.json()
     return {
