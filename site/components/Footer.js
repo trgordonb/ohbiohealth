@@ -22,7 +22,6 @@ export async function getServerSideProps(ctx) {
 }
 
 export default function Footer({ data }) {
-    console.log(data)
     return (
         <footer className={styles.footer}>
             <p>Copyright &copy; OH Biohealth 2021</p>
