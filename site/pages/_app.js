@@ -4,12 +4,14 @@ import App from 'next/app'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { appWithTranslation } from '../utils/i18n'
+import NextNProgress from 'nextjs-progressbar';
 
 const AppComponent = ({ Component, pageProps, currentUser }) => {
   return (
     <div>
+      <NextNProgress />
       <Header currentUser={currentUser} />
-        <Component currentUser={currentUser} {...pageProps} />
+      <Component currentUser={currentUser} {...pageProps} />
       <Footer />
     </div>
   )
