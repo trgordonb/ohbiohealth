@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: site-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: site
+  template:
+    metadata:
+      labels:
+        app: site
+    spec:
+      containers:
+        - name: site
+          image: ohbiohealth/site
+          env:
+            - name: NEXT_PUBLIC_MAILCHIMP_URL
+              value: 'https://ensembletechs.us20.list-manage.com/subscribe/post?u=28653a604c74efc74ca707df0&amp;id=043676552b'
+            - name: NEXT_YOUTUBE_PLAYLIST_ITEMS_API
+              value: 'https://www.googleapis.com/youtube/v3/playlistItems'
+            - name: NEXT_YOUTUBE_API_KEY
+              value: 'AIzaSyC-AJHuRDgssX-2Hu-UsXU8QCnSCPNmKJg'
+            - name: NEXT_YOUTUBE_CHANNELID
+              value: PLtmKTJS0Kkqw945sc38zAkI5HEqLGm49i
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: site-srv
+spec:
+  selector:
+    app: site
+  ports:
+    - name: site
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

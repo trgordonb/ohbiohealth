@@ -1,0 +1,46 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - ohbiohealth.xyz
+      secretName: cert-tls
+  rules:
+    - host: ohbiohealth.xyz
+      http:
+        paths:
+          - path: /api/users/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: auth-srv
+                port:
+                  number: 3000
+          - path: /api/devices/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: devices-srv
+                port:
+                  number: 3000
+          - path: /api/profiles/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: profile-srv
+                port:
+                  number: 3000
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: site-srv
+                port:
+                  number: 3000
