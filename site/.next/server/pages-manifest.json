@@ -1,7 +1,13 @@
 {
-  "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
   "/404": "pages/404.js",
-  "/": "pages/index.js"
+  "/_app": "pages/_app.js",
+  "/about": "pages/about.js",
+  "/account/signin": "pages/account/signin.js",
+  "/account/signout": "pages/account/signout.js",
+  "/account/signup": "pages/account/signup.js",
+  "/admin": "pages/admin.js",
+  "/": "pages/index.js",
+  "/videos": "pages/videos.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js"
 }
