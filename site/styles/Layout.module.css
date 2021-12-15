@@ -8,3 +8,7 @@
   float: right;
   padding: 30px;
 }
+
+.container p {
+  white-space: pre-wrap;
+}

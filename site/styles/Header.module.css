@@ -42,7 +42,7 @@
 
   .header ul {
     margin: 20px 0;
-    flex-direction: column;
+    flex-direction: column-reverse;
     text-align: center;
   }
 

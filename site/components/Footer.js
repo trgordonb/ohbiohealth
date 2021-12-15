@@ -1,30 +1,20 @@
 import Link from 'next/link'
+import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa'
+import { useTranslation } from 'react-i18next'
 import styles from '../styles/Footer.module.css'
 
-export async function getServerSideProps(ctx) {
-    const options = {headers: new Headers({'Content-Type': 'application/json'})}
-    const resEN = await fetch('https://cms.ohbiohealth.club/documents?type=contact', {
-        method: 'GET', ...options
-    })
-    const resZH = await fetch('https://cms.ohbiohealth.club/documents?_locale=zh-Hant&&type=contact', {
-        method: 'GET', ...options
-    })
-    const dataEN = await resEN.json()
-    const dataZH = await resZH.json()
-    return {
-        props: {
-            data : {
-                en: dataEN[0].text,
-                zh: dataZH[0].text
-            }
-        }
-    }
-}
-
-export default function Footer({ data }) {
-    return (
+export default function Footer() {
+    const { t, i18n } = useTranslation()
+    return (   
         <footer className={styles.footer}>
-            <p>Copyright &copy; OH Biohealth 2021</p>
+            <div>
+                <p>
+                    <Link href="https://www.youtube.com/channel/UCXjd7VSLVHL3R3GUZ_LqtQw"><FaYoutube size={25} className={styles.icon}/></Link>
+                    <Link href="https://www.instagram.com/ohbiohealth"><FaInstagram size={25} className={styles.icon}/></Link>
+                    <Link href="https://www.facebook.com/OnourHolistic"><FaFacebook size={25} className={styles.icon}/></Link>
+                </p>
+                <p>Copyright &copy; OH Biohealth 2021</p>
+            </div>
         </footer>
     )
 }

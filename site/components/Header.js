@@ -22,6 +22,7 @@ export default function Header({ currentUser }) {
         { label: t('service'), href: '/service' },
         { label: t('healthtip'), href: '/healthtips' },
         { label: t('video'), href: '/videos'},
+        { label: t('contact'), href: '/contact' },
         { label: t('faq'), href: '/faq' },
         currentUser && currentUser.usertype === 'admin' && { label: t('admin'), href: '/admin' },
         !currentUser && { label: t('signin'), href: '/account/signin' },
@@ -39,8 +40,7 @@ export default function Header({ currentUser }) {
     })
 
     return (
-        <header className={styles.header}>
-            
+        <header className={styles.header}>      
             <div className={styles.logo}>
                 <Link href='/'>
                     <a>
@@ -61,7 +61,6 @@ export default function Header({ currentUser }) {
                     
                 </ul>
             </nav>
-
-        </header>
+        </header>  
     )
 }

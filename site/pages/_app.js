@@ -6,13 +6,13 @@ import Footer from '@/components/Footer'
 import { appWithTranslation } from '../utils/i18n'
 import NextNProgress from 'nextjs-progressbar';
 
-const AppComponent = ({ Component, pageProps, currentUser }) => {
+const AppComponent = ({ Component, pageProps, currentUser, footerData }) => {
   return (
     <div>
       <NextNProgress />
       <Header currentUser={currentUser} />
       <Component currentUser={currentUser} {...pageProps} />
-      <Footer />
+      <Footer data={footerData} />
     </div>
   )
 }
