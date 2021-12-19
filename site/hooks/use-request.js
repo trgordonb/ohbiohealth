@@ -15,7 +15,10 @@ export default ({ url, method, body, onSuccess }) => {
       return response.data;
     } catch (err) {
       console.log(err)
-      setErrors(null);
+      const errMsgs = err.response.data.errors.map(err => (
+        `${err.message}`
+      ))
+      setErrors(errMsgs[0]);
     }
   };
 

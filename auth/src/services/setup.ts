@@ -5,7 +5,9 @@ export const addAdmin = async () => {
         email: 'admin@ohbiohealth.com',
         password: process.env.ADMIN_PASSWORD || 'admin',
         usertype: 'admin',
-        hasProvidedInfo: true
+        hasProvidedInfo: true,
+        hasFinishedSurvey: true,
+        hasRegDevice: false
     });
     await user.save();
 }

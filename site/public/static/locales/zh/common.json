@@ -29,5 +29,13 @@
     "contact": "聯繫我們",
     "privacy": "隱私政策",
     "ok": "我明白",
-    "cookie": "本網站使用cookies來提升用戶體驗"
+    "cookie": "本網站使用cookies來提升用戶體驗",
+    "shop": "購物",
+    "gender": "性別",
+    "dateofbirth": "出生日期",
+    "weight": "體重 (kg)",
+    "height": "身高 (cm)",
+    "moredetail": "請提供下列資料以完成註冊",
+    "male": "男",
+    "female": "女"
 }

@@ -40,7 +40,9 @@ router.post(
         id: existingUser.id,
         email: existingUser.email,
         usertype: existingUser.usertype,
-        hasProvidedInfo: existingUser.hasProvidedInfo
+        hasProvidedInfo: existingUser.hasProvidedInfo,
+        hasRegDevice: existingUser.hasRegDevice,
+        hasFinishedSurvey: existingUser.hasFinishedSurvey
       },
       process.env.JWT_KEY!
     );

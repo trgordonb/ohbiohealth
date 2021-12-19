@@ -1,20 +1,29 @@
 import mongoose from 'mongoose';
 import { Gender } from '@ohbiohealth/common';
+import { DeviceDoc } from './device'
 
 interface ProfileAttrs {
     userId: string;
     email: string;
     gender?: Gender;
+    dateOfBirth?: Date;
+    weight?: Number;
+    height?: Number;
+    devices?: [DeviceDoc];
 }
 
 interface ProfileDoc extends mongoose.Document {
     userId: string;
     email: string;
     gender?: Gender;
+    dateOfBirth?: Date;
+    weight?: Number;
+    height?: Number;
+    devices?: [DeviceDoc];
 }
 
 interface ProfileModel extends mongoose.Model<ProfileDoc> {
-  build(attrs: ProfileAttrs): ProfileDoc;
+    build(attrs: ProfileAttrs): ProfileDoc;
 }
 
 const profileSchema = new mongoose.Schema(
@@ -30,7 +39,20 @@ const profileSchema = new mongoose.Schema(
     gender: {
         type: String,
         enum: Object.values(Gender),
-    }
+    },
+    dateOfBirth: {
+        type: Date
+    },
+    weight: {
+        type: Number
+    },
+    height: {
+        type: Number
+    }, 
+    devices: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Device',
+    }]
   },
   {
     toJSON: {

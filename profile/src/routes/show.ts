@@ -12,7 +12,7 @@ router.get(
   '/api/profiles/:userId',
   requireAuth,
   async (req: Request, res: Response) => {
-    const profile = await Profile.findOne({ userId: req.params.userId })
+    const profile = await Profile.findOne({ userId: req.params.userId }).populate('devices')
 
     if (!profile) {
       throw new NotFoundError();

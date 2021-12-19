@@ -5,6 +5,7 @@ import cookieSession from 'cookie-session';
 import { errorHandler, NotFoundError, currentUser } from '@ohbiohealth/common';
 import { createDeviceRouter } from './routes/new'
 import { showDeviceRouter } from './routes/show';
+import { updateDeviceRouter } from './routes/update'
 
 const app = express();
 app.set('trust proxy', true);
@@ -18,6 +19,7 @@ app.use(
 app.use(currentUser);
 app.use(createDeviceRouter);
 app.use(showDeviceRouter);
+app.use(updateDeviceRouter);
 
 app.all('*', async (req, res) => {
   throw new NotFoundError();

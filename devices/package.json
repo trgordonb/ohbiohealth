@@ -16,7 +16,7 @@
     ]
   },
   "dependencies": {
-    "@ohbiohealth/common": "^1.0.10",
+    "@ohbiohealth/common": "^1.0.14",
     "@types/cookie-session": "^2.0.43",
     "@types/express": "^4.17.12",
     "@types/jsonwebtoken": "^8.5.6",

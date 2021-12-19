@@ -3,11 +3,13 @@ import mongoose from 'mongoose';
 interface DeviceAttrs {
   deviceId: string;
   deviceType: string;
+  warrantyExpireAt: Date;
 }
 
-interface DeviceDoc extends mongoose.Document {
+export interface DeviceDoc extends mongoose.Document {
   deviceId: string;
   deviceType: string;
+  warrantyExpireAt: Date;
 }
 
 interface DeviceModel extends mongoose.Model<DeviceDoc> {
@@ -23,9 +25,6 @@ const deviceSchema = new mongoose.Schema(
     deviceType: {
       type: String,
       required: true,
-    },
-    userId: {
-      type: String
     },
     warrantyExpireAt: {
       type: Date

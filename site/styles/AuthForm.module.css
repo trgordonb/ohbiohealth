@@ -10,8 +10,10 @@
     margin-bottom: 10px;
 }
 
+.auth input[type='number'],
 .auth input[type='text'],
 .auth input[type='email'],
+.auth input[type='date'],
 .auth input[type='password'] {
     display: block;
     width: 100%;
@@ -36,4 +38,14 @@
 
 .auth div {
     margin-bottom: 20px;
+}
+
+.genderselect {
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+}
+
+.selecttext {
+    margin: 5px 5px;
 }

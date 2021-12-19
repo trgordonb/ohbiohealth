@@ -8,6 +8,8 @@ interface UserAttrs {
   password: string;
   usertype?: string;
   hasProvidedInfo?: boolean;
+  hasRegDevice?: boolean;
+  hasFinishedSurvey?: boolean;
 }
 
 // An interface that describes the properties
@@ -23,6 +25,8 @@ interface UserDoc extends mongoose.Document {
   password: string;
   usertype?: string;
   hasProvidedInfo?: boolean;
+  hasRegDevice?: boolean;
+  hasFinishedSurvey?: boolean;
 }
 
 const userSchema = new mongoose.Schema({
@@ -39,6 +43,14 @@ const userSchema = new mongoose.Schema({
     default: 'client'
   },
   hasProvidedInfo: {
+    type: Boolean,
+    default: false
+  },
+  hasRegDevice: {
+    type: Boolean,
+    default: false
+  },
+  hasFinishedSurvey: {
     type: Boolean,
     default: false
   }},

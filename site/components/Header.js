@@ -22,9 +22,11 @@ export default function Header({ currentUser }) {
         { label: t('service'), href: '/service' },
         { label: t('healthtip'), href: '/healthtips' },
         { label: t('video'), href: '/videos'},
+        { label: t('shop'), href: '/shop'},
         { label: t('contact'), href: '/contact' },
         { label: t('faq'), href: '/faq' },
         currentUser && currentUser.usertype === 'admin' && { label: t('admin'), href: '/admin' },
+        currentUser && currentUser.usertype === 'client' && { label: t('regdevice'), href: '/account/regdevice'},
         !currentUser && { label: t('signin'), href: '/account/signin' },
         currentUser && { label: t('signout'), href: '/account/signout' }
     ]

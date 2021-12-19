@@ -1,7 +1,7 @@
 import { FaUser } from 'react-icons/fa'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Router from 'next/router';
 import useRequest from '../../hooks/use-request';
@@ -20,7 +20,13 @@ export default function SigninPage() {
       email,
       password
     },
-    onSuccess: () => Router.push('/')
+    onSuccess: (user) => {
+      if (user && user.hasProvidedInfo) {
+        Router.push('/')
+      } else {
+        Router.push('/account/profile')
+      }
+    }
   });
 
   const handleSubmit = async (e) => {
@@ -28,6 +34,12 @@ export default function SigninPage() {
     
     await doRequest()
   }
+
+  useEffect(() => {
+    if (errors) {
+      toast.error(errors)
+    }
+  },[errors])
 
   return (
     <div>

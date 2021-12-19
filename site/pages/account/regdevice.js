@@ -6,21 +6,19 @@ import styles from '@/styles/AuthForm.module.css'
 import useRequest from '../../hooks/use-request'
 import { useTranslation } from 'react-i18next'
 
-export default function SigninPage() {
+export default function DeviceRegPage() {
   const [deviceId, setDeviceId] = useState('')
-  const [deviceType, setDeviceType] = useState('')
   const { t, i18n } = useTranslation()
 
   const { doRequest, errors } = useRequest({
     url: '/api/devices',
-    method: 'post',
+    method: 'put',
     body: {
       deviceId,
-      deviceType
     },
     onSuccess: (data) => {
       if (data && data.id) {
-        toast.info('Device record added sucessfully')
+        toast.info('Device sucessfully registered')
       }
       setDeviceId('')
     }
@@ -45,23 +43,15 @@ export default function SigninPage() {
         </h1>
         <ToastContainer />
         <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor='deviceId'>{t('deviceid')}</label>
-            <input
-              id='deviceId'
-              value={deviceId}
-              type="text"
-              onChange={(e) => setDeviceId(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor='devicetype'>{t('devicetype')}</label>
-            <select onChange={(e) => setDeviceType(e.target.value)} id="devicetype" name="devicetype">
-                <option value="QM">QM</option>
-                <option value="BM">BM</option>
-                <option value="BES">BES</option>
-            </select>
-          </div>
+            <div>
+                <label htmlFor='deviceId'>{t('deviceid')}</label>
+                <input
+                    id='deviceId'
+                    value={deviceId}
+                    type="text"
+                    onChange={(e) => setDeviceId(e.target.value)}
+                />
+            </div>
 
           <input type='submit' value={t('submit')} className='btn' />
         </form>

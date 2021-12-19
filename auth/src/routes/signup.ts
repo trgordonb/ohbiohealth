@@ -36,7 +36,9 @@ router.post('/api/users/signup', [
       id: user.id,
       email: user.email,
       usertype: user.usertype,
-      hasProvidedInfo: user.hasProvidedInfo
+      hasProvidedInfo: user.hasProvidedInfo,
+      hasRegDevice: user.hasRegDevice,
+      hasFinishedSurvey: user.hasFinishedSurvey
     }, 
     process.env.JWT_KEY!
     );

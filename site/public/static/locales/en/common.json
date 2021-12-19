@@ -29,5 +29,13 @@
     "contact": "Contact us",
     "privacy": "Privacy Policy",
     "ok": "I understand",
-    "cookie": "This website uses cookies to enhance the user experience."
+    "cookie": "This website uses cookies to enhance the user experience.",
+    "shop": "Shop",
+    "gender": "Gender",
+    "dateofbirth": "Date of Birth",
+    "weight": "Weight (kg)",
+    "height": "Height (cm)",
+    "moredetail": "Please complete user profile",
+    "male": "Male",
+    "female": "Female"
 }

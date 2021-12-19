@@ -1,7 +1,7 @@
 import { FaUser } from 'react-icons/fa'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Router from 'next/router'
 import Link from 'next/link'
 import styles from '@/styles/AuthForm.module.css'
@@ -22,7 +22,7 @@ export default function SignUpPage() {
         password
       },
       onSuccess: () => Router.push({
-        pathname: '/',
+        pathname: '/account/profile',
       })
     });
 
@@ -36,6 +36,12 @@ export default function SignUpPage() {
 
     doRequest()
   }
+
+  useEffect(() => {
+    if (errors) {
+      toast.error(errors)
+    }
+  },[errors])
 
   return (
     <div>
