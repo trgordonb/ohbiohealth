@@ -63,7 +63,7 @@ export default function Header({ currentUser }) {
                 <li key={href} className={styles.dropdown}>
                     <button className={styles.dropbtn}>
                         {label}
-                        <i class="fa fa-caret-down"></i>
+                        <i className={styles.fa}></i>
                     </button>
                     <div className={styles.dropdowncontent}>
                     {
