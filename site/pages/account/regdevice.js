@@ -7,7 +7,18 @@ import useRequest from '../../hooks/use-request'
 import { useTranslation } from 'react-i18next'
 import { WidgetLoader, Widget } from 'react-cloudinary-upload-widget'
 
-export default function DeviceRegPage() {
+export function getServerSideProps() {
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD
+  const preset = process.env.NEXT_PUBLIC_CLOUDINARY_PRESET
+  return { 
+      props: {
+          cloudName,
+          preset
+      } 
+  }
+}
+
+export default function DeviceRegPage({ cloudName, preset }) {
   const [deviceId, setDeviceId] = useState('')
   const [fileUrl, setFileUrl] = useState('')
   const [fileName, setFileName] = useState('-')
@@ -49,8 +60,8 @@ export default function DeviceRegPage() {
         <WidgetLoader />
         <Widget
           sources={['local']}
-          cloudName={process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD}
-          uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_PRESET}
+          cloudName={cloudName}
+          uploadPreset={preset}
           folder={'ohbiohealth'}
           logging={false}
           onSuccess={(res) => {
