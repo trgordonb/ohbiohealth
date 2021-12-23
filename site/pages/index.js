@@ -14,8 +14,16 @@ import ActionProvider from '../chatbot/ActionProvider'
 import 'react-chatbot-kit/build/main.css'
 import NewsletterSubscribe from '../components/NewsletterSubscribe'
 
+export async function getServerSideProps(ctx) {
+  const mailChimpUrl = NEXT_PUBLIC_MAILCHIMP_URL
+  return { 
+      props: {
+          data: mailChimpUrl 
+      }
+  }
+}
 
-export default function HomePage({ currentUser }) {
+export default function HomePage({ currentUser, data }) {
   //const [showChatBot, setShowChatBot] = useState(false)
   const { t, i18n } = useTranslation()
 
@@ -50,7 +58,7 @@ export default function HomePage({ currentUser }) {
       >{t('cookie')}
       </CookieConsent>
       <div className={styles.container}> 
-        <NewsletterSubscribe />
+        <NewsletterSubscribe mailChimpUrl={data} />
       </div>
       <div className={styles.right}>
         {
