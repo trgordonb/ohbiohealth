@@ -49,8 +49,8 @@ export default function DeviceRegPage() {
         <WidgetLoader />
         <Widget
           sources={['local']}
-          cloudName={process.env.NEXT_CLOUDINARY_CLOUD}
-          uploadPreset={process.env.NEXT_CLOUDINARY_PRESET}
+          cloudName={process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD}
+          uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_PRESET}
           folder={'ohbiohealth'}
           logging={false}
           onSuccess={(res) => {

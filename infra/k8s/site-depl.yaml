@@ -18,17 +18,17 @@ spec:
           env:
             - name: NEXT_PUBLIC_MAILCHIMP_URL
               value: 'https://ensembletechs.us20.list-manage.com/subscribe/post?u=28653a604c74efc74ca707df0&amp;id=043676552b'
-            - name: NEXT_YOUTUBE_PLAYLIST_ITEMS_API
+            - name: NEXT_PUBLIC_YOUTUBE_PLAYLIST_ITEMS_API
               value: 'https://www.googleapis.com/youtube/v3/playlistItems'
-            - name: NEXT_YOUTUBE_API_KEY
+            - name: NEXT_PUBLIC_YOUTUBE_API_KEY
               value: 'AIzaSyC-AJHuRDgssX-2Hu-UsXU8QCnSCPNmKJg'
-            - name: NEXT_YOUTUBE_CHANNELID
+            - name: NEXT_PUBLIC_YOUTUBE_CHANNELID
               value: PLtmKTJS0Kkqw945sc38zAkI5HEqLGm49i
-            - name: NEXT_CLOUDINARY_CLOUD
+            - name: NEXT_PUBLIC_CLOUDINARY_CLOUD
               value: 'dqmqirs5h'
-            - name: NEXT_CLOUDINARY_PRESET
+            - name: NEXT_PUBLIC_CLOUDINARY_PRESET
               value: 'fppkpzyu'
-            - name: NEXT_ECWID_STOREID
+            - name: NEXT_PUBLIC_ECWID_STOREID
               value: '67812829'
 ---
 apiVersion: v1

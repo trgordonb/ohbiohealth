@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import styles from '../styles/Videos.module.css'
 
 export async function getServerSideProps(ctx) {
-    const reqUrl = `${process.env.NEXT_YOUTUBE_PLAYLIST_ITEMS_API}?part=snippet&maxResults=50&playlistId=${process.env.NEXT_YOUTUBE_CHANNELID}&key=${process.env.NEXT_YOUTUBE_API_KEY}`
+    const reqUrl = `${process.env.NEXT_PUBLIC_YOUTUBE_PLAYLIST_ITEMS_API}?part=snippet&maxResults=50&playlistId=${process.env.NEXT_PUBLIC_YOUTUBE_CHANNELID}&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}`
     const res = await fetch(reqUrl)
     const data = await res.json()
     return { 

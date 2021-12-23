@@ -4,7 +4,7 @@ import { ProductBrowser, BuyNowButton } from '@ecwid/nextjs-ecwid-plugin'
 
 
 ShopPage.getInitialProps = () => {
-    const storeId = process.env.NEXT_ECWID_STOREID
+    const storeId = process.env.NEXT_PUBLIC_ECWID_STOREID
     console.log('Server value:', storeId)
     return { 
         props: {
