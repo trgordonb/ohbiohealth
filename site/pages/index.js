@@ -14,8 +14,8 @@ import ActionProvider from '../chatbot/ActionProvider'
 import 'react-chatbot-kit/build/main.css'
 import NewsletterSubscribe from '../components/NewsletterSubscribe'
 
-export async function getServerSideProps(ctx) {
-  const mailChimpUrl = NEXT_PUBLIC_MAILCHIMP_URL
+HomePage.getInitialProps = () => {
+  const mailChimpUrl = process.env.NEXT_PUBLIC_MAILCHIMP_URL
   return { 
       props: {
           data: mailChimpUrl 

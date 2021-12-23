@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next'
 import { ProductBrowser, BuyNowButton } from '@ecwid/nextjs-ecwid-plugin'
 
 
-export async function getServerSideProps(ctx) {
+ShopPage.getInitialProps = () => {
     const storeId = process.env.NEXT_ECWID_STOREID
     return { 
         props: {
-            data: StoreId 
+            data: storeId 
         }
     }
 }
