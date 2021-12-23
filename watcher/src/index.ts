@@ -34,6 +34,7 @@ const start = async () => {
     });
     process.on('SIGINT', () => natsWrapper.client.close());
     process.on('SIGTERM', () => natsWrapper.client.close());
+    console.log('NATS client started...')
 
     const mailListener = new MailListener({
       username: process.env.WATCH_EMAIL,
@@ -52,6 +53,7 @@ const start = async () => {
     });
     
     mailListener.start();
+    console.log('mailbox listener started...')
 
     mailListener.on("server:connected", function(){
       console.log("imapConnected");
