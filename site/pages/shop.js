@@ -5,6 +5,7 @@ import { ProductBrowser, BuyNowButton } from '@ecwid/nextjs-ecwid-plugin'
 
 ShopPage.getInitialProps = () => {
     const storeId = process.env.NEXT_ECWID_STOREID
+    console.log('Server value:', storeId)
     return { 
         props: {
             data: storeId 
@@ -14,6 +15,7 @@ ShopPage.getInitialProps = () => {
 
 
 export default function ShopPage({ data }) {
+    console.log('Client value:', data)
     const { t, i18n } = useTranslation()
     
     return (
