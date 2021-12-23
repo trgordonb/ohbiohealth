@@ -9,10 +9,11 @@ import { Device } from '../models/device';
 const router = express.Router();
 
 router.get(
-  '/api/profiles/:deviceId',
+  '/api/devices',
   requireAuth,
   async (req: Request, res: Response) => {
-    const device = await Device.findOne({ deviceId: req.params.deviceId })
+    let deviceId = req.query.deviceId?.toString()
+    const device = await Device.findOne({ deviceId: deviceId })
 
     if (!device) {
       throw new NotFoundError();

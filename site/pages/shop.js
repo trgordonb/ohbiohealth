@@ -9,7 +9,7 @@ export default function ShopPage() {
     return (
         <div className={styles.container}>
             <ProductBrowser
-                storeId="67812829"
+                storeId={process.env.NEXT_ECWID_STOREID}
             />
         </div>
     )

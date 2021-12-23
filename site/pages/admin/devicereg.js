@@ -2,11 +2,12 @@ import { FaRocket } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import styles from '@/styles/AuthForm.module.css'
 import useRequest from '../../hooks/use-request'
 import { useTranslation } from 'react-i18next'
 
-export default function SigninPage() {
+export default function DeviceRegistrationPage() {
   const [deviceId, setDeviceId] = useState('')
   const [deviceType, setDeviceType] = useState('')
   const { t, i18n } = useTranslation()
@@ -65,6 +66,10 @@ export default function SigninPage() {
 
           <input type='submit' value={t('submit')} className='btn' />
         </form>
+
+        <p>
+          <Link href='/admin/approve'>{t('approve')}</Link>
+        </p>
 
       </div>
     </div>

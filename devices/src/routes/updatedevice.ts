@@ -9,8 +9,7 @@ import {
   Gender
 } from '@ohbiohealth/common';
 import { Device } from '../models/device';
-import { DeviceUpdatedPublisher } from '../events/publishers/device-updated-publisher';
-import { natsWrapper } from '../nats-wrapper';
+import { PurchaseProof } from '../models/purchaseproof';
 
 const router = express.Router();
 
@@ -19,6 +18,7 @@ router.put(
   requireAuth,
   [
     body('deviceId').not().isEmpty().withMessage('DeviceId is required'),
+    body('purchaseProofUrl').not().isEmpty().withMessage('Receipt must be uploaded'),
   ],
   validateRequest,
   async (req: Request, res: Response) => {
@@ -28,22 +28,20 @@ router.put(
       throw new NotFoundError();
     }
 
-    let curDate = new Date()
-    let expireDate = new Date()
-    expireDate.setDate(curDate.getDate() + 365)
+    const purchaseProof = PurchaseProof.build({
+      _id: req.body.deviceId,
+      userId: req.currentUser!.id,
+      email: req.currentUser!.email,
+      purchaseProofUrl: req.body.purchaseProofUrl
+    });
+    await purchaseProof.save();
 
     device.set({
-      userId: req.currentUser!.id,
-      warrantyExpireAt: expireDate
-    });
-    await device.save();
+      purchaseProof: req.body.deviceId
+    })
+    await device.save()
 
-    await new DeviceUpdatedPublisher(natsWrapper.client).publish({
-        deviceId: req.body.deviceId,
-        userId: req.currentUser!.id,
-        deviceType: device.deviceType,
-        warrantyExpireAt: expireDate.toISOString()
-    });
+    await device.populate('purchaseProof')
     
     res.send(device);
   }

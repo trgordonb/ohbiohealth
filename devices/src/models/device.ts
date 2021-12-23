@@ -1,13 +1,16 @@
 import mongoose from 'mongoose';
+import { PurchaseProofDoc } from './purchaseproof'
 
 interface DeviceAttrs {
   deviceId: string;
   deviceType: string;
+  purchaseProof?: PurchaseProofDoc;
 }
 
 interface DeviceDoc extends mongoose.Document {
   deviceId: string;
   deviceType: string;
+  purchaseProof?: PurchaseProofDoc;
 }
 
 interface DeviceModel extends mongoose.Model<DeviceDoc> {
@@ -24,11 +27,9 @@ const deviceSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    userId: {
-      type: String
-    },
-    warrantyExpireAt: {
-      type: Date
+    purchaseProof: {
+      type: String,
+      ref: 'PurchaseProof'
     }
   },
   {

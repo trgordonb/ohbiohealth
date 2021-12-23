@@ -24,6 +24,12 @@ spec:
               value: 'AIzaSyC-AJHuRDgssX-2Hu-UsXU8QCnSCPNmKJg'
             - name: NEXT_YOUTUBE_CHANNELID
               value: PLtmKTJS0Kkqw945sc38zAkI5HEqLGm49i
+            - name: NEXT_CLOUDINARY_CLOUD
+              value: 'dqmqirs5h'
+            - name: NEXT_CLOUDINARY_PRESET
+              value: 'fppkpzyu'
+            - name: NEXT_ECWID_STOREID
+              value: '67812829'
 ---
 apiVersion: v1
 kind: Service

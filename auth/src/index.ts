@@ -4,6 +4,7 @@ import { addAdmin } from './services/setup';
 import { natsWrapper } from './nats-wrapper';
 import { ProfileCompletedListener } from './events/listeners/profile-completed-listener'
 import { DeviceUpdatedListener } from './events/listeners/device-updated-listener'
+import { DeviceBoughtListener } from './events/listeners/device-bought-listener'
 
 import { app } from './app';
 
@@ -46,6 +47,7 @@ const start = async () => {
 
     new ProfileCompletedListener(natsWrapper.client).listen();
     new DeviceUpdatedListener(natsWrapper.client).listen();
+    new DeviceBoughtListener(natsWrapper.client).listen();
 
     await mongoose.connect(process.env.MONGO_URI);
     console.log('Connected to MongoDb');

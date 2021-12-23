@@ -19,6 +19,7 @@
     "react": "17.0.2",
     "react-bootstrap": "^2.0.3",
     "react-chatbot-kit": "^2.0.1",
+    "react-cloudinary-upload-widget": "^1.4.3",
     "react-cookie-consent": "^7.0.1",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",

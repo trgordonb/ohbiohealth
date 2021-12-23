@@ -38,6 +38,7 @@ router.post('/api/users/signup', [
       usertype: user.usertype,
       hasProvidedInfo: user.hasProvidedInfo,
       hasRegDevice: user.hasRegDevice,
+      hasBoughtDevice: user.hasBoughtDevice,
       hasFinishedSurvey: user.hasFinishedSurvey
     }, 
     process.env.JWT_KEY!

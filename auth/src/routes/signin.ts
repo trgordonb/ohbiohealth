@@ -42,6 +42,7 @@ router.post(
         usertype: existingUser.usertype,
         hasProvidedInfo: existingUser.hasProvidedInfo,
         hasRegDevice: existingUser.hasRegDevice,
+        hasBoughtDevice: existingUser.hasBoughtDevice,
         hasFinishedSurvey: existingUser.hasFinishedSurvey
       },
       process.env.JWT_KEY!

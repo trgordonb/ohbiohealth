@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import buildClient from '../api/build-client'
-import App from 'next/app'
+import { AppStateProvider } from '../hooks/use-appstate'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { appWithTranslation } from '../utils/i18n'
@@ -9,10 +9,12 @@ import NextNProgress from 'nextjs-progressbar';
 const AppComponent = ({ Component, pageProps, currentUser, footerData }) => {
   return (
     <div>
-      <NextNProgress />
-      <Header currentUser={currentUser} />
-      <Component currentUser={currentUser} {...pageProps} />
-      <Footer data={footerData} />
+      <AppStateProvider>
+        <NextNProgress />
+        <Header currentUser={currentUser} />
+        <Component currentUser={currentUser} {...pageProps} />
+        <Footer data={footerData} />
+      </AppStateProvider>
     </div>
   )
 }

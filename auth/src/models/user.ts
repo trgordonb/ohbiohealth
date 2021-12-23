@@ -8,6 +8,7 @@ interface UserAttrs {
   password: string;
   usertype?: string;
   hasProvidedInfo?: boolean;
+  hasBoughtDevice?: boolean;
   hasRegDevice?: boolean;
   hasFinishedSurvey?: boolean;
 }
@@ -25,6 +26,7 @@ interface UserDoc extends mongoose.Document {
   password: string;
   usertype?: string;
   hasProvidedInfo?: boolean;
+  hasBoughtDevice?: boolean;
   hasRegDevice?: boolean;
   hasFinishedSurvey?: boolean;
 }
@@ -43,6 +45,10 @@ const userSchema = new mongoose.Schema({
     default: 'client'
   },
   hasProvidedInfo: {
+    type: Boolean,
+    default: false
+  },
+  hasBoughtDevice: {
     type: Boolean,
     default: false
   },
