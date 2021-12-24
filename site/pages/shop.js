@@ -5,7 +5,6 @@ import { ProductBrowser, BuyNowButton } from '@ecwid/nextjs-ecwid-plugin'
 
 export function getServerSideProps() {
     const storeId = process.env.NEXT_PUBLIC_ECWID_STOREID
-    console.log('Server value:', storeId)
     return { 
         props: {
             data: storeId 
@@ -15,7 +14,6 @@ export function getServerSideProps() {
 
 
 export default function ShopPage({ data }) {
-    console.log('Client value:', data)
     const { t, i18n } = useTranslation()
     
     return (

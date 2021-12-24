@@ -48,10 +48,12 @@ export default function Header({ currentUser }) {
         { label: t('video'), href: '/videos', sub: false, menuItems: '' },
         { label: t('contact'), href: '/contact', sub: false, menuItems: '' },
         { label: t('faq'), href: '/faq', sub: false, menuItems: '' },
-        currentUser && currentUser.usertype === 'admin' && { label: t('admin'), href: '/admin/devicereg:/admin/approve', sub: true, menuItems: `${t('adddevice')}:${t('approve')}` },
-        currentUser && currentUser.usertype === 'client' && { label: t('shop'), href: '/shop', sub: false, menuItems: '' },
+        currentUser && currentUser.usertype === 'admin' && 
+        { label: t('admin'), href: '/admin/devicereg:/admin/approve', sub: true, menuItems: `${t('adddevice')}:${t('approve')}` },
+        { label: t('shop'), href: '/shop', sub: false, menuItems: '' },
         !currentUser && { label: t('account'), href: '/account/signin:/account/signup', sub: true, menuItems: `${t('signin')}:${t('register')}`},
-        currentUser && { label: t('account'), href: '/account/signout:/account/regdevice', sub: true, menuItems: `${t('signout')}:${t('regdevice')}`}
+        currentUser && 
+        { label: t('account'), href: `/account/signout:/account/regdevice:/shop#!/~/orders/email=${currentUser.email}`, sub: true, menuItems: `${t('signout')}:${t('regdevice')}:My Orders`}
     ]
     .filter(linkConfig => linkConfig)
     .map(({ label, href, sub, menuItems }) => {
