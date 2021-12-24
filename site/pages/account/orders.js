@@ -19,7 +19,7 @@ export default function OrdersPage({ data }) {
         <p>{new Date(order.orderDate).toISOString().slice(0,10)} &nbsp;&nbsp; {t('total')}: ${order.total}</p>
         {
           order.items.map((item) => { return (
-            <p><a href={item.product.url}>{item.product.name}(SKU:{item.product.sku})</a> &nbsp;&nbsp; ${item.product.price} X {item.quantity}</p>
+            <p key={item.product.name}><a href={item.product.url}>{item.product.name}(SKU:{item.product.sku})</a> &nbsp;&nbsp; ${item.product.price} X {item.quantity}</p>
           )})
         }
     </li>
