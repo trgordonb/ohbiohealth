@@ -42,8 +42,11 @@
     "account": "用戶",
     "adddevice": "新增設備",
     "basic": "請繼續提供一些關於閣下的基本信息",
-    "boughtdevice": "請為您最近購買的設備進行註冊",
+    "buydevice": "請為您最近購買的設備進行註冊",
     "talkchatbot": "請與我們的聊天機器人交談，以便我們更能了解您的健康狀況",
     "dismiss": "關閉",
-    "order": "我的訂單"
+    "order": "我的訂單",
+    "total": "總數",
+    "items": "項目",
+    "pleaselogin": "請先登入再繼續網購"
 }

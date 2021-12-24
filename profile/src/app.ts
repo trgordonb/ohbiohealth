@@ -7,6 +7,7 @@ import { errorHandler, NotFoundError, currentUser } from '@ohbiohealth/common';
 import { indexProfileRouter } from './routes/index';
 import { updateProfileRouter } from './routes/update';
 import { showProfileRouter } from './routes/show';
+import { newOrderRouter } from './routes/neworder';
 
 const app = express();
 app.set('trust proxy', true);
@@ -22,6 +23,7 @@ app.use(currentUser);
 app.use(indexProfileRouter);
 app.use(updateProfileRouter);
 app.use(showProfileRouter);
+app.use(newOrderRouter);
 
 app.all('*', async (req, res) => {
   throw new NotFoundError();

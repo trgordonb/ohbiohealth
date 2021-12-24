@@ -20,7 +20,7 @@ export default function Header({ currentUser }) {
             if (!currentUser.hasProvidedInfo) {
                 displayMessage = t('basic')
             } else if (currentUser.hasBoughtDevice && !currentUser.hasRegDevice && !currentUser.hasFinishedSurvey) {
-                displayMessage = t('boughtdevice')
+                displayMessage = t('buydevice')
             } else if (currentUser.hasBoughtDevice && currentUser.hasRegDevice && !currentUser.hasFinishedSurvey) {
                 displayMessage = t('talkchatbot')
             }
@@ -31,7 +31,7 @@ export default function Header({ currentUser }) {
             setDismissBar(false)
         }
         setTopMessage(displayMessage)
-    }, [currentUser]);
+    }, [currentUser, i18n.language]);
 
     const onChangeLanguage = (language) => {
         i18n.changeLanguage(language)
@@ -53,7 +53,7 @@ export default function Header({ currentUser }) {
         { label: t('shop'), href: '/shop', sub: false, menuItems: '' },
         !currentUser && { label: t('account'), href: '/account/signin:/account/signup', sub: true, menuItems: `${t('signin')}:${t('register')}`},
         currentUser && 
-        { label: t('account'), href: `/account/signout:/account/regdevice:/shop#!/~/orders/email=${currentUser.email}`, sub: true, menuItems: `${t('signout')}:${t('regdevice')}:My Orders`}
+        { label: t('account'), href: `/account/signout:/account/regdevice:/account/orders`, sub: true, menuItems: `${t('signout')}:${t('regdevice')}:${t('order')}`}
     ]
     .filter(linkConfig => linkConfig)
     .map(({ label, href, sub, menuItems }) => {

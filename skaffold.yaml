@@ -41,12 +41,4 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: ohbiohealth/watcher
-      context: watcher
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: "src/**/*.ts"
-            dest: .
 

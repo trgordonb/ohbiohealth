@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { Gender } from '@ohbiohealth/common';
 import { DeviceDoc } from './device'
+import { OrderDoc } from './order'
 
 interface ProfileAttrs {
     userId: string;
@@ -10,6 +11,7 @@ interface ProfileAttrs {
     weight?: Number;
     height?: Number;
     devices?: [DeviceDoc];
+    orders?: [OrderDoc];
 }
 
 interface ProfileDoc extends mongoose.Document {
@@ -20,6 +22,7 @@ interface ProfileDoc extends mongoose.Document {
     weight?: Number;
     height?: Number;
     devices?: [DeviceDoc];
+    orders?: [OrderDoc];
 }
 
 interface ProfileModel extends mongoose.Model<ProfileDoc> {
@@ -50,8 +53,12 @@ const profileSchema = new mongoose.Schema(
         type: Number
     }, 
     devices: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Device',
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Device',
+    }],
+    orders: [{
+        type: String,
+        ref: 'Order'
     }]
   },
   {
