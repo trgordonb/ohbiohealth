@@ -12,9 +12,9 @@ export default function Header({ currentUser }) {
     const { hasDismissedNotification, setHasDismissedNotification } = useAppState()
     
     useEffect(() => {
-        //if (!i18n.language) {
-        i18n.changeLanguage('zh');
-        //}
+        if (!i18n.language) {
+            i18n.changeLanguage('zh');
+        }
         let displayMessage = ''
         if (currentUser && currentUser.usertype === 'client') {
             if (!currentUser.hasProvidedInfo) {
