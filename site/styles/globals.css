@@ -56,17 +56,6 @@ h1 {
   opacity: 0.8;
 }
 
-.chatbot-button {
-  font-size: 0.99rem;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  background: transparent;
-  border-color: #28334aff;
-  padding: 0.4em;
-  margin: 0.4em;
-  cursor: pointer;
-  border-radius: 20px;
-}
-
 .btn-lang1 {
   font: inherit;
   font-size: 13px;

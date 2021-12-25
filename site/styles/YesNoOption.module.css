@@ -1,0 +1,17 @@
+.yesnobtn {
+    font-size: 0.99rem;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    background: transparent;
+    border-color: #28334aff;
+    padding: 0.4em;
+    margin: 0.4em;
+    cursor: pointer;
+    border-radius: 20px;
+    min-width: 70px;
+}
+
+.yesnobtn:focus {
+    background-color: orangered;
+    color: #fff;
+    border-color: transparent;
+}

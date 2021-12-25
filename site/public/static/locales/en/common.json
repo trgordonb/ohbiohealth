@@ -48,5 +48,16 @@
     "order": "My orders",
     "total": "Total",
     "items": "Items",
-    "pleaselogin": "Please login first before continue to our eShop"
+    "pleaselogin": "Please login first before continue to our eShop",
+    "talkassistant": "Conversation with Chatbot",
+    "surveyintro": "Hi. We'd like to survey you on your current pain situation.",
+    "q1": "Do you have muscle aches?",
+    "q2": "Do your pain feel like being picked by a needle?",
+    "q3": "Do you pain bring a sensation like burning?",
+    "q4": "Do your pain bring a sensation of numbness?",
+    "q5": "Thanks for letting us know more about your pain situation. Do you have more to share?",
+    "y": "Yes",
+    "n": "No",
+    "assistant": "Assistant",
+    "enterresponse": "Enter your response here"
 }

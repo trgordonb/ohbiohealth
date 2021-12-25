@@ -1,8 +1,9 @@
 class ActionProvider {
-    constructor(createChatbotMessage, setStateFunc, createClientMessage) {
+    constructor(createChatbotMessage, setStateFunc, createClientMessage, stateRef) {
       this.createChatbotMessage = createChatbotMessage;
       this.setState = setStateFunc;
       this.createClientMessage = createClientMessage;
+      this.stateRef = stateRef;
     }
 
     setChatbotMessage = (message, newstate) => {
@@ -18,31 +19,45 @@ class ActionProvider {
         } else {
           this.setState((state) => ({
             ...state,
+            step: state.step + 1,
             messages: [...state.messages, message]
           })
         )}
         
     }
     
-    handleGenderMale = () => {
-      const message = this.createChatbotMessage("We have updated your profile accordingly. Type done to save.");
-      this.setChatbotMessage(message, { gender: 'male' });
+    handleYes = () => {
+      if (this.stateRef.step === 1) {
+        const message = this.createChatbotMessage(this.stateRef.t('q2'), { withAvatar: false, delay: 500, widget: "yesno" });
+        this.setChatbotMessage(message, { muscleache: true });
+      } else if (this.stateRef.step === 2) {
+        const message = this.createChatbotMessage(this.stateRef.t('q3'), { withAvatar: false, delay: 500, widget: "yesno" });
+        this.setChatbotMessage(message, { needlesensation: true });
+      } else if (this.stateRef.step === 3) {
+        const message = this.createChatbotMessage(this.stateRef.t('q4'), { withAvatar: false, delay: 500, widget: "yesno" });
+        this.setChatbotMessage(message, { burningsensation: true });
+      } else if (this.stateRef.step === 4) {
+        const message = this.createChatbotMessage(this.stateRef.t('q5'));
+        this.setChatbotMessage(message, { numbsensation: true });
+      }
     }
 
-    handleGenderFemale = () => {
-      const message = this.createChatbotMessage("We have updated your profile accordingly. Type done to save.");
-      this.setChatbotMessage(message, { gender: 'female' });
+    handleNo = () => {
+      if (this.stateRef.step === 1) {
+        const message = this.createChatbotMessage(this.stateRef.t('q2'), { withAvatar: false, delay: 500, widget: "yesno" });
+        this.setChatbotMessage(message, { muscleache: false });
+      } else if (this.stateRef.step === 2) {
+        const message = this.createChatbotMessage(this.stateRef.t('q3'), { withAvatar: false, delay: 500, widget: "yesno" });
+        this.setChatbotMessage(message, { needlesensation: false });
+      } else if (this.stateRef.step === 3) {
+        const message = this.createChatbotMessage(this.stateRef.t('q4'), { withAvatar: false, delay: 500, widget: "yesno" });
+        this.setChatbotMessage(message, { burningsensation: false });
+      } else if (this.stateRef.step === 4) {
+        const message = this.createChatbotMessage(this.stateRef.t('q5'));
+        this.setChatbotMessage(message, { numbsensation: false });
+      }
     }
 
-    handleUnknown = () => {
-      const message = this.createChatbotMessage("Not sure what you mean, try again?");
-      this.setChatbotMessage(message, { });
-    };
-
-    handleGoodbye = () => {
-      const message = this.createChatbotMessage("Thanks for your time. Hope to hear from you soon.");
-      this.setChatbotMessage(message, { });
-    }
 }
   
 export default ActionProvider;

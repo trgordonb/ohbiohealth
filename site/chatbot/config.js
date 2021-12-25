@@ -1,14 +1,15 @@
 import { createChatBotMessage } from 'react-chatbot-kit';
-import GenderOptions from '../components/ChatBotOptions/GenderOptions';
+import YesNoOptions from '../components/ChatBotOptions/YesNoOptions';
+import { nextI18next } from '../utils/i18n';
 
 const config = {  
     botName: "UserProfileBot",
     initialMessages: [
-        createChatBotMessage(`Hi. I'm here to get to know you better.`),
-        createChatBotMessage(`What is your gender ?`, {
+        createChatBotMessage(nextI18next.i18n.t('surveyintro')),
+        createChatBotMessage(nextI18next.i18n.t('q1'), {
             withAvatar: false,
             delay: 500,
-            widget: "genderoptions"
+            widget: "yesno"
         })
     ],
     customStyles: {
@@ -37,19 +38,21 @@ const config = {
                 alignItems: "center"
               }}
             >
-              Conversation with Assistant
+              {nextI18next.i18n.t('talkassistant')}
             </div>
         ),
     },
     state: {
-        gender: "",
-        weight: "",
+        muscleache: false,
+        needlesensation: false,
+        burningsensation: false,
+        numbsensation: false,
         step: 1
     },
     widgets: [
         {
-            widgetName: "genderoptions",
-            widgetFunc: (props) => <GenderOptions {...props} />
+          widgetName: "yesno",
+          widgetFunc: (props) => <YesNoOptions {...props} />
         }
     ]
 };

@@ -24,31 +24,31 @@ export function getServerSideProps() {
 }
 
 export default function HomePage({ currentUser, data }) {
-  //const [showChatBot, setShowChatBot] = useState(false)
+  const [showChatBot, setShowChatBot] = useState(false)
   const { t, i18n } = useTranslation()
 
   useEffect(() => {
-    //if (currentUser && !currentUser.hasProvidedInfo) {
-      //toast.info('We would like to know more about you. Please chat with our assistant down here.')
-      //setShowChatBot(true)
-      //if (currentUser.id) {
-      //  config = {
-      //    ...config,
-      //    state : {
-      //      ...config.state,
-      //      userId: currentUser.id
-      //    }
-      //  }
-      //}  
-    //}
+    if (currentUser) {
+      setShowChatBot(true)
+      if (currentUser.id) {
+        config = {
+          ...config,
+          state : {
+            ...config.state,
+            userId: currentUser.id,
+            language: i18n.language,
+            t: t
+          }
+        }
+      }  
+    }
     
   },[])
 
-  //const closeChatbot = () => {
-  //  setShowChatBot(false)
-  //}
+  const closeChatbot = () => {
+    setShowChatBot(false)
+  }
 
- 
   return (
     <div>
       <Hero />
@@ -62,20 +62,21 @@ export default function HomePage({ currentUser, data }) {
       </div>
       <div className={styles.right}>
         {
-          //showChatBot &&
-          //<Popup
-          //  trigger={open => (
-          //    <button className='btn-icon btn-secondary'><SiChatbot />Assistant</button>
-          //  )}
-          //  position="top right"
-          //  closeOnDocumentClick
-          //>
-          //  <Chatbot
-          //    config={config}
-          //    messageParser={MessageParser}
-          //    actionProvider={ActionProvider}
-          //</div>  />
-          //</Popup>
+          showChatBot &&
+          <Popup
+            trigger={open => (
+              <button className='btn-icon btn-secondary'><SiChatbot />{t('assistant')}</button>
+            )}
+            position="top right"
+            closeOnDocumentClick
+          >
+            <Chatbot
+              config={config}
+              messageParser={MessageParser}
+              actionProvider={ActionProvider}
+              placeholderText={t('enterresponse')}
+            />
+          </Popup>
         }
       </div>
     </div>

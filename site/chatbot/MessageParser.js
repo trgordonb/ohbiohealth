@@ -7,22 +7,18 @@ class MessageParser {
     }
   
     parse(message) {
-      const lowercase = message.toLowerCase();
-
-      if (lowercase.includes('done')) {
-        if (this.state.step === 2) {
-          console.log('State: ',this.state);
-          axios['put'](`/api/profiles/${this.state.userId}`, { 
-              gender: this.state.gender
-          })
-          .then(response => {
-            console.log('Response: ',response)
-          })
-          this.actionProvider.handleGoodbye();
-        } 
-      } else {
-        this.actionProvider.handleUnknown();
-      }
+      if (this.state.step === 5) {
+        console.log('State: ',this.state);
+        axios['post'](`/api/profiles/painconditions`, { 
+          muscleache: this.state.muscleache,
+          needlesensation: this.state.needlesensation,
+          burningsensation: this.state.burningsensation,
+          numbsensation: this.state.numbsensation
+        })
+        .then(response => {
+          console.log('Response: ',response)
+        })
+      } 
     }
 }
 
