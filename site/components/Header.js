@@ -8,7 +8,6 @@ import { useAppState } from '../hooks/use-appstate'
 export default function Header({ currentUser }) {
     const { t, i18n } = useTranslation()  
     const [dismissBar, setDismissBar] = useState(false)
-    const [topMessage, setTopMessage] = useState('')
     const { hasDismissedNotification, setHasDismissedNotification } = useAppState()
     
     useEffect(() => {
@@ -30,7 +29,6 @@ export default function Header({ currentUser }) {
         } else {
             setDismissBar(false)
         }
-        setTopMessage(displayMessage)
     }, [currentUser, i18n.language]);
 
     const onChangeLanguage = (language) => {
@@ -93,7 +91,16 @@ export default function Header({ currentUser }) {
         <header>      
             {   !dismissBar &&
                 <div className={styles.alert}>
-                    <p>{topMessage}
+                    <p>
+                    {
+                        !currentUser.hasProvidedInfo && <div>{t('basic')}</div>
+                    }    
+                    {
+                        currentUser.hasBoughtDevice && !currentUser.hasRegDevice && !currentUser.hasFinishedSurvey && <div>{t('buydevice')}</div>
+                    }  
+                    {
+                        currentUser.hasBoughtDevice && currentUser.hasRegDevice && !currentUser.hasFinishedSurvey && <div>{t('talkchatbot')}</div>
+                    }
                         <span>
                             <button 
                                 className={styles.closebutton} 
