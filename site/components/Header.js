@@ -91,17 +91,17 @@ export default function Header({ currentUser }) {
         <header>      
             {   !dismissBar &&
                 <div className={styles.alert}>
-                    <p>
-                    {
-                        !currentUser.hasProvidedInfo && <div>{t('basic')}</div>
-                    }    
-                    {
-                        currentUser.hasBoughtDevice && !currentUser.hasRegDevice && !currentUser.hasFinishedSurvey && <div>{t('buydevice')}</div>
-                    }  
-                    {
-                        currentUser.hasBoughtDevice && currentUser.hasRegDevice && !currentUser.hasFinishedSurvey && <div>{t('talkchatbot')}</div>
-                    }
+                    <p>              
                         <span>
+                        {
+                            !currentUser.hasProvidedInfo && <div>{t('basic')}</div>
+                        }    
+                        {
+                            currentUser.hasBoughtDevice && !currentUser.hasRegDevice && !currentUser.hasFinishedSurvey && <div>{t('buydevice')}</div>
+                        }  
+                        {
+                            currentUser.hasBoughtDevice && currentUser.hasRegDevice && !currentUser.hasFinishedSurvey && <div>{t('talkchatbot')}</div>
+                        }
                             <button 
                                 className={styles.closebutton} 
                                 onClick={() => {
