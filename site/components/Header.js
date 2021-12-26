@@ -94,13 +94,13 @@ export default function Header({ currentUser }) {
                     <p>              
                         <span>
                         {
-                            !currentUser.hasProvidedInfo && <div>{t('basic')}</div>
+                            !currentUser.hasProvidedInfo && <>{t('basic')}</>
                         }    
                         {
-                            currentUser.hasBoughtDevice && !currentUser.hasRegDevice && !currentUser.hasFinishedSurvey && <div>{t('buydevice')}</div>
+                            currentUser.hasBoughtDevice && !currentUser.hasRegDevice && !currentUser.hasFinishedSurvey && <>{t('buydevice')}</>
                         }  
                         {
-                            currentUser.hasBoughtDevice && currentUser.hasRegDevice && !currentUser.hasFinishedSurvey && <div>{t('talkchatbot')}</div>
+                            currentUser.hasBoughtDevice && currentUser.hasRegDevice && !currentUser.hasFinishedSurvey && <>{t('talkchatbot')}</>
                         }
                             <button 
                                 className={styles.closebutton} 
