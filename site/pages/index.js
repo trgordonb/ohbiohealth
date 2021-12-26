@@ -12,6 +12,7 @@ import config from '../chatbot/config'
 import MessageParser from '../chatbot/MessageParser'
 import ActionProvider from '../chatbot/ActionProvider'
 import 'react-chatbot-kit/build/main.css'
+import { createChatBotMessage } from 'react-chatbot-kit';
 import NewsletterSubscribe from '../components/NewsletterSubscribe'
 
 export function getServerSideProps() {
@@ -29,7 +30,7 @@ export default function HomePage({ currentUser, data }) {
 
   useEffect(() => {
     if (currentUser) {
-      setShowChatBot(true)
+      setShowChatBot(true)    
       if (currentUser.id) {
         config = {
           ...config,
@@ -41,8 +42,7 @@ export default function HomePage({ currentUser, data }) {
           }
         }
       }  
-    }
-    
+    } 
   },[])
 
   const closeChatbot = () => {
@@ -71,7 +71,17 @@ export default function HomePage({ currentUser, data }) {
             closeOnDocumentClick
           >
             <Chatbot
-              config={config}
+              config={{
+                ...config, 
+                initialMessages: [
+                  createChatBotMessage(t('surveyintro')),
+                  createChatBotMessage(t('q1'), {
+                      withAvatar: false,
+                      delay: 500,
+                      widget: "yesno"
+                  })
+                ]
+              }}
               messageParser={MessageParser}
               actionProvider={ActionProvider}
               placeholderText={t('enterresponse')}

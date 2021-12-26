@@ -1,17 +1,10 @@
 import { createChatBotMessage } from 'react-chatbot-kit';
 import YesNoOptions from '../components/ChatBotOptions/YesNoOptions';
-import { nextI18next } from '../utils/i18n';
+import { nextI18next } from '../utils/i18n'
 
 const config = {  
     botName: "UserProfileBot",
-    initialMessages: [
-        createChatBotMessage(nextI18next.i18n.t('surveyintro')),
-        createChatBotMessage(nextI18next.i18n.t('q1'), {
-            withAvatar: false,
-            delay: 500,
-            widget: "yesno"
-        })
-    ],
+    initialMessages: [],
     customStyles: {
         botMessageBox: {
           backgroundColor: "#28334AFF"

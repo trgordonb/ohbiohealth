@@ -31,7 +31,7 @@ export default function Header({ currentUser }) {
             setDismissBar(false)
         }
         setTopMessage(displayMessage)
-    }, [currentUser]);
+    }, [currentUser, i18n.language]);
 
     const onChangeLanguage = (language) => {
         i18n.changeLanguage(language)
