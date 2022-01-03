@@ -180,26 +180,20 @@ export default function HomePage({ currentUser, data }) {
       <div id="productsBM" className={styles.container}>
           <h1>BM</h1>
           <p>{BMContent}</p>
-          {
-              currentUser &&
               <BuyNowButton 
                   storeId={data.storeId}
                   productId="413756104"
                   currentUser={currentUser}
-              />
-          }        
+              />   
       </div>
       <div id="productsQM" className={styles.container}>
           <h1>QM</h1>
           <p>{QMContent}</p>
-          {
-              currentUser &&
               <BuyNowButton 
                   storeId={data.storeId}
                   productId="427411508"
                   currentUser={currentUser}
-              />
-          }        
+              />        
       </div>
       <div id="productsBES" className={styles.container}>
             <h1>BES</h1>
