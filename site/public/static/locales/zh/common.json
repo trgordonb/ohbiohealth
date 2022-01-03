@@ -1,10 +1,12 @@
 {
     "aboutus": "關於我們",
-    "products": "產品",
-    "technology": "技術",
-    "service": "服務",
+    "products": "我們的產品",
+    "technology": "研發技術",
+    "service": "服務與合作夥伴",
+    "services": "服務",
+    "partners": "合作夥伴",
     "healthtip": "健康貼士",
-    "faq": "常見問題",
+    "faq": "常問問題",
     "signin": "登入",
     "signout": "登出",
     "admin": "系統管理",
@@ -59,5 +61,6 @@
     "y": "是",
     "n": "否",
     "assistant": "小助手",
-    "enterresponse": "在此處輸入回复"
+    "enterresponse": "在此處輸入回复",
+    "support": "支持"
 }

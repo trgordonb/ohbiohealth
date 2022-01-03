@@ -1,8 +1,10 @@
 {
     "aboutus": "About us",
-    "products": "Products",
+    "products": "Our Products",
     "technology": "Technology",
-    "service": "Service",
+    "service": "Services & Partners",
+    "services": "Services",
+    "partners": "Partners",
     "healthtip": "Health tips",
     "faq": "FAQ",
     "signin": "Sign in",
@@ -59,5 +61,6 @@
     "y": "Yes",
     "n": "No",
     "assistant": "Assistant",
-    "enterresponse": "Enter your response here"
+    "enterresponse": "Enter your response here",
+    "support": "Support"
 }

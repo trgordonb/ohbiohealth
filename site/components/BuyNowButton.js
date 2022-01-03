@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import useRequest from '../hooks/use-request'
 
-const ProductBrowser = (props) => {
+const BuyNowButton = (props) => {
     const { doRequest, errors } = useRequest({
         url: '/api/profiles/orders',
         method: 'post',
@@ -16,13 +16,14 @@ const ProductBrowser = (props) => {
 
         function load_ecwid() {
         if( typeof Ecwid != 'undefined' ) {
+            xProduct("display= price addtobag","link=yes","version=2","show_border=","show_price_on_button=1","center_align=1");
+
             Ecwid.OnAPILoaded.add(function() {
             if (!ecwidLoaded) {
                 ecwidLoaded = true;
                 if (props.currentUser) {
                     Ecwid.Cart.setCustomerEmail(props.currentUser.email)
                 }
-                xProductBrowser("categoriesPerRow=3", "views=grid(3,3) list(10) table(20)", "categoryView=grid", "searchView=list", "id=ecStoreProductBrowser");
             }
             });
             Ecwid.OnOrderPlaced.add(async (order) => {
@@ -48,13 +49,7 @@ const ProductBrowser = (props) => {
                 }
             })
         }}
-
-        window.ec = window.ec || {};
-        window.ec.config = window.ec.config || {};
-        window.ec.config.storefrontUrls = window.ec.config.storefrontUrls || {};
-        window.ec.config.storefrontUrls.cleanUrls = true;
-        window.ec.config.storefrontUrls.queryBasedCleanUrls = true;
-
+        
         window.ecwid_script_defer = true;
         window.ecwid_dynamic_widgets = true;
     
@@ -67,15 +62,24 @@ const ProductBrowser = (props) => {
             script.onload = load_ecwid
             document.body.appendChild(script);
         } else {
-        load_ecwid()
+            load_ecwid()
         }
     },[])
 
     return (
-        <div id="ecStoreProductBrowser"></div>
-    )
+		<div className={"ecsp ecsp-SingleProduct-v2 ecsp-Product ecwid-SingleProduct-v2-centered ec-Product-" + props.productId} itemType="http://schema.org/Product" data-single-product-id={props.productId}>
+			<div itemType="http://schema.org/Offer" itemScope itemProp="offers">
+				{ props.isShowPrice &&
+				<div className="ecwid-productBrowser-price ecwid-price" itemProp="price"  data-spw-price-location="button" content="">
+					<div itemProp="priceCurrency"></div>
+				</div>
+				}
+			</div>
+			<div customprop="addtobag"></div>
+		</div>
+	)
 }
 
-ProductBrowser.defaultProps = {storeId: 13433173};
+BuyNowButton.defaultProps = {storeId: 13433173, productId: 102852327, isShowPrice: true};
 
-export default ProductBrowser
+export default BuyNowButton

@@ -38,17 +38,14 @@ export default function Header({ currentUser }) {
     const zip = rows => rows[0].map((_,c)=>rows.map(row=>row[c]))
 
     const links = [
-        { label: t('aboutus'), href: '/about', sub: false, menuItems: '' },
-        { label: t('products'), href: '/products', sub: false, menuItems: '' },
-        { label: t('technology'), href: '/technology', sub: false, menuItems: '' },
-        { label: t('service'), href: '/service', sub: false, menuItems: '' },
-        { label: t('healthtip'), href: '/healthtips', sub: false, menuItems: '' },
-        { label: t('video'), href: '/videos', sub: false, menuItems: '' },
-        { label: t('contact'), href: '/contact', sub: false, menuItems: '' },
-        { label: t('faq'), href: '/faq', sub: false, menuItems: '' },
+        { label: t('aboutus'), href: '/#about', sub: false, menuItems: '' },
+        { label: t('technology'), href: '/#technology', sub: false, menuItems: '' },
+        { label: t('service'), href: '/#services', sub: false, menuItems: '' },
+        { label: t('products'), href: '/#productsBM:/#productsQM:/#productsBES:/#productsSEG', sub:true, menuItems: 'BM:QM:BES:SEG' },
+        { label: t('support'), href:'/#faq:/#contact', sub:true, menuItems: `${t('faq')}:${t('contact')}`},
         currentUser && currentUser.usertype === 'admin' && 
         { label: t('admin'), href: '/admin/devicereg:/admin/approve', sub: true, menuItems: `${t('adddevice')}:${t('approve')}` },
-        { label: t('shop'), href: '/shop', sub: false, menuItems: '' },
+        //{ label: t('shop'), href: '/shop', sub: false, menuItems: '' },
         !currentUser && { label: t('account'), href: '/account/signin:/account/signup', sub: true, menuItems: `${t('signin')}:${t('register')}`},
         currentUser && 
         { label: t('account'), href: `/account/signout:/account/regdevice:/account/orders`, sub: true, menuItems: `${t('signout')}:${t('regdevice')}:${t('order')}`}
