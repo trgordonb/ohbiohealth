@@ -20,94 +20,46 @@ HomePage.getInitialProps = async (ctx) => {
   const mailChimpUrl = process.env.NEXT_PUBLIC_MAILCHIMP_URL
   const storeId = process.env.NEXT_PUBLIC_ECWID_STOREID
   const options = {headers: new Headers({'Content-Type': 'application/json'})}
-  const aboutresEN = await fetch('https://cms.ohbiohealth.club/documents?type=aboutus', {
-      method: 'GET', ...options
+  const resEN = await fetch('https://cms.ohbiohealth.club/documents', {
+    method: 'GET', ...options
   })
-  const aboutresZH = await fetch('https://cms.ohbiohealth.club/documents?_locale=zh-Hant&&type=aboutus', {
-      method: 'GET', ...options
+  const resZH = await fetch('https://cms.ohbiohealth.club/documents?_locale=zh-Hant&&', {
+    method: 'GET', ...options
   })
-  const technologyresEN = await fetch('https://cms.ohbiohealth.club/documents?type=technology', {
-      method: 'GET', ...options
-  })
-  const technologyresZH = await fetch('https://cms.ohbiohealth.club/documents?_locale=zh-Hant&&type=technology', {
-      method: 'GET', ...options
-  })
-  const BMresEN = await fetch('https://cms.ohbiohealth.club/documents?type=BMfunctions', {
-      method: 'GET', ...options
-  })
-  const BMresZH = await fetch('https://cms.ohbiohealth.club/documents?_locale=zh-Hant&&type=BMfunctions', {
-      method: 'GET', ...options
-  })
-  const QMresEN = await fetch('https://cms.ohbiohealth.club/documents?type=QMfunctions', {
-      method: 'GET', ...options
-  })
-  const QMresZH = await fetch('https://cms.ohbiohealth.club/documents?_locale=zh-Hant&&type=QMfunctions', {
-      method: 'GET', ...options
-  })
-  const BESresEN = await fetch('https://cms.ohbiohealth.club/documents?type=BESfunctions', {
-      method: 'GET', ...options
-  })
-  const BESresZH = await fetch('https://cms.ohbiohealth.club/documents?_locale=zh-Hant&&type=BESfunctions', {
-      method: 'GET', ...options
-  })
-  const SEGresEN = await fetch('https://cms.ohbiohealth.club/documents?type=SEGfunctions', {
-      method: 'GET', ...options
-  })
-  const SEGresZH = await fetch('https://cms.ohbiohealth.club/documents?_locale=zh-Hant&&type=SEGfunctions', {
-      method: 'GET', ...options
-  })
-  const contactresEN = await fetch('https://cms.ohbiohealth.club/documents?type=contact', {
-      method: 'GET', ...options
-  })
-  const contactresZH = await fetch('https://cms.ohbiohealth.club/documents?_locale=zh-Hant&&type=contact', {
-      method: 'GET', ...options
-  })
-    
-  const aboutdataEN = await aboutresEN.json()
-  const aboutdataZH = await aboutresZH.json()
-  const technologydataEN = await technologyresEN.json()
-  const technologydataZH = await technologyresZH.json()
-  const BMdataEN = await BMresEN.json()
-  const BMdataZH = await BMresZH.json()
-  const QMdataEN = await QMresEN.json()
-  const QMdataZH = await QMresZH.json()
-  const BESdataEN = await BESresEN.json()
-  const BESdataZH = await BESresZH.json()
-  const SEGdataEN = await SEGresEN.json()
-  const SEGdataZH = await SEGresZH.json()
-  const contactdataEN = await contactresEN.json()
-  const contactdataZH = await contactresZH.json()
+  const dataEN = await resEN.json()
+  const dataZH = await resZH.json()
+
   return { 
       data: {
           link: mailChimpUrl,
           storeId: storeId,
           about: {
-            en: aboutdataEN[0].text,
-            zh: aboutdataZH[0].text
+            en: dataEN.filter(item=> item.type==='aboutus')[0].text,
+            zh: dataZH.filter(item=> item.type==='aboutus')[0].text
           },
           technology: {
-            en: technologydataEN[0].text,
-            zh: technologydataZH[0].text
+            en: dataEN.filter(item=> item.type==='technology')[0].text,
+            zh: dataZH.filter(item=> item.type==='technology')[0].text
           },
           BM: {
-            en: BMdataEN[0].text,
-            zh: BMdataZH[0].text
+            en: dataEN.filter(item=> item.type==='BMfunctions')[0].text,
+            zh: dataZH.filter(item=> item.type==='BMfunctions')[0].text
           },
           QM: {
-            en: QMdataEN[0].text,
-            zh: QMdataZH[0].text
+            en: dataEN.filter(item=> item.type==='QMfunctions')[0].text,
+            zh: dataZH.filter(item=> item.type==='QMfunctions')[0].text
           },
           BES: {
-            en: BESdataEN[0].text,
-            zh: BESdataZH[0].text
+            en: dataEN.filter(item=> item.type==='BESfunctions')[0].text,
+            zh: dataZH.filter(item=> item.type==='BESfunctions')[0].text
           },
           SEG: {
-            en: SEGdataEN[0].text,
-            zh: SEGdataZH[0].text
+            en: dataEN.filter(item=> item.type==='SEGfunctions')[0].text,
+            zh: dataZH.filter(item=> item.type==='SEGfunctions')[0].text
           },
           contact: {
-            en: contactdataEN[0].text,
-            zh: contactdataZH[0].text
+            en: dataEN.filter(item=> item.type==='contact')[0].text,
+            zh: dataZH.filter(item=> item.type==='contact')[0].text
           }
       }
   }
