@@ -14,7 +14,6 @@ import ActionProvider from '../chatbot/ActionProvider'
 import 'react-chatbot-kit/build/main.css'
 import { createChatBotMessage } from 'react-chatbot-kit';
 import NewsletterSubscribe from '../components/NewsletterSubscribe'
-//import { BuyNowButton } from '@ecwid/nextjs-ecwid-plugin'
 import BuyNowButton from '../components/BuyNowButton'
 
 HomePage.getInitialProps = async (ctx) => {
@@ -147,6 +146,7 @@ export default function HomePage({ currentUser, data }) {
         }
       }  
     } 
+    
   },[i18n.language])
 
   const closeChatbot = () => {

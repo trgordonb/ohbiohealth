@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from '../styles/Header.module.css'
+import Router from "next/router";
+import { useRouter } from "next/router";
 import { useTranslation } from 'react-i18next'
 import { useAppState } from '../hooks/use-appstate'
 
@@ -9,6 +11,7 @@ export default function Header({ currentUser }) {
     const { t, i18n } = useTranslation()  
     const [dismissBar, setDismissBar] = useState(false)
     const { hasDismissedNotification, setHasDismissedNotification } = useAppState()
+    const router = useRouter()
     
     useEffect(() => {
         if (!i18n.language) {
@@ -45,7 +48,6 @@ export default function Header({ currentUser }) {
         { label: t('support'), href:'/#faq:/#contact', sub:true, menuItems: `${t('faq')}:${t('contact')}`},
         currentUser && currentUser.usertype === 'admin' && 
         { label: t('admin'), href: '/admin/devicereg:/admin/approve', sub: true, menuItems: `${t('adddevice')}:${t('approve')}` },
-        //{ label: t('shop'), href: '/shop', sub: false, menuItems: '' },
         !currentUser && { label: t('account'), href: '/account/signin:/account/signup', sub: true, menuItems: `${t('signin')}:${t('register')}`},
         currentUser && 
         { label: t('account'), href: `/account/signout:/account/regdevice:/account/orders`, sub: true, menuItems: `${t('signout')}:${t('regdevice')}:${t('order')}`}
@@ -66,9 +68,11 @@ export default function Header({ currentUser }) {
                     {
                         menus.map(([sublink, submenu]) => {
                             return (
-                                <Link key={sublink} href={sublink}>
-                                    <a>{submenu}</a>
-                                </Link>
+                                <a className={styles.dropdown} key={sublink}>
+                                    <button className={styles.submenubtn} onClick={()=>router.push(sublink).then(() => router.reload())}>
+                                        {submenu}
+                                    </button>
+                                </a>
                             )
                         })
                     }
@@ -76,10 +80,10 @@ export default function Header({ currentUser }) {
                 </li>
             )} else {
         return (
-          <li key={href}>
-            <Link href={href}>
-                <a>{label}</a>
-            </Link>
+          <li key={href} className={styles.dropdown}>
+            <button className={styles.dropbtn} onClick={()=>router.push(href).then(() => router.reload())}>
+                {label}
+            </button>
           </li>
         )}
     })
@@ -114,11 +118,16 @@ export default function Header({ currentUser }) {
             }
             <div className={styles.header}>
                 <div className={styles.logo}>
-                    <Link href='/'>
+                    {/**<Link href='/'>
                         <a>
                             <Image src='/OHLogo.jpg' width={100} height={40}/>   
                         </a>
-                    </Link>
+                    </Link>*/}
+                    <button style={{border:0}} onClick={() => {
+                        router.push('/#about').then(() => router.reload())
+                    }}>
+                        <Image src='/OHLogo.jpg' width={100} height={40}/>  
+                    </button>
                 </div>
 
                 <nav>

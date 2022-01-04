@@ -49,7 +49,7 @@ const BuyNowButton = (props) => {
                 }
             })
         }}
-        
+
         window.ecwid_script_defer = true;
         window.ecwid_dynamic_widgets = true;
     
@@ -58,7 +58,7 @@ const BuyNowButton = (props) => {
             script.charset = 'utf-8';
             script.type = 'text/javascript';
             script.src = 'https://app.ecwid.com/script.js?' + props.storeId + '&data_platform=nextjs';
-            script.id = 'ecwid-script'
+            script.id = `ecwid-script`
             script.onload = load_ecwid
             document.body.appendChild(script);
         } else {
