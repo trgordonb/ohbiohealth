@@ -2,17 +2,15 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from '../styles/Header.module.css'
-import Router from "next/router";
-import { useRouter } from "next/router";
 import { useTranslation } from 'react-i18next'
 import { useAppState } from '../hooks/use-appstate'
+import { useRouter } from 'next/router'
 
 export default function Header({ currentUser }) {
     const { t, i18n } = useTranslation()  
     const [dismissBar, setDismissBar] = useState(false)
     const { hasDismissedNotification, setHasDismissedNotification } = useAppState()
     const router = useRouter()
-    router.
     
     useEffect(() => {
         if (!i18n.language) {
@@ -70,7 +68,7 @@ export default function Header({ currentUser }) {
                         menus.map(([sublink, submenu]) => {
                             return (
                                 <a className={styles.dropdown} key={sublink}>
-                                    <button className={styles.submenubtn} onClick={()=>router.push(sublink).then(() => router.reload())}>
+                                    <button className={styles.submenubtn} onClick={()=>router.replace(sublink).then(() => router.reload())}>
                                         {submenu}
                                     </button>
                                 </a>
@@ -82,7 +80,7 @@ export default function Header({ currentUser }) {
             )} else {
         return (
           <li key={href} className={styles.dropdown}>
-            <button className={styles.dropbtn} onClick={()=>router.push(href).then(() => router.reload())}>
+            <button className={styles.dropbtn} onClick={()=>router.replace(href).then(() => router.reload())}>
                 {label}
             </button>
           </li>
@@ -120,7 +118,7 @@ export default function Header({ currentUser }) {
             <div className={styles.header}>
                 <div className={styles.logo}>
                     <button style={{border:0}} onClick={() => {
-                        router.push('/#about').then(() => router.reload())
+                        router.replace('/#about').then(() => router.reload())
                     }}>
                         <Image src='/OHLogo.jpg' width={100} height={40}/>  
                     </button>
