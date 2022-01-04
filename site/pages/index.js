@@ -14,7 +14,6 @@ import ActionProvider from '../chatbot/ActionProvider'
 import 'react-chatbot-kit/build/main.css'
 import { createChatBotMessage } from 'react-chatbot-kit';
 import NewsletterSubscribe from '../components/NewsletterSubscribe'
-import BuyNowButton from '../components/BuyNowButton'
 
 HomePage.getInitialProps = async (ctx) => {
   const mailChimpUrl = process.env.NEXT_PUBLIC_MAILCHIMP_URL
@@ -132,20 +131,10 @@ export default function HomePage({ currentUser, data }) {
       <div id="productsBM" className={styles.container}>
           <h1>BM</h1>
           <p>{BMContent}</p>
-              <BuyNowButton 
-                  storeId={data.storeId}
-                  productId="413756104"
-                  currentUser={currentUser}
-              />   
       </div>
       <div id="productsQM" className={styles.container}>
           <h1>QM</h1>
-          <p>{QMContent}</p>
-              <BuyNowButton 
-                  storeId={data.storeId}
-                  productId="427411508"
-                  currentUser={currentUser}
-              />        
+          <p>{QMContent}</p>     
       </div>
       <div id="productsBES" className={styles.container}>
             <h1>BES</h1>

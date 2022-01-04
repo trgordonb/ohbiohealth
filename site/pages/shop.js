@@ -1,6 +1,6 @@
 import styles from '@/styles/Layout.module.css'
 import { useTranslation } from 'react-i18next'
-import BuyNowButton from '../components/BuyNowButton'
+import ProductBrowser from '../components/ProductBrowser'
 
 export function getServerSideProps() {
     const storeId = process.env.NEXT_PUBLIC_ECWID_STOREID
@@ -17,13 +17,10 @@ export default function ShopPage({ data, currentUser }) {
     return (
         <div className={styles.container}>
             {
-                currentUser ?
-                <BuyNowButton
+                <ProductBrowser
                     storeId={data}
-                    productId="413756104"
                     currentUser={currentUser}
-                /> : 
-                <p>{t('pleaselogin')}</p>
+                />
             }
             
         </div>
