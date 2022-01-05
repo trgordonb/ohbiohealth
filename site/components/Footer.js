@@ -24,7 +24,7 @@ export default function Footer() {
                     <Link href="https://www.facebook.com/OnourHolistic"><FaFacebook size={25} className={styles.icon}/></Link>
                     <Link href="https://play.google.com/store/apps/details?id=org.ohbiohealth.healthtracker"><Image src={GooglePlayIcon} width={100} height={40}/></Link>
                 </p>
-                <p>Copyright &copy; OH Biohealth 2021</p>
+                <p>Copyright &copy; OH Biohealth 2022</p>
             </div>
         </footer>
     )
