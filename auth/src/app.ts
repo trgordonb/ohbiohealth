@@ -10,9 +10,10 @@ import { signupRouter } from './routes/signup';
 import { errorHandler, NotFoundError } from '@ohbiohealth/common';
 
 const app = express();
+const corsOptions = {origin: '*', credentials: true };
 app.set('trust proxy', true);
 app.use(json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(
   cookieSession({
     signed: false,
