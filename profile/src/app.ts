@@ -2,6 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
+import cors from 'cors';
 import { errorHandler, NotFoundError, currentUser } from '@ohbiohealth/common';
 
 import { indexProfileRouter } from './routes/index';
@@ -11,8 +12,10 @@ import { newOrderRouter } from './routes/neworder';
 import { newPainRouter } from './routes/newpainconditions';
 
 const app = express();
+const corsOptions = {origin: ['https://ohbiohealth.xyz','http://localhost:3000'], credentials: true };
 app.set('trust proxy', true);
 app.use(json());
+app.use(cors(corsOptions));
 app.use(
   cookieSession({
     signed: false,
