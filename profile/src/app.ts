@@ -12,7 +12,7 @@ import { newOrderRouter } from './routes/neworder';
 import { newPainRouter } from './routes/newpainconditions';
 
 const app = express();
-const corsOptions = {origin: ['https://ohbiohealth.xyz','http://localhost:3000'], credentials: true };
+const corsOptions = {origin: ['https://ohbiohealth.xyz','http://localhost:3000','https://ohportal1.vercel.app'], credentials: true };
 app.set('trust proxy', true);
 app.use(json());
 app.use(cors(corsOptions));

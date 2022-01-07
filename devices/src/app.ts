@@ -12,7 +12,7 @@ import { updateProofRouter } from './routes/updateproof'
 
 const app = express();
 app.set('trust proxy', true);
-const corsOptions = {origin: ['https://ohbiohealth.xyz','http://localhost:3000'], credentials: true };
+const corsOptions = {origin: ['https://ohbiohealth.xyz','http://localhost:3000','https://ohportal1.vercel.app'], credentials: true };
 app.use(json());
 app.use(cors(corsOptions));
 app.use(
