@@ -20,6 +20,7 @@ app.use(
   cookieSession({
     signed: false,
     secure: false,
+    sameSite: 'none'
   })
 );
 app.use(currentUser);

@@ -16,7 +16,7 @@ const router = express.Router();
 
 router.put(
   '/api/profiles/:userId',
-  //requireAuth,
+  requireAuth,
   [
     body('gender').not().isEmpty().withMessage('Gender is required'),
     body('gender').isIn([Gender.Male,Gender.Female]).withMessage('Invalid gender value'),
