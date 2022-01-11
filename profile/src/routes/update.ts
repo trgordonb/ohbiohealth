@@ -36,8 +36,6 @@ router.put(
     }
 
     if (profile.userId !== req.currentUser!.id) {
-      console.log('Profile:', profile)
-      console.log('CurrentUser:', req.currentUser)
       throw new NotAuthorizedError();
     }
 
