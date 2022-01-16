@@ -15,7 +15,7 @@ const app = express();
 const corsOptions = {
   origin: ['https://ohbiohealth.xyz','http://localhost:3000','https://ohportal1.vercel.app'], 
   credentials: true,
-  allowedHeaders: ['Content-Type','Authorization', 'x-csrf-token','X-Requested-With', 'X-HTTP-Method-Override']
+  allowedHeaders: ['Content-Type','Authorization', 'Set-Cookie']
 };
 app.set('trust proxy', true);
 app.use(json());
