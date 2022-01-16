@@ -20,8 +20,7 @@ app.use(
   cookieSession({
     signed: false,
     secure: true,
-    sameSite: 'none',
-    domain: 'vercel.app'
+    sameSite: 'none'
   })
 );
 app.use(currentUser);
