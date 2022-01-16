@@ -18,7 +18,8 @@ app.use(
   cookieSession({
     signed: false,
     secure: true,
-    sameSite: 'none'
+    sameSite: 'none',
+    domain: 'vercel.app'
   })
 );
 
