@@ -19,7 +19,8 @@ app.use(cors(corsOptions));
 app.use(
   cookieSession({
     signed: false,
-    secure: false
+    secure: true,
+    sameSite: 'none'
   })
 );
 app.use(currentUser);
