@@ -75,5 +75,6 @@
     "learn": "Learn More",
     "goback": "Go back",
     "oops": "OOPS!",
-    "notfound": "We cannot find the page you are looking for"
+    "notfound": "We cannot find the page you are looking for",
+    "plslogin": "Please first login"
 }

@@ -102,7 +102,16 @@ export default function HomePage({ currentUser, data }) {
           }
         }
       }  
-    } 
+    } else {
+      config = {
+        ...config,
+        state: {
+          ...config.state,
+          language: i18n.language,
+          t: t
+        }
+      }
+    }
   },[i18n.language])
 
   const closeChatbot = () => {
@@ -204,22 +213,36 @@ export default function HomePage({ currentUser, data }) {
             )}
             closeOnDocumentClick
           >
-            <Chatbot
-              config={{
-                ...config, 
-                initialMessages: [
-                  createChatBotMessage(t('surveyintro')),
-                  createChatBotMessage(t('q1'), {
-                      withAvatar: false,
-                      delay: 500,
-                      widget: "yesno"
-                  })
-                ]
-              }}
-              messageParser={MessageParser}
-              actionProvider={ActionProvider}
-              placeholderText={t('enterresponse')}
-            />
+            {
+              currentUser ?
+              <Chatbot
+                config={{
+                  ...config, 
+                  initialMessages: [
+                    createChatBotMessage(t('surveyintro')),
+                    createChatBotMessage(t('q1'), {
+                        withAvatar: false,
+                        delay: 500,
+                        widget: "yesno"
+                    })
+                  ]
+                }}
+                messageParser={MessageParser}
+                actionProvider={ActionProvider}
+                placeholderText={t('enterresponse')}
+              />:
+              <Chatbot
+                config={{
+                  ...config,
+                  initialMessages: [
+                    createChatBotMessage(t('plslogin'))
+                  ]}}
+                  messageParser={MessageParser}
+                  actionProvider={ActionProvider}
+                  placeholderText={t('enterresponse')}
+                />
+            }
+            
           </Popup>
         }
       </div>

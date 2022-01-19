@@ -86,6 +86,11 @@ class ActionProvider {
     const message = this.createChatbotMessage(this.stateRef.t('e2'))
     this.setChatbotMessage(message, {})
   }
+
+  handleUnauthenticated = () => {
+    const message = this.createChatbotMessage(this.stateRef.t('plslogin'))
+    this.setChatbotMessage(message, {})
+  }
 }
 
 export default ActionProvider;

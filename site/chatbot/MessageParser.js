@@ -7,7 +7,9 @@ class MessageParser {
     }
   
     parse(message) {
-      if (this.state.step >= 6) {
+      if (!this.state.userId) {
+        this.actionProvider.handleUnauthenticated()
+      } else if (this.state.step >= 6) {
         let points = message.replace(/\s+/g, '')
         let re = /^(\d+(,\d+)*)?$/gm
         if (!points.match(re)) {
