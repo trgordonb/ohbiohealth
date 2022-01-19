@@ -1,14 +1,10 @@
-import buildClient from '../../api/build-client'
-import styles from '@/styles/AuthForm.module.css'
 import { useTranslation } from 'react-i18next'
 
-export async function getServerSideProps(ctx) {
-  const client = buildClient(ctx);
-  const { data } = await client.get('/api/users/currentuser');
-  const userId = data.currentUser.id
-  const res = await client.get(`/api/profiles/${userId}`)
-
-  return { props: { data: res.data.orders } }
+OrdersPage.getInitialProps = async (context, client, currentUser) => {
+  const res = await client.get(`/api/profiles/${currentUser.id}`)
+  return {
+      data: res.data.orders
+  }
 }
 
 export default function OrdersPage({ data }) {
@@ -26,9 +22,9 @@ export default function OrdersPage({ data }) {
   )})
 
   return (
-    <div>
-      <div className={styles.auth}>
-        <h1>
+    <div className='py-16'>
+      <div className="w-full md:w-96 md:max-w-full mx-auto">
+        <h1 className='mt-10 mb-10 px-4 font-bold text-3xl'>
           {t('order')}
         </h1>
         <ul>

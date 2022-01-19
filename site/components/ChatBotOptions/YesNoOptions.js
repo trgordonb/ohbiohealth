@@ -1,5 +1,4 @@
 import React from "react";
-import styles from '../../styles/YesNoOption.module.css'
 import { useTranslation } from 'react-i18next'
 
 function YesNoOptions(props) {
@@ -17,7 +16,7 @@ function YesNoOptions(props) {
     },
   ];
   const optionsList = data.map((option) => (
-    <button className={styles.yesnobtn} key={option.id} onClick={option.handler}>
+    <button className="bg-gray-300 cursor-pointer border-indigo-700 p-2 m-2 rounded-md min-w-fit focus:text-white focus:bg-indigo-500" key={option.id} onClick={option.handler}>
       {option.text}
     </button>
   ));

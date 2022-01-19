@@ -1,21 +1,17 @@
-import { FaRocket } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useState, useEffect } from 'react'
-import styles from '@/styles/AuthForm.module.css'
 import useRequest from '../../hooks/use-request'
 import { useTranslation } from 'react-i18next'
 import { WidgetLoader, Widget } from 'react-cloudinary-upload-widget'
 
-export function getServerSideProps() {
+DeviceRegPage.getInitialProps = async (ctx) => {
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD
   const preset = process.env.NEXT_PUBLIC_CLOUDINARY_PRESET
-  return { 
-      props: {
-          cloudName,
-          preset
-      } 
-  }
+  return {
+      cloudName,
+      preset
+  };
 }
 
 export default function DeviceRegPage({ cloudName, preset }) {
@@ -51,12 +47,13 @@ export default function DeviceRegPage({ cloudName, preset }) {
   },[errors])
 
   return (
-    <div>
-      <div className={styles.auth}>
-        <h1>
-          <FaRocket /> {t('regdevice')}
-        </h1>
-        <ToastContainer />
+    <div className='py-16'>
+      <div className="w-full md:w-96 md:max-w-full mx-auto">
+        <h1 className="mt-10 mb-10 px-4 font-bold text-3xl">{t('regdevice')}</h1>
+      </div>
+      <ToastContainer />
+      <div className="w-full md:w-96 md:max-w-full mx-auto p-4 bg-indigo-100">
+        <div className="p-6 border border-gray-300 sm:rounded-md">
         <WidgetLoader />
         <Widget
           sources={['local']}
@@ -74,21 +71,49 @@ export default function DeviceRegPage({ cloudName, preset }) {
           }}
           onFailure={(res) => console.log(res)}
         />
-        <p>{fileName}</p>
-        <form onSubmit={handleSubmit}>
+        <p className='mt-6 mb-6'>{fileName}</p>
+          <form onSubmit={handleSubmit}>
             <div>
-                <label htmlFor='deviceId'>{t('deviceid')}</label>
+              <label className="block mb-6">
+                <span className="text-gray-700">{t('deviceid')}</span>
                 <input
-                    id='deviceId'
-                    value={deviceId}
-                    type="text"
-                    onChange={(e) => setDeviceId(e.target.value)}
+                  id='deviceId'
+                  name='deviceId'
+                  className="
+                    block
+                    w-full
+                    mt-1
+                    border-gray-300
+                    rounded-md
+                    shadow-sm
+                    focus:border-indigo-300
+                    focus:ring
+                    focus:ring-indigo-200
+                    focus:ring-opacity-50
+                  "
+                  value={deviceId}
+                  type="text"
+                  onChange={(e) => setDeviceId(e.target.value)}
                 />
+              </label>
+              <input 
+                type='submit' 
+                value={t('submit')} 
+                className="
+                  h-10
+                  px-5
+                  text-indigo-100
+                  bg-indigo-700
+                  rounded-lg
+                  transition-colors
+                  duration-150
+                  focus:shadow-outline
+                  hover:bg-indigo-800
+                "
+              />
             </div>
-            
-          <input type='submit' value={t('submit')} className='btn' />
-        </form>
-
+          </form>
+        </div>
       </div>
     </div>
   )

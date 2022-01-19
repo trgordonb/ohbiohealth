@@ -3,4 +3,10 @@ module.exports = {
     config.watchOptions.poll = 300;
     return config;
   },
+  reactStrictMode: true,
+  images: {
+    domains: [
+      'cms.ohbiohealth.club'
+    ]
+  }
 };

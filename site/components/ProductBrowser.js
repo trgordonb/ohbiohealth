@@ -7,7 +7,6 @@ const ProductBrowser = (props) => {
         url: '/api/profiles/orders',
         method: 'post',
         onSuccess: (data) => {
-            console.log(data)
         }
     });
 
