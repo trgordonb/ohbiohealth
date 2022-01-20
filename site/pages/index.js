@@ -70,6 +70,7 @@ HomePage.getInitialProps = async (ctx) => {
 
 export default function HomePage({ currentUser, data }) {
   const [showChatBot, setShowChatBot] = useState(true)
+  const [chatbotConfig, setChatBotConfig] = useState(config)
   const { t, i18n } = useTranslation()
   const [aboutContent, setAboutContent] = useState(data.about[i18n.language])
   const [technologyContent, setTechnologyContent] = useState(data.technology[i18n.language])
@@ -92,7 +93,7 @@ export default function HomePage({ currentUser, data }) {
     if (currentUser) {
       setShowChatBot(true)    
       if (currentUser.id) {
-        config = {
+        setChatBotConfig({
           ...config,
           state : {
             ...config.state,
@@ -100,23 +101,19 @@ export default function HomePage({ currentUser, data }) {
             language: i18n.language,
             t: t
           }
-        }
+        })
       }  
     } else {
-      config = {
+      setChatBotConfig({
         ...config,
         state: {
           ...config.state,
           language: i18n.language,
           t: t
         }
-      }
+      })
     }
-  },[i18n.language])
-
-  const closeChatbot = () => {
-    setShowChatBot(false)
-  }
+  },[i18n.language, currentUser])
 
   return (
     <div>
@@ -217,7 +214,7 @@ export default function HomePage({ currentUser, data }) {
               currentUser ?
               <Chatbot
                 config={{
-                  ...config, 
+                  ...chatbotConfig, 
                   initialMessages: [
                     createChatBotMessage(t('surveyintro')),
                     createChatBotMessage(t('q1'), {
@@ -233,7 +230,7 @@ export default function HomePage({ currentUser, data }) {
               />:
               <Chatbot
                 config={{
-                  ...config,
+                  ...chatbotConfig,
                   initialMessages: [
                     createChatBotMessage(t('plslogin'))
                   ]}}

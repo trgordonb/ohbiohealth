@@ -76,5 +76,13 @@
     "goback": "返回首頁",
     "oops": "哎呀！ 出問題了",
     "notfound": "我們找不到您要查找的頁面",
-    "plslogin": "請先登入"
+    "plslogin": "請先登入",
+    "mspasm": "肌肉痙攣",
+    "bspurs": "骨刺",
+    "hdisc": "椎間盤突出",
+    "arth": "關節炎",
+    "rarth": "類風濕關節炎",
+    "neuro": "神經痛",
+    "possible": "可能痛症: ",
+    "noresult": "分析時出錯，請稍後再試"
 }

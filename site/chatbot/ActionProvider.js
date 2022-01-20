@@ -53,6 +53,7 @@ class ActionProvider {
   }
 
   handleNo = () => {
+    console.log(this.stateRef)
     const reply = this.createClientMessage(this.stateRef.t('n'))
     this.setClientMessage(reply)
     if (this.stateRef.step === 1) {
@@ -89,6 +90,17 @@ class ActionProvider {
 
   handleUnauthenticated = () => {
     const message = this.createChatbotMessage(this.stateRef.t('plslogin'))
+    this.setChatbotMessage(message, {})
+  }
+
+  handlePainResult = (results) => {
+    let resultstr = results.map(result => this.stateRef.t(result)).join(',')
+    const message = this.createChatbotMessage(`${this.stateRef.t('possible')}${resultstr}`)
+    this.setChatbotMessage(message, {})
+  }
+
+  handleNoResult = () => {
+    const message = this.createChatbotMessage(this.stateRef.t('noresult'))
     this.setChatbotMessage(message, {})
   }
 }

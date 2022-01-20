@@ -76,5 +76,13 @@
     "goback": "Go back",
     "oops": "OOPS!",
     "notfound": "We cannot find the page you are looking for",
-    "plslogin": "Please first login"
+    "plslogin": "Please first login",
+    "mspasm": "Muscle spasm",
+    "bspurs": "Bone spur",
+    "hdisc": "Herniated disc",
+    "arth": "Arthritis",
+    "rarth": "Rheumatism arthritis",
+    "neuro": "Neuralgia",
+    "possible": "Likely pain conditions: ",
+    "noresult": "Something went wrong during analysis, please try later"
 }

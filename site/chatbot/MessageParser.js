@@ -28,16 +28,19 @@ class MessageParser {
           if (invalid) {
             this.actionProvider.handleInvalidInput()
           } else {
-            console.log('Points: ', pointsArr)
-            console.log('State: ',this.state);
-            axios['post'](`/api/profiles/painconditions`, { 
+            axios['post'](`/api/engine/painanalysis`, { 
               muscleache: this.state.muscleache,
               needlesensation: this.state.needlesensation,
               burningsensation: this.state.burningsensation,
-              numbsensation: this.state.numbsensation
+              numbsensation: this.state.numbsensation,
+              spinalpos: pointsArr.some(r => [3,4].includes(r))
             })
             .then(response => {
-              console.log('Response: ',response)
+              if (response.statusText === 'OK') {
+                this.actionProvider.handlePainResult(response.data)
+              } else {
+                this.actionProvider.handleNoResult()
+              }
             })
             this.actionProvider.handleGoodbye()
           }

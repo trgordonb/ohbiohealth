@@ -43,7 +43,7 @@ const config = {
         numbsensation: false,
         step: 1,
         infoBox: '',
-        painpoints: []
+        painpoints: [],
     },
     widgets: [
         {
