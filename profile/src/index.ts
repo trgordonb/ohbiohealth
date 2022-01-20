@@ -3,6 +3,7 @@ import { app } from './app';
 import { natsWrapper } from './nats-wrapper';
 import { UserCreatedListener } from './events/listeners/user-created-listener';
 import { DeviceUpdatedListener } from './events/listeners/device-updated-listener'
+import { AnalysisCompletedListener } from './events/listeners/analysis-completed-listener'
 
 const start = async () => {
   console.log('Starting up Profile Service....');
@@ -37,6 +38,7 @@ const start = async () => {
 
     new UserCreatedListener(natsWrapper.client).listen();
     new DeviceUpdatedListener(natsWrapper.client).listen();
+    new AnalysisCompletedListener(natsWrapper.client).listen();
 
     await mongoose.connect(process.env.MONGO_URI);
     console.log('Connected to MongoDb');

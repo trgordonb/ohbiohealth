@@ -5,6 +5,8 @@ import {
     requireAuth,
 } from '@ohbiohealth/common';
 import { applyRule } from '../lib/rule-engine'
+import { natsWrapper } from '../nats-wrapper';
+import { AnalysisCompletedPublisher } from '../../events/publishers/analysis-completed-publisher';
 
 const router = express.Router();
 
@@ -27,7 +29,17 @@ router.post(
             "numbsensation": req.body.numbsensation,
             "spinalpos": req.body.spinalpos
         }
-        const result = await applyRule(input)
+        const result = await applyRule(input) as string[]
+
+        await new AnalysisCompletedPublisher(natsWrapper.client).publish({
+            userId: req.currentUser!.id,
+            muscleache: req.body.muscleache,
+            needlesensation: req.body.needlesensation,
+            burningsensation: req.body.burningsensation,
+            numbsensation: req.body.numbsensation,
+            spinalpos: req.body.spinalpos,
+            diagnosis: result
+        })
         res.send(result)
     }
 );

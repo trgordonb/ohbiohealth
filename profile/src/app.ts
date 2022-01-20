@@ -8,7 +8,6 @@ import { indexProfileRouter } from './routes/index';
 import { updateProfileRouter } from './routes/update';
 import { showProfileRouter } from './routes/show';
 import { newOrderRouter } from './routes/neworder';
-import { newPainRouter } from './routes/newpainconditions';
 
 const app = express();
 app.set('trust proxy', true);
@@ -25,7 +24,6 @@ app.use(indexProfileRouter);
 app.use(updateProfileRouter);
 app.use(showProfileRouter);
 app.use(newOrderRouter);
-app.use(newPainRouter);
 
 app.all('*', async (req, res) => {
   throw new NotFoundError();
