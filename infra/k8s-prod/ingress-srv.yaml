@@ -37,6 +37,13 @@ spec:
                 name: profile-srv
                 port:
                   number: 3000
+          - path: /api/engine/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: engine-srv
+                port:
+                  number: 3000
           - path: /?(.*)
             pathType: Prefix
             backend:
