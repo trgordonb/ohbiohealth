@@ -18,11 +18,10 @@ export class AnalysisCompletedListener extends Listener<AnalysisCompletedEvent> 
 
     const exitstingPainConditions = await PainConditions.findById(userId);
     if (exitstingPainConditions) {
+      console.log('Already done analysis');
       msg.ack();
-      throw new BadRequestError('already done analysis');
-    }
-
-    const painConditions = PainConditions.build({
+    } else {
+      const painConditions = PainConditions.build({
         _id: userId,
         muscleache: muscleache,
         needlesensation: needlesensation,
@@ -30,16 +29,17 @@ export class AnalysisCompletedListener extends Listener<AnalysisCompletedEvent> 
         numbsensation: numbsensation,
         spinalpos: spinalpos,
         diagnosis: diagnosis
-    });
-    try {
-      await painConditions.save();
-      profile.set({
+      });
+      try {
+        await painConditions.save();
+        profile.set({
           painConditions: userId
-      })
-      await profile.save()
-    } catch (err) {
-      console.error(err)
+        })
+        await profile.save()
+      } catch (err) {
+        console.error(err)
+      }
+      msg.ack();
     }
-    msg.ack();
   }
 }
