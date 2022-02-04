@@ -94,6 +94,16 @@ export default function Header({ currentUser }) {
               <DropDown title={t('support')} items={[t('faq'),t('contact')]} short={false} links={['/#faq','/#contact']}/>
             </div>
             <DropDownResponsive title={t('support')} items={[t('faq'),t('contact')]} links={['/#faq','/#contact']}/>
+            {
+              currentUser && currentUser.usertype === 'admin' && 
+              <div className="hidden sm:block">
+                <DropDown title={t('admin')} items={[t('adddevice'),t('approve')]} short={false} links={['/admin/devicereg','/admin/approve']}/>
+              </div>
+            }
+            {
+              currentUser && currentUser.usertype === 'admin' &&
+              <DropDownResponsive title={t('admin')} items={[t('adddevice'),t('approve')]} links={['/admin/devicereg','/admin/approve']}/>
+            }
             <div className="hidden sm:block">
               <DropDown title={`${i18n.language === 'en' ? 'EN': '繁'}`} items={['EN','繁']} short={true} links={['#','#']} isLanguageMenu={true}/>
             </div>
