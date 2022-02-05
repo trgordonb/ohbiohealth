@@ -261,13 +261,13 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__) => {
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9003);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _hooks_use_cart__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(4310);
-/* harmony import */ var _utils_common_cart_functions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(5975);
+/* harmony import */ var _utils_cart_functions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(6392);
 /* harmony import */ var _data_graphql_queries_get_cart__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(824);
 /* harmony import */ var _data_graphql_mutations_add_to_cart__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(8087);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(997);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_utils_common_cart_functions__WEBPACK_IMPORTED_MODULE_6__, uuid__WEBPACK_IMPORTED_MODULE_3__]);
-([_utils_common_cart_functions__WEBPACK_IMPORTED_MODULE_6__, uuid__WEBPACK_IMPORTED_MODULE_3__] = __webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_utils_cart_functions__WEBPACK_IMPORTED_MODULE_6__, uuid__WEBPACK_IMPORTED_MODULE_3__]);
+([_utils_cart_functions__WEBPACK_IMPORTED_MODULE_6__, uuid__WEBPACK_IMPORTED_MODULE_3__] = __webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__);
 
 
 
@@ -311,7 +311,7 @@ const AddToCart = props => {
     notifyOnNetworkStatusChange: true,
     onCompleted: () => {
       // Update cart in the localStorage.
-      const updatedCart = (0,_utils_common_cart_functions__WEBPACK_IMPORTED_MODULE_6__/* .getFormattedCart */ .W3)(data);
+      const updatedCart = (0,_utils_cart_functions__WEBPACK_IMPORTED_MODULE_6__/* .getFormattedCart */ .W3)(data);
       console.log(updatedCart);
       localStorage.setItem('woo-next-cart', JSON.stringify(updatedCart)); // Update cart data in React Context.
 
@@ -791,7 +791,7 @@ module.exports = import("uuid");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [400,664,675,409,149], () => (__webpack_exec__(3396)));
+var __webpack_exports__ = __webpack_require__.X(0, [400,664,675,921,149], () => (__webpack_exec__(3396)));
 module.exports = __webpack_exports__;
 
 })();
