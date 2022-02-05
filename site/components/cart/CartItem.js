@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { v4 } from "uuid";
-import { getUpdatedItems } from '../../utils/common/functions'
+import { getUpdatedItems } from '../../utils/common/cart-functions'
 import {Cross, Loading} from '../icons'
 
 const CartItem = ( {

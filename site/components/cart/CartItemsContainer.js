@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useState, useEffect, useContext } from 'react';
 import { CartContext } from '../../hooks/use-cart'
-import { getFormattedCart, getUpdatedItems } from '../../utils/common/functions'
+import { getFormattedCart, getUpdatedItems } from '../../utils/common/cart-functions'
 import CartItem from "./CartItem";
 import { v4 } from 'uuid';
 import { useMutation, useQuery } from '@apollo/client';
