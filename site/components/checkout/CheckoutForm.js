@@ -6,7 +6,7 @@ import YourOrder from "./YourOrder";
 import PaymentModes from "./PaymentModes";
 import {CartContext} from '../../hooks/use-cart';
 import validateAndSanitizeCheckoutForm from '../../utils/validator/checkout'
-import {getFormattedCart, createCheckoutData,} from '../../utils/common/cart-functions'
+import {getFormattedCart, createCheckoutData,} from '../../utils/cart-functions'
 import OrderSuccess from "./OrderSuccess";
 import GET_CART from '../../data/graphql/queries/get-cart'
 import CHECKOUT_MUTATION from '../../data/graphql/mutations/checkout'

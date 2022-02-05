@@ -5,7 +5,7 @@ import {v4} from 'uuid';
 import cx from 'classnames';
 
 import { CartContext } from "../../hooks/use-cart"
-import {getFormattedCart} from "../../utils/common/cart-functions"
+import {getFormattedCart} from "../../utils/cart-functions"
 import GET_CART from "../../data/graphql/queries/get-cart"
 import ADD_TO_CART from "../../data/graphql/mutations/add-to-cart"
 

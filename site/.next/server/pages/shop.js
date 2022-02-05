@@ -260,14 +260,14 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__) => {
 /* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6555);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9003);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _hooks_use_appstate__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5350);
-/* harmony import */ var _utils_functions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9103);
+/* harmony import */ var _hooks_use_cart__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(4310);
+/* harmony import */ var _utils_common_cart_functions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(5975);
 /* harmony import */ var _data_graphql_queries_get_cart__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(824);
 /* harmony import */ var _data_graphql_mutations_add_to_cart__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(8087);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(997);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_utils_functions__WEBPACK_IMPORTED_MODULE_6__, uuid__WEBPACK_IMPORTED_MODULE_3__]);
-([_utils_functions__WEBPACK_IMPORTED_MODULE_6__, uuid__WEBPACK_IMPORTED_MODULE_3__] = __webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_utils_common_cart_functions__WEBPACK_IMPORTED_MODULE_6__, uuid__WEBPACK_IMPORTED_MODULE_3__]);
+([_utils_common_cart_functions__WEBPACK_IMPORTED_MODULE_6__, uuid__WEBPACK_IMPORTED_MODULE_3__] = __webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__);
 
 
 
@@ -292,9 +292,9 @@ const AddToCart = props => {
     productId: product.productId
   };
   const {
-    cart,
-    setCart
-  } = (0,_hooks_use_appstate__WEBPACK_IMPORTED_MODULE_5__/* .useAppState */ .m)();
+    0: cart,
+    1: setCart
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_hooks_use_cart__WEBPACK_IMPORTED_MODULE_5__/* .CartContext */ .A);
   const {
     0: showViewCart,
     1: setShowViewCart
@@ -311,7 +311,8 @@ const AddToCart = props => {
     notifyOnNetworkStatusChange: true,
     onCompleted: () => {
       // Update cart in the localStorage.
-      const updatedCart = (0,_utils_functions__WEBPACK_IMPORTED_MODULE_6__/* .getFormattedCart */ .W3)(data);
+      const updatedCart = (0,_utils_common_cart_functions__WEBPACK_IMPORTED_MODULE_6__/* .getFormattedCart */ .W3)(data);
+      console.log(updatedCart);
       localStorage.setItem('woo-next-cart', JSON.stringify(updatedCart)); // Update cart data in React Context.
 
       setCart(updatedCart);
@@ -453,103 +454,6 @@ const ADD_TO_CART = _apollo_client__WEBPACK_IMPORTED_MODULE_0__.gql`
 
 /***/ }),
 
-/***/ 824:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9114);
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_apollo_client__WEBPACK_IMPORTED_MODULE_0__);
-
-const GET_CART = _apollo_client__WEBPACK_IMPORTED_MODULE_0__.gql`
-query GET_CART {
-  cart {
-    contents {
-      nodes {
-        key
-        product {
-          node {
-            id
-            productId: databaseId
-            name
-            description
-            type
-            onSale
-            slug
-            averageRating
-            reviewCount
-            image {
-              id
-              sourceUrl
-              srcSet
-              altText
-              title
-            }
-            galleryImages {
-              nodes {
-                id
-                sourceUrl
-                srcSet
-                altText
-                title
-              }
-            }
-          }
-        }
-        variation {
-          node {
-            id
-            variationId: databaseId
-            name
-            description
-            type
-            onSale
-            price
-            regularPrice
-            salePrice
-            image {
-              id
-              sourceUrl
-              srcSet
-              altText
-              title
-            }
-          }
-          attributes {
-            id
-            name
-            value
-          }
-        }
-        quantity
-        total
-        subtotal
-        subtotalTax
-      }
-    }
-    appliedCoupons {
-      code
-      discountAmount
-      discountTax
-    }
-    subtotal
-    subtotalTax
-    shippingTax
-    shippingTotal
-    total
-    totalTax
-    feeTax
-    feeTotal
-    discountTax
-    discountTotal
-  }
-}
-`;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GET_CART);
-
-/***/ }),
-
 /***/ 5121:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -644,10 +548,7 @@ _components_Product__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies
 
 
 
-function ShopPage({
-  data,
-  currentUser
-}) {
+function ShopPage(props) {
   const {
     t
   } = (0,react_i18next__WEBPACK_IMPORTED_MODULE_0__.useTranslation)();
@@ -712,318 +613,6 @@ async function getStaticProps() {
 const DEFAULT_IMG_URL = 'https://via.placeholder.com/400x225';
 const DEFAULT_CATEGORY_IMG_URL = 'https://via.placeholder.com/416x224';
 const DEFAULT_PRODUCT_HOME_IMG_URL = 'https://via.placeholder.com/308x308';
-
-/***/ }),
-
-/***/ 9103:
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.a(module, async (__webpack_handle_async_dependencies__) => {
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "W3": () => (/* binding */ getFormattedCart)
-/* harmony export */ });
-/* unused harmony exports getFloatVal, addFirstProduct, createNewProduct, updateCart, getUpdatedProducts, removeItemFromCart, createCheckoutData, getUpdatedItems */
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6555);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6517);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([uuid__WEBPACK_IMPORTED_MODULE_0__]);
-uuid__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__)[0];
-
-
-/**
- * Extracts and returns float value from a string.
- *
- * @param {string} string String
- * @return {any}
- */
-
-const getFloatVal = string => {
-  let floatValue = string.replace(',', '').match(/[+-]?\d+(\.\d+)?/g)[0];
-  return null !== floatValue ? parseFloat(parseFloat(floatValue).toFixed(2)) : '';
-};
-/**
- * Add first product.
- *
- * @param {Object} product Product
- * @return {{totalProductsCount: number, totalProductsPrice: any, products: Array}}
- */
-
-const addFirstProduct = product => {
-  let productPrice = getFloatVal(product.price);
-  let newCart = {
-    products: [],
-    totalProductsCount: 1,
-    totalProductsPrice: productPrice
-  };
-  const newProduct = createNewProduct(product, productPrice, 1);
-  newCart.products.push(newProduct);
-  localStorage.setItem('woo-next-cart', JSON.stringify(newCart));
-  return newCart;
-};
-/**
- * Create a new product object.
- *
- * @param {Object} product Product
- * @param {Integer} productPrice Product Price
- * @param {Integer} qty Quantity
- * @return {{image: *, productId: *, totalPrice: number, price: *, qty: *, name: *}}
- */
-
-const createNewProduct = (product, productPrice, qty) => {
-  return {
-    productId: product.productId,
-    image: product.image,
-    name: product.name,
-    price: productPrice,
-    qty,
-    totalPrice: parseFloat((productPrice * qty).toFixed(2))
-  };
-};
-/**
- * Updates the existing cart with new item.
- *
- * @param {Object} existingCart Existing Cart.
- * @param {Object} product Product.
- * @param {Integer} qtyToBeAdded Quantity.
- * @param {Integer} newQty New Qty to be updated.
- * @return {{totalProductsCount: *, totalProductsPrice: *, products: *}}
- */
-
-const updateCart = (existingCart, product, qtyToBeAdded, newQty = false) => {
-  const updatedProducts = getUpdatedProducts(existingCart.products, product, qtyToBeAdded, newQty);
-
-  const addPrice = (total, item) => {
-    total.totalPrice += item.totalPrice;
-    total.qty += item.qty;
-    return total;
-  }; // Loop through the updated product array and add the totalPrice of each item to get the totalPrice
-
-
-  let total = updatedProducts.reduce(addPrice, {
-    totalPrice: 0,
-    qty: 0
-  });
-  const updatedCart = {
-    products: updatedProducts,
-    totalProductsCount: parseInt(total.qty),
-    totalProductsPrice: parseFloat(total.totalPrice)
-  };
-  localStorage.setItem('woo-next-cart', JSON.stringify(updatedCart));
-  return updatedCart;
-};
-/**
- * Get updated products array
- * Update the product if it exists else,
- * add the new product to existing cart,
- *
- * @param {Object} existingProductsInCart Existing product in cart
- * @param {Object} product Product
- * @param {Integer} qtyToBeAdded Quantity
- * @param {Integer} newQty New qty of the product (optional)
- * @return {*[]}
- */
-
-const getUpdatedProducts = (existingProductsInCart, product, qtyToBeAdded, newQty = false) => {
-  // Check if the product already exits in the cart.
-  const productExitsIndex = isProductInCart(existingProductsInCart, product.productId); // If product exits ( index of that product found in the array ), update the product quantity and totalPrice
-
-  if (-1 < productExitsIndex) {
-    let updatedProducts = existingProductsInCart;
-    let updatedProduct = updatedProducts[productExitsIndex]; // If have new qty of the product available, set that else add the qtyToBeAdded
-
-    updatedProduct.qty = newQty ? parseInt(newQty) : parseInt(updatedProduct.qty + qtyToBeAdded);
-    updatedProduct.totalPrice = parseFloat((updatedProduct.price * updatedProduct.qty).toFixed(2));
-    return updatedProducts;
-  } else {
-    // If product not found push the new product to the existing product array.
-    let productPrice = getFloatVal(product.price);
-    const newProduct = createNewProduct(product, productPrice, qtyToBeAdded);
-    existingProductsInCart.push(newProduct);
-    return existingProductsInCart;
-  }
-};
-/**
- * Returns index of the product if it exists.
- *
- * @param {Object} existingProductsInCart Existing Products.
- * @param {Integer} productId Product id.
- * @return {number | *} Index Returns -1 if product does not exist in the array, index number otherwise
- */
-
-const isProductInCart = (existingProductsInCart, productId) => {
-  const returnItemThatExits = (item, index) => {
-    if (productId === item.productId) {
-      return item;
-    }
-  }; // This new array will only contain the product which is matched.
-
-
-  const newArray = existingProductsInCart.filter(returnItemThatExits);
-  return existingProductsInCart.indexOf(newArray[0]);
-};
-/**
- * Remove Item from the cart.
- *
- * @param {Integer} productId Product Id.
- * @return {any | string} Updated cart
- */
-
-
-const removeItemFromCart = productId => {
-  let existingCart = localStorage.getItem('woo-next-cart');
-  existingCart = JSON.parse(existingCart); // If there is only one item in the cart, delete the cart.
-
-  if (1 === existingCart.products.length) {
-    localStorage.removeItem('woo-next-cart');
-    return null;
-  } // Check if the product already exits in the cart.
-
-
-  const productExitsIndex = isProductInCart(existingCart.products, productId); // If product to be removed exits
-
-  if (-1 < productExitsIndex) {
-    const productTobeRemoved = existingCart.products[productExitsIndex];
-    const qtyToBeRemovedFromTotal = productTobeRemoved.qty;
-    const priceToBeDeductedFromTotal = productTobeRemoved.totalPrice; // Remove that product from the array and update the total price and total quantity of the cart
-
-    let updatedCart = existingCart;
-    updatedCart.products.splice(productExitsIndex, 1);
-    updatedCart.totalProductsCount = updatedCart.totalProductsCount - qtyToBeRemovedFromTotal;
-    updatedCart.totalProductsPrice = updatedCart.totalProductsPrice - priceToBeDeductedFromTotal;
-    localStorage.setItem('woo-next-cart', JSON.stringify(updatedCart));
-    return updatedCart;
-  } else {
-    return existingCart;
-  }
-};
-/**
- * Returns cart data in the required format.
- * @param {String} data Cart data
- */
-
-const getFormattedCart = data => {
-  var _data$cart$total, _data$cart;
-
-  let formattedCart = null;
-
-  if (undefined === data || !data.cart.contents.nodes.length) {
-    return formattedCart;
-  }
-
-  const givenProducts = data.cart.contents.nodes; // Create an empty object.
-
-  formattedCart = {};
-  formattedCart.products = [];
-  let totalProductsCount = 0;
-
-  for (let i = 0; i < givenProducts.length; i++) {
-    var _givenProducts$i, _givenProducts$i$prod, _givenProduct$product, _givenProducts$i$key, _givenProducts$i2, _givenProduct$name, _givenProducts$i3, _givenProducts$i$tota, _givenProducts$i4, _givenProduct$image$s, _givenProduct$image, _givenProduct$image$s2, _givenProduct$image2, _givenProduct$image$t, _givenProduct$image3, _givenProduct$image$a, _givenProduct$image4, _givenProducts$i5;
-
-    const givenProduct = givenProducts === null || givenProducts === void 0 ? void 0 : (_givenProducts$i = givenProducts[i]) === null || _givenProducts$i === void 0 ? void 0 : (_givenProducts$i$prod = _givenProducts$i.product) === null || _givenProducts$i$prod === void 0 ? void 0 : _givenProducts$i$prod.node;
-    const product = {};
-    const total = getFloatVal(givenProducts[i].total);
-    product.productId = (_givenProduct$product = givenProduct === null || givenProduct === void 0 ? void 0 : givenProduct.productId) !== null && _givenProduct$product !== void 0 ? _givenProduct$product : '';
-    product.cartKey = (_givenProducts$i$key = givenProducts === null || givenProducts === void 0 ? void 0 : (_givenProducts$i2 = givenProducts[i]) === null || _givenProducts$i2 === void 0 ? void 0 : _givenProducts$i2.key) !== null && _givenProducts$i$key !== void 0 ? _givenProducts$i$key : '';
-    product.name = (_givenProduct$name = givenProduct === null || givenProduct === void 0 ? void 0 : givenProduct.name) !== null && _givenProduct$name !== void 0 ? _givenProduct$name : '';
-    product.qty = givenProducts === null || givenProducts === void 0 ? void 0 : (_givenProducts$i3 = givenProducts[i]) === null || _givenProducts$i3 === void 0 ? void 0 : _givenProducts$i3.quantity;
-    product.price = total / (product === null || product === void 0 ? void 0 : product.qty);
-    product.totalPrice = (_givenProducts$i$tota = givenProducts === null || givenProducts === void 0 ? void 0 : (_givenProducts$i4 = givenProducts[i]) === null || _givenProducts$i4 === void 0 ? void 0 : _givenProducts$i4.total) !== null && _givenProducts$i$tota !== void 0 ? _givenProducts$i$tota : '';
-    product.image = {
-      sourceUrl: (_givenProduct$image$s = givenProduct === null || givenProduct === void 0 ? void 0 : (_givenProduct$image = givenProduct.image) === null || _givenProduct$image === void 0 ? void 0 : _givenProduct$image.sourceUrl) !== null && _givenProduct$image$s !== void 0 ? _givenProduct$image$s : '',
-      srcSet: (_givenProduct$image$s2 = givenProduct === null || givenProduct === void 0 ? void 0 : (_givenProduct$image2 = givenProduct.image) === null || _givenProduct$image2 === void 0 ? void 0 : _givenProduct$image2.srcSet) !== null && _givenProduct$image$s2 !== void 0 ? _givenProduct$image$s2 : '',
-      title: (_givenProduct$image$t = givenProduct === null || givenProduct === void 0 ? void 0 : (_givenProduct$image3 = givenProduct.image) === null || _givenProduct$image3 === void 0 ? void 0 : _givenProduct$image3.title) !== null && _givenProduct$image$t !== void 0 ? _givenProduct$image$t : '',
-      altText: (_givenProduct$image$a = givenProduct === null || givenProduct === void 0 ? void 0 : (_givenProduct$image4 = givenProduct.image) === null || _givenProduct$image4 === void 0 ? void 0 : _givenProduct$image4.altText) !== null && _givenProduct$image$a !== void 0 ? _givenProduct$image$a : ''
-    };
-    totalProductsCount += givenProducts === null || givenProducts === void 0 ? void 0 : (_givenProducts$i5 = givenProducts[i]) === null || _givenProducts$i5 === void 0 ? void 0 : _givenProducts$i5.quantity; // Push each item into the products array.
-
-    formattedCart.products.push(product);
-  }
-
-  formattedCart.totalProductsCount = totalProductsCount;
-  formattedCart.totalProductsPrice = (_data$cart$total = data === null || data === void 0 ? void 0 : (_data$cart = data.cart) === null || _data$cart === void 0 ? void 0 : _data$cart.total) !== null && _data$cart$total !== void 0 ? _data$cart$total : '';
-  return formattedCart;
-};
-const createCheckoutData = order => {
-  var _order$shipping, _order$shipping2, _order$shipping3, _order$shipping4, _order$shipping5, _order$shipping6, _order$shipping7, _order$shipping8, _order$shipping9, _order$shipping10, _order$shipping11;
-
-  // Set the billing Data to shipping, if applicable.
-  const billingData = order.billingDifferentThanShipping ? order.billing : order.shipping;
-  const checkoutData = {
-    clientMutationId: v4(),
-    shipping: {
-      firstName: order === null || order === void 0 ? void 0 : (_order$shipping = order.shipping) === null || _order$shipping === void 0 ? void 0 : _order$shipping.firstName,
-      lastName: order === null || order === void 0 ? void 0 : (_order$shipping2 = order.shipping) === null || _order$shipping2 === void 0 ? void 0 : _order$shipping2.lastName,
-      address1: order === null || order === void 0 ? void 0 : (_order$shipping3 = order.shipping) === null || _order$shipping3 === void 0 ? void 0 : _order$shipping3.address1,
-      address2: order === null || order === void 0 ? void 0 : (_order$shipping4 = order.shipping) === null || _order$shipping4 === void 0 ? void 0 : _order$shipping4.address2,
-      city: order === null || order === void 0 ? void 0 : (_order$shipping5 = order.shipping) === null || _order$shipping5 === void 0 ? void 0 : _order$shipping5.city,
-      country: order === null || order === void 0 ? void 0 : (_order$shipping6 = order.shipping) === null || _order$shipping6 === void 0 ? void 0 : _order$shipping6.country,
-      state: order === null || order === void 0 ? void 0 : (_order$shipping7 = order.shipping) === null || _order$shipping7 === void 0 ? void 0 : _order$shipping7.state,
-      postcode: order === null || order === void 0 ? void 0 : (_order$shipping8 = order.shipping) === null || _order$shipping8 === void 0 ? void 0 : _order$shipping8.postcode,
-      email: order === null || order === void 0 ? void 0 : (_order$shipping9 = order.shipping) === null || _order$shipping9 === void 0 ? void 0 : _order$shipping9.email,
-      phone: order === null || order === void 0 ? void 0 : (_order$shipping10 = order.shipping) === null || _order$shipping10 === void 0 ? void 0 : _order$shipping10.phone,
-      company: order === null || order === void 0 ? void 0 : (_order$shipping11 = order.shipping) === null || _order$shipping11 === void 0 ? void 0 : _order$shipping11.company
-    },
-    billing: {
-      firstName: billingData === null || billingData === void 0 ? void 0 : billingData.firstName,
-      lastName: billingData === null || billingData === void 0 ? void 0 : billingData.lastName,
-      address1: billingData === null || billingData === void 0 ? void 0 : billingData.address1,
-      address2: billingData === null || billingData === void 0 ? void 0 : billingData.address2,
-      city: billingData === null || billingData === void 0 ? void 0 : billingData.city,
-      country: billingData === null || billingData === void 0 ? void 0 : billingData.country,
-      state: billingData === null || billingData === void 0 ? void 0 : billingData.state,
-      postcode: billingData === null || billingData === void 0 ? void 0 : billingData.postcode,
-      email: billingData === null || billingData === void 0 ? void 0 : billingData.email,
-      phone: billingData === null || billingData === void 0 ? void 0 : billingData.phone,
-      company: billingData === null || billingData === void 0 ? void 0 : billingData.company
-    },
-    shipToDifferentAddress: order.billingDifferentThanShipping,
-    paymentMethod: order.paymentMethod,
-    isPaid: false
-  };
-
-  if (order.createAccount) {
-    checkoutData.account = {
-      username: order.username,
-      password: order.password
-    };
-  }
-
-  return checkoutData;
-};
-/**
- * Get the updated items in the below format required for mutation input.
- *
- * [
- * { "key": "33e75ff09dd601bbe6dd51039152189", "quantity": 1 },
- * { "key": "02e74f10e0327ad868d38f2b4fdd6f0", "quantity": 1 },
- * ]
- *
- * Creates an array in above format with the newQty (updated Qty ).
- *
- */
-
-const getUpdatedItems = (products, newQty, cartKey) => {
-  // Create an empty array.
-  const updatedItems = []; // Loop through the product array.
-
-  products.map(cartItem => {
-    // If you find the cart key of the product user is trying to update, push the key and new qty.
-    if (cartItem.cartKey === cartKey) {
-      updatedItems.push({
-        key: cartItem.cartKey,
-        quantity: parseInt(newQty)
-      }); // Otherwise just push the existing qty without updating.
-    } else {
-      updatedItems.push({
-        key: cartItem.cartKey,
-        quantity: cartItem.qty
-      });
-    }
-  }); // Return the updatedItems array with new Qtys.
-
-  return updatedItems;
-};
-});
 
 /***/ }),
 
@@ -1202,7 +791,7 @@ module.exports = import("uuid");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [400,664,675,278], () => (__webpack_exec__(3396)));
+var __webpack_exports__ = __webpack_require__.X(0, [400,664,675,409,149], () => (__webpack_exec__(3396)));
 module.exports = __webpack_exports__;
 
 })();
