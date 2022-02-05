@@ -30,6 +30,10 @@ spec:
               value: 'fppkpzyu'
             - name: NEXT_PUBLIC_ECWID_STOREID
               value: '67812829'
+            - name: NEXT_PUBLIC_WORDPRESS_URL
+              value: 'https://ohbiohealth.shop'
+            - name: NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+              value: pk_test_51KNcqvHeckYyuEvC3Fgnh3zPNIJqCwiJyFni34mHmvoBvKDxK19vMtEgxrWTalEwpW1yeGdJp2fbhCUaXKelTMtI00nBHj6EuG
 ---
 apiVersion: v1
 kind: Service
