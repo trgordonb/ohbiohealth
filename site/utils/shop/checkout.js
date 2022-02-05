@@ -99,8 +99,11 @@ const createCheckoutSessionAndRedirect = async ( products, input, orderId ) => {
         mode: 'payment'
     }
     const session = await createCheckoutSession(sessionData)
+    console.log('Checkout session:', session)
+    console.log('Stripe key: ',process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
     try {
-        const stripe = await loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
+        const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+        console.log('Stripe object:', stripe)
         if (stripe) {
             stripe.redirectToCheckout({ sessionId: session.id });
         }
