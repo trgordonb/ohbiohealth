@@ -89,6 +89,7 @@ class ActionProvider {
     });
 
     _defineProperty(this, "handleNo", () => {
+      console.log(this.stateRef);
       const reply = this.createClientMessage(this.stateRef.t('n'));
       this.setClientMessage(reply);
 
@@ -148,6 +149,22 @@ class ActionProvider {
       this.setChatbotMessage(message, {});
     });
 
+    _defineProperty(this, "handleUnauthenticated", () => {
+      const message = this.createChatbotMessage(this.stateRef.t('plslogin'));
+      this.setChatbotMessage(message, {});
+    });
+
+    _defineProperty(this, "handlePainResult", results => {
+      let resultstr = results.map(result => this.stateRef.t(result)).join(',');
+      const message = this.createChatbotMessage(`${this.stateRef.t('possible')}${resultstr}`);
+      this.setChatbotMessage(message, {});
+    });
+
+    _defineProperty(this, "handleNoResult", () => {
+      const message = this.createChatbotMessage(this.stateRef.t('noresult'));
+      this.setChatbotMessage(message, {});
+    });
+
     this.createChatbotMessage = createChatbotMessage;
     this.setState = setStateFunc;
     this.createClientMessage = createClientMessage;
@@ -178,7 +195,9 @@ class MessageParser {
   }
 
   parse(message) {
-    if (this.state.step >= 6) {
+    if (!this.state.userId) {
+      this.actionProvider.handleUnauthenticated();
+    } else if (this.state.step >= 6) {
       let points = message.replace(/\s+/g, '');
       let re = /^(\d+(,\d+)*)?$/gm;
 
@@ -200,15 +219,18 @@ class MessageParser {
         if (invalid) {
           this.actionProvider.handleInvalidInput();
         } else {
-          console.log('Points: ', pointsArr);
-          console.log('State: ', this.state);
-          axios__WEBPACK_IMPORTED_MODULE_0___default().post(`/api/profiles/painconditions`, {
+          axios__WEBPACK_IMPORTED_MODULE_0___default().post(`/api/engine/painanalysis`, {
             muscleache: this.state.muscleache,
             needlesensation: this.state.needlesensation,
             burningsensation: this.state.burningsensation,
-            numbsensation: this.state.numbsensation
+            numbsensation: this.state.numbsensation,
+            spinalpos: pointsArr.some(r => [3, 4].includes(r))
           }).then(response => {
-            console.log('Response: ', response);
+            if (response.statusText === 'OK') {
+              this.actionProvider.handlePainResult(response.data);
+            } else {
+              this.actionProvider.handleNoResult();
+            }
           });
           this.actionProvider.handleGoodbye();
         }
@@ -301,9 +323,9 @@ var ChatBotBodyDiagram_module_default = /*#__PURE__*/__webpack_require__.n(ChatB
 // EXTERNAL MODULE: ./node_modules/next/image.js
 var next_image = __webpack_require__(5675);
 ;// CONCATENATED MODULE: ./public/images/bodyback.jpg
-/* harmony default export */ const bodyback = ({"src":"/_next/static/media/bodyback.fe37e0eb.jpg","height":718,"width":254,"blurDataURL":"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoKCgoKCgsMDAsPEA4QDxYUExMUFiIYGhgaGCIzICUgICUgMy03LCksNy1RQDg4QFFeT0pPXnFlZXGPiI+7u/sBCgoKCgoKCwwMCw8QDhAPFhQTExQWIhgaGBoYIjMgJSAgJSAzLTcsKSw3LVFAODhAUV5PSk9ecWVlcY+Ij7u7+//CABEIAAgAAwMBIgACEQEDEQH/xAAnAAEBAAAAAAAAAAAAAAAAAAAABwEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEAMQAAAAsAP/xAAXEAEAAwAAAAAAAAAAAAAAAAABAAIx/9oACAEBAAE/AAu4z//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Af//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Af//Z"});
+/* harmony default export */ const bodyback = ({"src":"/_next/static/media/bodyback.f30dbcc8.jpg","height":718,"width":254,"blurDataURL":"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoKCgoKCgsMDAsPEA4QDxYUExMUFiIYGhgaGCIzICUgICUgMy03LCksNy1RQDg4QFFeT0pPXnFlZXGPiI+7u/sBCgoKCgoKCwwMCw8QDhAPFhQTExQWIhgaGBoYIjMgJSAgJSAzLTcsKSw3LVFAODhAUV5PSk9ecWVlcY+Ij7u7+//CABEIAAgAAwMBIgACEQEDEQH/xAAnAAEBAAAAAAAAAAAAAAAAAAAABwEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEAMQAAAAr4P/xAAYEAEAAwEAAAAAAAAAAAAAAAABAAMxQf/aAAgBAQABPwALE3rP/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAgBAgEBPwB//8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAgBAwEBPwB//9k="});
 ;// CONCATENATED MODULE: ./public/images/bodyfront.jpg
-/* harmony default export */ const bodyfront = ({"src":"/_next/static/media/bodyfront.9f968a4c.jpg","height":718,"width":252,"blurDataURL":"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoKCgoKCgsMDAsPEA4QDxYUExMUFiIYGhgaGCIzICUgICUgMy03LCksNy1RQDg4QFFeT0pPXnFlZXGPiI+7u/sBCgoKCgoKCwwMCw8QDhAPFhQTExQWIhgaGBoYIjMgJSAgJSAzLTcsKSw3LVFAODhAUV5PSk9ecWVlcY+Ij7u7+//CABEIAAgAAwMBIgACEQEDEQH/xAAnAAEBAAAAAAAAAAAAAAAAAAAABwEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEAMQAAAAr4P/xAAXEAEAAwAAAAAAAAAAAAAAAAABAAJB/9oACAEBAAE/AAvjP//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Af//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Af//Z"});
+/* harmony default export */ const bodyfront = ({"src":"/_next/static/media/bodyfront.17c5ae38.jpg","height":718,"width":252,"blurDataURL":"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoKCgoKCgsMDAsPEA4QDxYUExMUFiIYGhgaGCIzICUgICUgMy03LCksNy1RQDg4QFFeT0pPXnFlZXGPiI+7u/sBCgoKCgoKCwwMCw8QDhAPFhQTExQWIhgaGBoYIjMgJSAgJSAzLTcsKSw3LVFAODhAUV5PSk9ecWVlcY+Ij7u7+//CABEIAAgAAwMBIgACEQEDEQH/xAAnAAEBAAAAAAAAAAAAAAAAAAAABwEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEAMQAAAArwP/xAAYEAACAwAAAAAAAAAAAAAAAAAAAQIDQf/aAAgBAQABPwBKzJH/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oACAECAQE/AH//xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oACAEDAQE/AH//2Q=="});
 ;// CONCATENATED MODULE: ./components/ChatBotBodyDiagram/ChatBotBodyDiagram.js
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -664,11 +686,11 @@ const VerticalFeatureRow = props => {
       })]
     }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx("div", {
       className: "w-full sm:w-1/2 p-6",
-      children: props.imageOverride ? /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx(next_image__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      children: props.imageOverride ? /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx("img", {
         className: "mx-auto object-center p-4",
         src: `${router.basePath}${props.image}`,
         alt: props.imageAlt
-      }) : /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx(next_image__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }) : /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx("img", {
         className: "mx-auto object-center p-4",
         src: `${router.basePath}${props.image}`,
         alt: props.imageAlt,
@@ -810,6 +832,10 @@ function HomePage({
     1: setShowChatBot
   } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   const {
+    0: chatbotConfig,
+    1: setChatBotConfig
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_chatbot_config__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z);
+  const {
     t,
     i18n
   } = (0,react_i18next__WEBPACK_IMPORTED_MODULE_10__.useTranslation)();
@@ -858,21 +884,23 @@ function HomePage({
       setShowChatBot(true);
 
       if (currentUser.id) {
-        _chatbot_config__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z = _objectSpread(_objectSpread({}, _chatbot_config__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z), {}, {
+        setChatBotConfig(_objectSpread(_objectSpread({}, _chatbot_config__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z), {}, {
           state: _objectSpread(_objectSpread({}, _chatbot_config__WEBPACK_IMPORTED_MODULE_12__/* ["default"].state */ .Z.state), {}, {
             userId: currentUser.id,
             language: i18n.language,
             t: t
           })
-        });
+        }));
       }
+    } else {
+      setChatBotConfig(_objectSpread(_objectSpread({}, _chatbot_config__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z), {}, {
+        state: _objectSpread(_objectSpread({}, _chatbot_config__WEBPACK_IMPORTED_MODULE_12__/* ["default"].state */ .Z.state), {}, {
+          language: i18n.language,
+          t: t
+        })
+      }));
     }
-  }, [i18n.language]);
-
-  const closeChatbot = () => {
-    setShowChatBot(false);
-  };
-
+  }, [i18n.language, currentUser]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_15__.jsxs)("div", {
     children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_15__.jsx(_components_Hero__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, {}), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_15__.jsx(react_toastify__WEBPACK_IMPORTED_MODULE_5__.ToastContainer, {}), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_15__.jsx((react_cookie_consent__WEBPACK_IMPORTED_MODULE_9___default()), {
       buttonText: t('ok'),
@@ -954,14 +982,18 @@ function HomePage({
                   className: "inline-flex rounded-md shadow",
                   children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_15__.jsx(next_link__WEBPACK_IMPORTED_MODULE_6__["default"], {
                     href: "/#chatbot",
-                    className: "inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-bold rounded-md text-white bg-gray-700 hover:bg-indigo-700",
-                    children: t('getstart')
+                    children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_15__.jsx("a", {
+                      className: "inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-bold rounded-md text-white bg-gray-700 hover:bg-indigo-700",
+                      children: t('getstart')
+                    })
                   }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_15__.jsx("div", {
                     className: "ml-3 inline-flex rounded-md shadow",
                     children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_15__.jsx(next_link__WEBPACK_IMPORTED_MODULE_6__["default"], {
                       href: "/#chatbot",
-                      className: "inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-bold rounded-md text-indigo-600 bg-white hover:bg-indigo-50",
-                      children: t('learn')
+                      children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_15__.jsx("a", {
+                        className: "inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-bold rounded-md text-indigo-600 bg-white hover:bg-indigo-50",
+                        children: t('learn')
+                      })
                     })
                   })]
                 })
@@ -970,13 +1002,20 @@ function HomePage({
           })
         }),
         closeOnDocumentClick: true,
-        children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_15__.jsx((react_chatbot_kit__WEBPACK_IMPORTED_MODULE_8___default()), {
-          config: _objectSpread(_objectSpread({}, _chatbot_config__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z), {}, {
+        children: currentUser ? /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_15__.jsx((react_chatbot_kit__WEBPACK_IMPORTED_MODULE_8___default()), {
+          config: _objectSpread(_objectSpread({}, chatbotConfig), {}, {
             initialMessages: [(0,react_chatbot_kit__WEBPACK_IMPORTED_MODULE_8__.createChatBotMessage)(t('surveyintro')), (0,react_chatbot_kit__WEBPACK_IMPORTED_MODULE_8__.createChatBotMessage)(t('q1'), {
               withAvatar: false,
               delay: 500,
               widget: "yesno"
             })]
+          }),
+          messageParser: _chatbot_MessageParser__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z,
+          actionProvider: _chatbot_ActionProvider__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z,
+          placeholderText: t('enterresponse')
+        }) : /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_15__.jsx((react_chatbot_kit__WEBPACK_IMPORTED_MODULE_8___default()), {
+          config: _objectSpread(_objectSpread({}, chatbotConfig), {}, {
+            initialMessages: [(0,react_chatbot_kit__WEBPACK_IMPORTED_MODULE_8__.createChatBotMessage)(t('plslogin'))]
           }),
           messageParser: _chatbot_MessageParser__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z,
           actionProvider: _chatbot_ActionProvider__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z,

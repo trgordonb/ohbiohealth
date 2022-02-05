@@ -7,6 +7,10 @@ ENV YOUTUBE_CHANNELID=PLtmKTJS0Kkqw945sc38zAkI5HEqLGm49i
 ENV CLOUDINARY_CLOUD=dqmqirs5h
 ENV CLOUDINARY_PRESET=fppkpzyu
 ENV ECWID_STOREID=67812829
+ENV STRIPE_SECRET_KEY=sk_test_51KNcqvHeckYyuEvCDlauwPbCRYHUy0qsGdRNIAxDbvO8vozJ6n1TQmRePky2Qt3qCZy6nRQnuwAmvMg9C2mVQLU200g9BPwvzg
+ENV WC_CONSUMER_KEY=ck_f51aef3198e122540bf844df9d48080dc6728c85
+ENV WC_CONSUMER_SECRET=cs_31e968bc34073092a3042a6904ac34f336b971a4
+ENV STRIPE_WEBHOOK_ENDPOINT_SECRET=whsec_hI6b42fp9WmLvisBjZUdBFUpZr7VcB01
 
 # Create app directory
 RUN mkdir -p /usr/src/app
@@ -20,6 +24,6 @@ RUN npm install
 COPY . /usr/src/app
 
 # Building app
-RUN npm run build
+#RUN npm run build
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "dev"]

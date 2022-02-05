@@ -6,7 +6,8 @@ module.exports = {
   reactStrictMode: true,
   images: {
     domains: [
-      'cms.ohbiohealth.club'
+      'cms.ohbiohealth.club',
+      'ohbiohealth.shop'
     ]
   }
 };
