@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next'
 import CountrySelection from "./CountrySelection";
 import StateSelection from "./StatesSelection";
 import InputField from "./form-elements/InputField";
 
 const Address = ({input, countries, states, handleOnChange, isFetchingStates, isShipping}) => {
+	const { t, i18n } = useTranslation()
 
     const {errors} = input || {};
 
@@ -15,7 +17,7 @@ const Address = ({input, countries, states, handleOnChange, isFetchingStates, is
                     inputValue={input?.firstName}
                     required
                     handleOnChange={handleOnChange}
-                    label="First name"
+                    label={t('firstname')}
                     errors={errors}
                     isShipping={isShipping}
                     containerClassNames="w-full overflow-hidden sm:my-2 sm:px-2 md:w-1/2"
@@ -25,7 +27,7 @@ const Address = ({input, countries, states, handleOnChange, isFetchingStates, is
                     inputValue={input?.lastName}
                     required
                     handleOnChange={handleOnChange}
-                    label="Last name"
+                    label={t('lastname')}
                     errors={errors}
                     isShipping={isShipping}
                     containerClassNames="w-full overflow-hidden sm:my-2 sm:px-2 md:w-1/2"
@@ -35,7 +37,7 @@ const Address = ({input, countries, states, handleOnChange, isFetchingStates, is
                 name="company"
                 inputValue={input?.company}
                 handleOnChange={handleOnChange}
-                label="Company Name (Optional)"
+                label={t('company')}
                 errors={errors}
                 isShipping={isShipping}
                 containerClassNames="mb-4"
@@ -52,8 +54,8 @@ const Address = ({input, countries, states, handleOnChange, isFetchingStates, is
                 inputValue={input?.address1}
                 required
                 handleOnChange={handleOnChange}
-                label="Street address"
-                placeholder="House number and street name"
+                label={t('address1')}
+                placeholder={t('house')}
                 errors={errors}
                 isShipping={isShipping}
                 containerClassNames="mb-4"
@@ -62,8 +64,8 @@ const Address = ({input, countries, states, handleOnChange, isFetchingStates, is
                 name="address2"
                 inputValue={input?.address2}
                 handleOnChange={handleOnChange}
-                label="Street address line two"
-                placeholder="Apartment floor unit building floor etc(optional)"
+                label={t('address2')}
+                placeholder={t('apartment')}
                 errors={errors}
                 isShipping={isShipping}
                 containerClassNames="mb-4"
@@ -73,7 +75,7 @@ const Address = ({input, countries, states, handleOnChange, isFetchingStates, is
                 required
                 inputValue={input?.city}
                 handleOnChange={handleOnChange}
-                label="Town/City"
+                label={t('town')}
                 errors={errors}
                 isShipping={isShipping}
                 containerClassNames="mb-4"
@@ -92,7 +94,7 @@ const Address = ({input, countries, states, handleOnChange, isFetchingStates, is
                     inputValue={input?.postcode}
                     required
                     handleOnChange={handleOnChange}
-                    label="Post code"
+                    label={t('postcode')}
                     errors={errors}
                     isShipping={isShipping}
                     containerClassNames="w-full overflow-hidden sm:my-2 sm:px-2 md:w-1/2"
@@ -102,7 +104,7 @@ const Address = ({input, countries, states, handleOnChange, isFetchingStates, is
                     inputValue={input?.phone}
                     required
                     handleOnChange={handleOnChange}
-                    label="Phone"
+                    label={t('phone')}
                     errors={errors}
                     isShipping={isShipping}
                     containerClassNames="w-full overflow-hidden sm:my-2 sm:px-2 md:w-1/2"
@@ -114,7 +116,7 @@ const Address = ({input, countries, states, handleOnChange, isFetchingStates, is
                 inputValue={input?.email}
                 required
                 handleOnChange={handleOnChange}
-                label="Email"
+                label={t('email')}
                 errors={errors}
                 isShipping={isShipping}
                 containerClassNames="mb-4"

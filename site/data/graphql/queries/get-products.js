@@ -21,6 +21,11 @@ const PRODUCTS_QUERY = gql`query {
         price
         regularPrice
         id
+        attributes {
+          nodes {
+            options
+          }
+        }
       }
       ... on VariableProduct {
         price

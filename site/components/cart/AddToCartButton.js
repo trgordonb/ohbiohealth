@@ -1,4 +1,5 @@
 import {useState, useContext} from "react";
+import { useTranslation } from 'react-i18next'
 import {useQuery, useMutation} from '@apollo/client';
 import Link from "next/link";
 import {v4} from 'uuid';
@@ -10,6 +11,7 @@ import GET_CART from "../../data/graphql/queries/get-cart"
 import ADD_TO_CART from "../../data/graphql/mutations/add-to-cart"
 
 const AddToCart = (props) => {
+    const { t, i18n } = useTranslation()
 
     const {product} = props;
 
@@ -72,7 +74,7 @@ const AddToCart = (props) => {
             {"ExternalProduct" === product.__typename ? (
                     <a href={product?.externalUrl ?? '/'} target="_blank" rel="noreferrer"
                        className="px-3 py-1 rounded-sm mr-3 text-sm border-solid border border-current inline-block hover:bg-purple-600 hover:text-white hover:border-purple-600">
-						Buy now
+						{t('buynow')}
                     </a>
                 ) :
                 <button
@@ -84,14 +86,14 @@ const AddToCart = (props) => {
                         {'opacity-50 cursor-not-allowed': addToCartLoading}
                     )}
                 >
-					{ addToCartLoading ? 'Adding to cart...' : 'Add to cart' }
+					{ addToCartLoading ? t('addingtocart') : t('addtocart') }
                 </button>
             }
             {showViewCart ? (
                 <Link href="/cart">
                     <button
-                        className="px-3 py-1 rounded-sm text-sm border-solid border border-current inline-block hover:bg-purple-600 hover:text-white hover:border-purple-600">View
-                        Cart
+                        className="px-3 py-1 rounded-sm text-sm border-solid border border-current inline-block hover:bg-purple-600 hover:text-white hover:border-purple-600">{t('view')}
+                        {t('cart')}
                     </button>
                 </Link>
             ) : ''}

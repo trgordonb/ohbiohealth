@@ -1,4 +1,5 @@
 import {useState, useEffect, useContext} from "react";
+import { useTranslation } from 'react-i18next'
 import Router from "next/router";
 import Link from 'next/link';
 import axios from "axios";
@@ -7,6 +8,8 @@ import Loading from '../components/icons/Loading'
 import ShoppingCart from '../components/icons/ShoppingCart'
 
 const ThankYouContent = () => {
+    const { t, i18n } = useTranslation()
+
     const [cart, setCart] = useContext(CartContext);
     const [isSessionFetching, setSessionFetching] = useState(false);
     const [sessionData, setSessionData] = useState({});
@@ -37,28 +40,28 @@ const ThankYouContent = () => {
         <div className="w-full md:w-96 md:max-w-full mt-20 mx-auto">
                 {isSessionFetching ? <Loading/> : (
                     <>
-                        <h2 className="mb-6 text-xl"><ShoppingCart className="inline-block mr-1"/> <span>Thank you for placing the order.</span></h2>
-                        <p>Your payment is successful and your order details are: </p>
+                        <h2 className="mb-6 text-xl"><ShoppingCart className="inline-block mr-1"/> <span>{t('thank')}</span></h2>
+                        <p>{t('payment success')} </p>
                         <table className="table-auto w-full text-left whitespace-no-wrap mb-8">
                             <thead>
                             <tr>
-                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">Name</th>
-                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Details</th>
+                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">{t('name')}</th>
+                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">{t('detail')}</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td className="px-4 py-3">Order#</td>
+                                <td className="px-4 py-3">{t('ordernum')}</td>
                                 <td className="px-4 py-3">{sessionData?.metadata?.orderId}</td>
                             </tr>
                             <tr>
-                                <td className="px-4 py-3">Email</td>
+                                <td className="px-4 py-3">{t('email')}</td>
                                 <td className="px-4 py-3">{sessionData?.customer_email}</td>
                             </tr>
                             </tbody>
                         </table>
                         <Link href="/">
-                            <a className="bg-purple-600 text-white px-5 py-3 rounded-sm w-auto">Shop more</a>
+                            <a className="bg-purple-600 text-white px-5 py-3 rounded-sm w-auto">{t('shopmore')}</a>
                         </Link>
                     </>
                 )}

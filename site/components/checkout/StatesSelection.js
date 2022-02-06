@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next'
 import {memo} from 'react';
 import cx from 'classnames';
 
@@ -6,6 +7,7 @@ import Abbr from "./form-elements/Abbr";
 import Error from './Error';
 
 const StateSelection = ({handleOnChange, input, states, isFetchingStates, isShipping}) => {
+	const { t, i18n } = useTranslation()
 
     const {state, errors} = input || {};
 
@@ -16,7 +18,7 @@ const StateSelection = ({handleOnChange, input, states, isFetchingStates, isShip
         return (
             <div className="mb-3">
                 <label className="leading-7 text-sm text-gray-700">
-                    State/County
+                    {t('state')}
                     <Abbr required/>
                 </label>
                 <div className="relative w-full border-none">
@@ -26,7 +28,7 @@ const StateSelection = ({handleOnChange, input, states, isFetchingStates, isShip
                         name="state"
                         className="opacity-50 bg-gray-100 bg-opacity-50 border border-gray-500 text-gray-500 appearance-none inline-block py-3 pl-3 pr-8 rounded leading-tight w-full"
                     >
-                        <option value="">Loading...</option>
+                        <option value="">{t('loading')}</option>
                     </select>
                 </div>
             </div>
@@ -40,7 +42,7 @@ const StateSelection = ({handleOnChange, input, states, isFetchingStates, isShip
     return (
         <div className="mb-3">
             <label className="leading-7 text-sm text-gray-600" htmlFor={inputId}>
-                State/County
+                {t('state')}
                 <Abbr required/>
             </label>
             <div className="relative w-full border-none">
@@ -55,7 +57,7 @@ const StateSelection = ({handleOnChange, input, states, isFetchingStates, isShip
                     )}
                     id={inputId}
                 >
-                    <option value="">Select a state...</option>
+                    <option value="">{t('selectstate')}</option>
                     {states.map((state, index) => (
                         <option key={state?.stateCode ?? index} value={state?.stateName ?? ''}>
                             {state?.stateName}

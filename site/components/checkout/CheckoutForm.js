@@ -1,5 +1,6 @@
 import {useState, useContext, useEffect} from 'react';
 import {useMutation, useQuery} from '@apollo/client';
+import { useTranslation } from 'react-i18next'
 import cx from 'classnames'
 
 import YourOrder from "./YourOrder";
@@ -19,22 +20,23 @@ import {
 import CheckboxField from "./form-elements/CheckboxField";
 import CLEAR_CART_MUTATION from '../../data/graphql/mutations/clear-cart'
 
-const defaultCustomerInfo = {
-    firstName: '',
-    lastName: '',
-    address1: '',
-    address2: '',
-    city: '',
-    country: '',
-    state: '',
-    postcode: '',
-    email: '',
-    phone: '',
-    company: '',
-    errors: null
-}
+const CheckoutForm = ({countriesData, email}) => {
+    const { t, i18n } = useTranslation()
 
-const CheckoutForm = ({countriesData}) => {
+    const defaultCustomerInfo = {
+        firstName: '',
+        lastName: '',
+        address1: '',
+        address2: '',
+        city: '',
+        country: '',
+        state: '',
+        postcode: '',
+        email: email ? email : '',
+        phone: '',
+        company: '',
+        errors: null
+    }
 
     const {billingCountries, shippingCountries} = countriesData || {}
 
@@ -48,7 +50,7 @@ const CheckoutForm = ({countriesData}) => {
         createAccount: false,
         orderNotes: '',
         billingDifferentThanShipping: false,
-        paymentMethod: 'cod',
+        paymentMethod: 'stripe-mode',
     };
 
     const [cart, setCart] = useContext(CartContext);
@@ -206,7 +208,7 @@ const CheckoutForm = ({countriesData}) => {
                         <div>
                             {/*Shipping Details*/}
                             <div className="billing-details">
-                                <h2 className="text-xl font-medium mb-4">Shipping Details</h2>
+                                <h2 className="text-xl font-medium mb-4">{t('shipping')}</h2>
                                 <Address
                                     states={theShippingStates}
                                     countries={shippingCountries}
@@ -223,14 +225,14 @@ const CheckoutForm = ({countriesData}) => {
                                     type="checkbox"
                                     checked={input?.billingDifferentThanShipping}
                                     handleOnChange={handleOnChange}
-                                    label="Billing different than shipping"
+                                    label={t('billingdiff')}
                                     containerClassNames="mb-4 pt-4"
                                 />
                             </div>
                             {/*Billing Details*/}
                             {input?.billingDifferentThanShipping ? (
                                 <div className="billing-details">
-                                    <h2 className="text-xl font-medium mb-4">Billing Details</h2>
+                                    <h2 className="text-xl font-medium mb-4">{t('billing')}</h2>
                                     <Address
                                         states={theBillingStates}
                                         countries={billingCountries}
@@ -247,7 +249,7 @@ const CheckoutForm = ({countriesData}) => {
                         {/* Order & Payments*/}
                         <div className="your-orders">
                             {/*	Order*/}
-                            <h2 className="text-xl font-medium mb-4">Your Order</h2>
+                            <h2 className="text-xl font-medium mb-4">{t('yourorder')}</h2>
                             <YourOrder cart={cart}/>
 
                             {/*Payment*/}
@@ -262,13 +264,13 @@ const CheckoutForm = ({countriesData}) => {
                                     )}
                                     type="submit"
                                 >
-                                    Place Order
+                                    {t('placeorder')}
                                 </button>
                             </div>
 
                             {/* Checkout Loading*/}
-                            {isOrderProcessing && <p>Processing Order...</p>}
-                            {requestError && <p>Error : {requestError} :( Please try again</p>}
+                            {isOrderProcessing && <p>{t('processorder')}</p>}
+                            {requestError && <p>{t('error')} : {requestError} :( {t('tryagain')}</p>}
                         </div>
                     </div>
                 </form>

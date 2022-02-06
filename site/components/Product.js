@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import AddToCartButton from './cart/AddToCartButton'
+import PreOrderButton from './cart/PreOrderButton';
 import ProductPrice from "./ProductPrice"
 import Image from "./Image"
 import {DEFAULT_PRODUCT_HOME_IMG_URL} from "../utils/constants/urls"
 
 const Product = ( props ) => {
-	const { product } = props;
+	const { product, isPreOrder } = props;
 
 	return (
 		// @TODO Need to handle Group products differently.
@@ -32,7 +33,10 @@ const Product = ( props ) => {
 					</h3>
 					<div className="product-description text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: (product?.description)}}/>
 					<ProductPrice salesPrice={product?.price} regularPrice={product?.regularPrice}/>
-					<AddToCartButton product={ product }/>
+					{
+						isPreOrder ? <PreOrderButton product={ product }/> :
+						<AddToCartButton product={ product }/>
+					}
 				</div>
 
 			</div>

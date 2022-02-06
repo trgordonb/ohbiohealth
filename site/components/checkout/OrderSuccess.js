@@ -1,4 +1,7 @@
+import { useTranslation } from 'react-i18next'
+
 const OrderSuccess = ( props ) => {
+	const { t, i18n } = useTranslation()
 
 	const { response } = props;
 
@@ -14,8 +17,8 @@ const OrderSuccess = ( props ) => {
 		<div className="container">
 			{ 'success' === responseData.result ? (
 				<div>
-					<h2>Order no: { responseData.order.orderNumber } </h2>
-					<p>Status : { responseData.order.status }</p>
+					<h2>{t('orderno')} { responseData.order.orderNumber } </h2>
+					<p>{t('status')} { responseData.order.status }</p>
 				</div>
 			): ''}
 		</div>

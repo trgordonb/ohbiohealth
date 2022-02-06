@@ -12,9 +12,9 @@ import Product from '../components/Product'
 //}
 
 export default function ShopPage(props) {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
     const { products } = props || {};
-    
+    console.log(products)    
     return (
             //{
                 //<div className='m-auto p-5 max-w-4xl'>
@@ -27,10 +27,11 @@ export default function ShopPage(props) {
                 //</div>
             //}          
         <div className="products container mx-auto my-32 px-4 xl:px-0">
-            <h2 className="products-main-title main-title mb-5 text-xl uppercase"><span className="main-title-inner">Products</span></h2>
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
                 { products.length ? (
-                    products.map( product => <Product key={ product.id } product={ product }/> )
+                    products.filter( product => {
+                        return (product.attributes.nodes[0].options[0] === i18n.language)
+                    }).map( product => <Product key={ product.id } product={ product } isPreOrder={product.attributes.nodes[1].options[0] === 'yes'}/> )
                 ) : '' }
             </div>
         </div>
