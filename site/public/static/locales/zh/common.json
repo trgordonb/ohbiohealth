@@ -133,5 +133,11 @@
     "processorder": "處理訂單...",
     "tryagain": "請再試一次",
     "error": "錯誤",
-    "billingdiff": "結算地址與送貨地址不同"
+    "billingdiff": "結算地址與送貨地址不同",
+    "notvalid": "無效",
+    "isrequired": "是必須的選項",
+    "mustbe": "必須是",
+    "to": "至",
+    "character": "字符",
+    "city": "城市"
 }

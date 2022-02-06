@@ -41,7 +41,7 @@ const ThankYouContent = () => {
                 {isSessionFetching ? <Loading/> : (
                     <>
                         <h2 className="mb-6 text-xl"><ShoppingCart className="inline-block mr-1"/> <span>{t('thank')}</span></h2>
-                        <p>{t('payment success')} </p>
+                        <p>{t('paymentsuccess')} </p>
                         <table className="table-auto w-full text-left whitespace-no-wrap mb-8">
                             <thead>
                             <tr>

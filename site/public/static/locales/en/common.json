@@ -117,7 +117,7 @@
     "apartment": "Apartment floor unit building floor etc(optional)",
     "town": "Town/City",
     "postcode": "Post code",
-    "phone": "Phone",
+    "phone": "Phone number",
     "required": "required",
     "ordernum": "Order #",
     "shopmore": "Shop more",
@@ -133,5 +133,11 @@
     "processorder": "Processing Order...",
     "tryagain": "Please try again",
     "error": "Error",
-    "billingdiff": "Billing different than shipping"
+    "billingdiff": "Billing different than shipping",
+    "notvalid": "is not valid",
+    "isrequired": "is required",
+    "mustbe": "must be",
+    "to": "to",
+    "charcater": "characters",
+    "city": "City"
 }

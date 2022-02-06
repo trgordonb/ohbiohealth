@@ -114,8 +114,8 @@ const CheckoutForm = ({countriesData, email}) => {
          * 2. We are passing theBillingStates?.length and theShippingStates?.length, so that
          * the respective states should only be mandatory, if a country has states.
          */
-        const billingValidationResult = input?.billingDifferentThanShipping ? validateAndSanitizeCheckoutForm(input?.billing, theBillingStates?.length) : {errors: null, isValid: true};
-        const shippingValidationResult = validateAndSanitizeCheckoutForm(input?.shipping, theShippingStates?.length);
+        const billingValidationResult = input?.billingDifferentThanShipping ? validateAndSanitizeCheckoutForm(input?.billing, theBillingStates?.length, t) : {errors: null, isValid: true};
+        const shippingValidationResult = validateAndSanitizeCheckoutForm(input?.shipping, theShippingStates?.length, t);
 
         if (!shippingValidationResult.isValid || !billingValidationResult.isValid) {
             setInput({
