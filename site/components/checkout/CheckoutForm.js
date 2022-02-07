@@ -301,7 +301,7 @@ const CheckoutForm = ({countriesData, email}) => {
                                         }}
                                         onSuccess={async (details, data) => {
                                             if (data.orderID && createdOrderData.orderId) {
-                                                await handlePaypalPaymentSuccess(createdOrderData.orderId, data.orderId)
+                                                await handlePaypalPaymentSuccess(createdOrderData.orderId, data.orderID)
                                             }
                                             router.push({
                                                 pathname: '/thank-you',
