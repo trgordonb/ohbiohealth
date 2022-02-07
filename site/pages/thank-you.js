@@ -13,7 +13,9 @@ const ThankYouContent = () => {
     const [cart, setCart] = useContext(CartContext);
     const [isSessionFetching, setSessionFetching] = useState(false);
     const [sessionData, setSessionData] = useState({});
-    const session_id = process.browser ? Router.query.session_id : null;
+    const session_id = process.browser ? Router.query.session_id : null
+    const customer_email = process.browser ? Router.query.email : null
+    const order_id = process.browser ? Router.query.order_id : null
 
     useEffect(() => {
         setSessionFetching(true);
@@ -31,6 +33,14 @@ const ThankYouContent = () => {
                         console.log(error);
                         setSessionFetching(false);
                     });
+            } else {
+                setSessionData({
+                    metadata: {
+                        orderId : order_id
+                    },
+                    customer_email
+                })
+                setSessionFetching(false);
             }
         }
 

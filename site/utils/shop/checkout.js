@@ -70,7 +70,7 @@ export const handleCreateAccount = ( input, setInput, target ) => {
  */
 export const handleStripeCheckout = async (input, products, setRequestError, clearCartMutation, setIsStripeOrderProcessing, setCreatedOrderData) => {
     setIsStripeOrderProcessing(true);
-    const orderData = getCreateOrderData( input, products );
+    const orderData = getCreateOrderData( input, products, 'stripe' );
     const createCustomerOrder = await createTheOrder( orderData, setRequestError,  '' );
     const cartCleared = await clearTheCart( clearCartMutation, createCustomerOrder?.error );
     setIsStripeOrderProcessing(false);
@@ -84,6 +84,20 @@ export const handleStripeCheckout = async (input, products, setRequestError, cle
     // On success show stripe form.
     setCreatedOrderData(createCustomerOrder)
     await createCheckoutSessionAndRedirect( products, input, createCustomerOrder?.orderId );
+
+    return createCustomerOrder;
+}
+
+export const handlePaypalCheckout = async (input, products, setRequestError, clearCartMutation) => {
+    const orderData = getCreateOrderData( input, products, 'paypal' );
+    const createCustomerOrder = await createTheOrder( orderData, setRequestError,  '' );
+    const cartCleared = await clearTheCart( clearCartMutation, createCustomerOrder?.error );
+
+    if ( isEmpty( createCustomerOrder?.orderId ) || cartCleared?.error ) {
+        console.log( 'came in' );
+        setRequestError('Clear cart failed')
+    	return null;
+    }
 
     return createCustomerOrder;
 }

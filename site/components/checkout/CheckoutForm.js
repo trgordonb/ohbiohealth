@@ -2,6 +2,7 @@ import {useState, useContext, useEffect} from 'react';
 import {useMutation, useQuery} from '@apollo/client';
 import { useTranslation } from 'react-i18next'
 import cx from 'classnames'
+import { PayPalButton } from "react-paypal-button-v2";
 
 import YourOrder from "./YourOrder";
 import PaymentModes from "./PaymentModes";
@@ -14,14 +15,16 @@ import CHECKOUT_MUTATION from '../../data/graphql/mutations/checkout'
 import Address from "./Address";
 import {
     handleBillingDifferentThanShipping,
-    handleCreateAccount, handleStripeCheckout,
+    handleCreateAccount, handleStripeCheckout, handlePaypalCheckout,
     setStatesForCountry
 } from '../../utils/shop/checkout'
 import CheckboxField from "./form-elements/CheckboxField";
 import CLEAR_CART_MUTATION from '../../data/graphql/mutations/clear-cart'
+import { useRouter } from 'next/router';
 
 const CheckoutForm = ({countriesData, email}) => {
     const { t, i18n } = useTranslation()
+    const router = useRouter()
 
     const defaultCustomerInfo = {
         firstName: '',
@@ -64,6 +67,7 @@ const CheckoutForm = ({countriesData, email}) => {
     const [isStripeOrderProcessing, setIsStripeOrderProcessing] = useState(false);
     const [createdOrderData, setCreatedOrderData] = useState({});
     const [refreshCart, setRefreshCart] = useState(false)
+    const [showPaypalBtn, setShowPaypalBtn] = useState(false)
 
     // Get Cart Data.
     const {data} = useQuery(GET_CART, {
@@ -169,6 +173,10 @@ const CheckoutForm = ({countriesData, email}) => {
             const newState = {...input, [target.name]: target.value};
             setInput(newState);
         }
+
+        if (  'paymentMethod' === target.name && 'paypal' === target.value ) {
+            setShowPaypalBtn(true)
+        }
     };
 
     const handleShippingChange = async (target) => {
@@ -181,6 +189,21 @@ const CheckoutForm = ({countriesData, email}) => {
         const newState = {...input, billing: {...input?.billing, [target.name]: target.value}};
         setInput(newState);
         await setStatesForCountry(target, setTheBillingStates, setIsFetchingBillingStates);
+    }
+
+    const handlePaypalPaymentSuccess = async (orderId, transactionId) => {
+        try {
+            await fetch( '/api/paypal-completed', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ orderId, transactionId }),
+            } );
+        } catch ( error ) {
+            // @TODO to be handled later.
+            console.warn( 'Handle update order payment info', error?.message );
+        }
     }
 
     useEffect(async () => {
@@ -255,18 +278,55 @@ const CheckoutForm = ({countriesData, email}) => {
                             {/*Payment*/}
                             <PaymentModes input={input} handleOnChange={handleOnChange}/>
 
-                            <div className="woo-next-place-order-btn-wrap mt-5">
-                                <button
-                                    disabled={isOrderProcessing}
-                                    className={cx(
-                                        'bg-purple-600 text-white px-5 py-3 rounded-sm w-auto xl:w-full',
-                                        {'opacity-50': isOrderProcessing}
-                                    )}
-                                    type="submit"
-                                >
-                                    {t('placeorder')}
-                                </button>
-                            </div>
+                            {
+                                showPaypalBtn ?
+                                <div className="woo-next-place-order-btn-wrap mt-5">
+                                    <PayPalButton 
+                                        options={{
+                                            clientId:'AUYj6H-64g89ld5AjnP6S98_VQIervIH1HbF0cWKp85IdYAEWVLXZNMpHAlXkQDjVsYDvFNjun28yCJf',
+                                            disableFunding:'credit,card',
+                                            currency:'HKD'
+                                        }}
+                                        createOrder={async (data, actions) => {
+                                            const createdOrderData = await handlePaypalCheckout(input, cart?.products, setRequestError, clearCartMutation)
+                                            setCreatedOrderData(createdOrderData)
+                                            return actions.order.create({
+                                                purchase_units: [{
+                                                    amount: {
+                                                        currency_code: "HKD",
+                                                        value: cart.totalProductsPrice.replace('$','').replace(',','')
+                                                    }
+                                                }],
+                                            })
+                                        }}
+                                        onSuccess={async (details, data) => {
+                                            if (data.orderID && createdOrderData.orderId) {
+                                                await handlePaypalPaymentSuccess(createdOrderData.orderId, data.orderId)
+                                            }
+                                            router.push({
+                                                pathname: '/thank-you',
+                                                query: {
+                                                    email: input.billing.email,
+                                                    order_id: createdOrderData.orderId
+                                                }
+                                            })
+                                        }}                                       
+                                    />
+                                </div> :
+                                <div className="woo-next-place-order-btn-wrap mt-5">
+                                    <button
+                                        disabled={isOrderProcessing}
+                                        className={cx(
+                                            'bg-purple-600 text-white px-5 py-3 rounded-sm w-auto xl:w-full',
+                                            {'opacity-50': isOrderProcessing}
+                                        )}
+                                        type="submit"
+                                    >
+                                        {t('placeorder')}
+                                    </button>
+                                </div>
+                            }
+                            
 
                             {/* Checkout Loading*/}
                             {isOrderProcessing && <p>{t('processorder')}</p>}
