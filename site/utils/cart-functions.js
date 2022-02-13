@@ -221,6 +221,7 @@ export const getFormattedCart = ( data ) => {
 		product.cartKey = givenProducts?.[ i ]?.key ?? '';
 		product.name = givenProduct?.name ?? '';
 		product.qty = givenProducts?.[ i ]?.quantity;
+		product.sku = givenProduct?.sku ?? '';
 		product.price = total / product?.qty;
 		product.totalPrice = givenProducts?.[ i ]?.total ?? '';
 		product.image = {
