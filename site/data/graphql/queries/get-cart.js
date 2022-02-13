@@ -9,6 +9,7 @@ query GET_CART {
         product {
           node {
             id
+            sku
             productId: databaseId
             name
             description
@@ -38,6 +39,7 @@ query GET_CART {
         variation {
           node {
             id
+            sku
             variationId: databaseId
             name
             description

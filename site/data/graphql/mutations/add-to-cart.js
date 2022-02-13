@@ -8,6 +8,7 @@ const ADD_TO_CART = gql`
           product {
             node {
               id
+              sku
               productId: databaseId
               name
               description
@@ -33,6 +34,7 @@ const ADD_TO_CART = gql`
           variation {
             node {
               id
+              sku
               variationId: databaseId
               name
               description
