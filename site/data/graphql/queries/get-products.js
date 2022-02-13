@@ -18,6 +18,7 @@ const PRODUCTS_QUERY = gql`query {
       }
       name
       ... on SimpleProduct {
+        sku
         price
         regularPrice
         id
@@ -28,11 +29,13 @@ const PRODUCTS_QUERY = gql`query {
         }
       }
       ... on VariableProduct {
+        sku
         price
         id
         regularPrice
       }
       ... on ExternalProduct {
+        sku
         price
         id
         externalUrl
@@ -43,6 +46,7 @@ const PRODUCTS_QUERY = gql`query {
         products {
           nodes {
             ... on SimpleProduct {
+              sku
               id
               price
               regularPrice

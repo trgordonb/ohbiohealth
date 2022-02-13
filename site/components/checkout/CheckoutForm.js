@@ -3,7 +3,7 @@ import {useMutation, useQuery} from '@apollo/client';
 import { useTranslation } from 'react-i18next'
 import cx from 'classnames'
 import { PayPalButton } from "react-paypal-button-v2";
-
+import useRequest from '../../hooks/use-request'
 import YourOrder from "./YourOrder";
 import PaymentModes from "./PaymentModes";
 import {CartContext} from '../../hooks/use-cart';
@@ -25,6 +25,13 @@ import { useRouter } from 'next/router';
 const CheckoutForm = ({countriesData, email}) => {
     const { t, i18n } = useTranslation()
     const router = useRouter()
+
+    const { doRequest, errors } = useRequest({
+        url: '/api/profiles/orders',
+        method: 'post',
+        onSuccess: (data) => {
+        }
+    });
 
     const defaultCustomerInfo = {
         firstName: '',
@@ -206,6 +213,28 @@ const CheckoutForm = ({countriesData, email}) => {
         }
     }
 
+    const updateProfile = async (orderId) => {
+        if (email) {
+            await doRequest({
+                orderNumber: orderId,
+                total: parseFloat(cart.totalProductsPrice.replace('$','').replace(',','')),
+                items: cart.products.map(item => {
+                    return {
+                        product: {
+                            price: ('string' !== typeof item.price) ? item.price.toFixed(2) : item.price,
+                            name: item.name,
+                            sku: item.sku,
+                            url: item.image.sourceUrl
+                        },
+                        quantity: item.qty
+                    }
+                })
+            })
+        } else {
+            console.log('profile not updated')
+        }
+    }
+
     useEffect(async () => {
         // Update cart in the localStorage.
 		const updatedCart = getFormattedCart( data );
@@ -301,6 +330,7 @@ const CheckoutForm = ({countriesData, email}) => {
                                         }}
                                         onSuccess={async (details, data) => {
                                             if (data.orderID && createdOrderData.orderId) {
+                                                await updateProfile(createdOrderData.orderId)
                                                 await handlePaypalPaymentSuccess(createdOrderData.orderId, data.orderID)
                                             }
                                             router.push({
