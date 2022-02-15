@@ -43,6 +43,7 @@ const config = {
         numbsensation: false,
         step: 1,
         infoBox: '',
+        bodyPart: 'front',
         painpoints: [],
     },
     widgets: [
@@ -53,7 +54,7 @@ const config = {
         {
           widgetName: "bodydiagram",
           widgetFunc: (props) => <ChatBotBodyDiagram {...props} />,
-          mapStateToProps: ["infoBox"]
+          mapStateToProps: ["infoBox", "bodyPart"]
         }
     ]
 };

@@ -5,8 +5,10 @@ import styles from './ChatBotBodyDiagram.module.css'
 import Image from "next/image";
 import bodyback from '../../public/images/bodyback.jpg'
 import bodyfront from '../../public/images/bodyfront.jpg'
+import bodyLeft from '../../public/images/bodyleft.jpg'
+import bodyRight from '../../public/images/bodyright.jpg'
 
-const ChatBotBodyDiagram = ({ infoBox, setState }) => {
+const ChatBotBodyDiagram = ({ infoBox, bodyPart, setState }) => {
   useEffect(() => {
     setState((state) => ({
       ...state,
@@ -23,12 +25,30 @@ const ChatBotBodyDiagram = ({ infoBox, setState }) => {
         show={
           <ChatBotInfoBox setState={setState}>
             <div className={styles.flexcontainer}>
+              {
+                bodyPart === 'front' &&
                 <div className={styles.flexchild}>
                     <Image src={bodyfront} alt="Body Front" width={130} height={400} />
                 </div>
+              }
+              {
+                bodyPart === 'back' &&
                 <div className={styles.flexchild}>
                     <Image src={bodyback} alt="Body Back" width={130} height={400} />
                 </div>
+              }
+              {
+                bodyPart === 'left' &&
+                <div className={styles.flexchild}>
+                    <Image src={bodyLeft} alt="Body Left" width={130} height={400} />
+                </div>
+              }
+              {
+                bodyPart === 'right' &&
+                <div className={styles.flexchild}>
+                    <Image src={bodyRight} alt="Body Right" width={130} height={400} />
+                </div>
+              }
             </div>
           </ChatBotInfoBox>
         }

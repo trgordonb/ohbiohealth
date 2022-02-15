@@ -6,7 +6,7 @@ interface PainConditionsAttrs {
     needlesensation: boolean,
     burningsensation: boolean,
     numbsensation: boolean,
-    spinalpos: boolean,
+    painpositions: number[],
     diagnosis: string[]
 }
 
@@ -16,7 +16,7 @@ export interface PainConditionsDoc extends mongoose.Document {
     needlesensation: boolean,
     burningsensation: boolean,
     numbsensation: boolean,
-    spinalpos: boolean,
+    painpositions: number[],
     diagnosis: string[]
 }
 
@@ -50,10 +50,10 @@ const painConditionsSchema = new mongoose.Schema(
             required: true,
             default: false
         },
-        spinalpos: {
-            type: Boolean,
+        painpositions: {
+            type: [Number],
             required: true,
-            default: false
+            default: []
         },
         diagnosis: {
             type: [String],

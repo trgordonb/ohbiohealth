@@ -63,7 +63,7 @@
     "e1": "Don't understand what you mean. Try again?",
     "e2": "Some values in the input are invalid, please try again",
     "p1": "Please choose from the accompanying body digram your pain points",
-    "p2": "If you have more than one pain points, type in like this example: 1,4,5",
+    "p2": "If you have more than one pain points, type in like this example: 1,4,5. If you have none, type n",
     "y": "Yes",
     "n": "No",
     "assistant": "Assistant",
@@ -139,5 +139,6 @@
     "mustbe": "must be",
     "to": "to",
     "charcater": "characters",
-    "city": "City"
+    "city": "City",
+    "morediagram": "Now check for this diagram"
 }

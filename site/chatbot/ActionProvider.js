@@ -6,23 +6,37 @@ class ActionProvider {
     this.stateRef = stateRef;
   }
 
-  setChatbotMessage = (message, newstate) => {
+  setChatbotMessage = (message, newstate, isError=false) => {
       let stateKey = Object.keys(newstate).length === 1 ? Object.keys(newstate)[0] : null
       let stateValue = Object.values(newstate).length === 1 ? Object.values(newstate)[0] : null
-      if (stateKey && stateValue) {
-        this.setState((state) => ({
-          ...state,
-          [stateKey]: stateValue,
-          step: state.step + 1,
-          messages: [...state.messages, message]
-        }))
+      if (!isError) {
+        if (stateKey && stateValue) {
+          this.setState((state) => ({
+            ...state,
+            [stateKey]: stateValue,
+            step: state.step + 1,
+            messages: [...state.messages, message],
+          }))
+        } else {
+          this.setState((state) => ({
+            ...state,
+            step: state.step + 1,
+            messages: [...state.messages, message]
+          })
+        )}
       } else {
         this.setState((state) => ({
           ...state,
-          step: state.step + 1,
           messages: [...state.messages, message]
-        })
-      )}
+        }))
+      } 
+  }
+
+  setPainPosition = (newPos) => {
+    this.setState((state) => ({
+      ...state,
+      painpoints: [...state.painpoints, newPos]
+    }))
   }
 
   setClientMessage = (message) => {
@@ -53,7 +67,6 @@ class ActionProvider {
   }
 
   handleNo = () => {
-    console.log(this.stateRef)
     const reply = this.createClientMessage(this.stateRef.t('n'))
     this.setClientMessage(reply)
     if (this.stateRef.step === 1) {
@@ -73,6 +86,12 @@ class ActionProvider {
     } 
   }
 
+  handleNextDiagram = (nextPart, tmpResult) => {
+    const message = this.createChatbotMessage(this.stateRef.t('morediagram'), { withAvatar: false, delay: 500, widget: 'bodydiagram'})
+    this.setPainPosition(tmpResult)
+    this.setChatbotMessage(message, { bodyPart: nextPart })
+  }
+
   handleGoodbye = () => {
     const message = this.createChatbotMessage(this.stateRef.t('q5'))
     this.setChatbotMessage(message, {})
@@ -80,12 +99,12 @@ class ActionProvider {
 
   handleBadInput = () => {
     const message = this.createChatbotMessage(this.stateRef.t('e1'))
-    this.setChatbotMessage(message, {})
+    this.setChatbotMessage(message, {}, true)
   }
 
   handleInvalidInput = () => {
     const message = this.createChatbotMessage(this.stateRef.t('e2'))
-    this.setChatbotMessage(message, {})
+    this.setChatbotMessage(message, {}, true)
   }
 
   handleUnauthenticated = () => {

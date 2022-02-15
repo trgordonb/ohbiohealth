@@ -1,9 +1,9 @@
 .flexcontainer {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .flexchild {
-    flex: 1;
-    border: 2px solid yellow;
-    align-items: center;
+    display: block;
 }  

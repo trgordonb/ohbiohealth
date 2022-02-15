@@ -9,7 +9,7 @@ export class AnalysisCompletedListener extends Listener<AnalysisCompletedEvent> 
   queueGroupName = deviceQueueGroupName;
 
   async onMessage(data: AnalysisCompletedEvent['data'], msg: Message) {
-    const { userId, muscleache, burningsensation, numbsensation, needlesensation, spinalpos, diagnosis } = data;
+    const { userId, muscleache, burningsensation, numbsensation, needlesensation, painpositions, diagnosis } = data;
     const profile = await Profile.findOne({ userId });
 
     if (!profile) {
@@ -19,6 +19,13 @@ export class AnalysisCompletedListener extends Listener<AnalysisCompletedEvent> 
     const exitstingPainConditions = await PainConditions.findById(userId);
     if (exitstingPainConditions) {
       console.log('Already done analysis');
+      exitstingPainConditions.muscleache = muscleache
+      exitstingPainConditions.needlesensation = needlesensation
+      exitstingPainConditions.burningsensation = burningsensation
+      exitstingPainConditions.numbsensation = numbsensation
+      exitstingPainConditions.painpositions = painpositions
+      exitstingPainConditions.diagnosis = diagnosis
+      await exitstingPainConditions.save()
       msg.ack();
     } else {
       const painConditions = PainConditions.build({
@@ -27,7 +34,7 @@ export class AnalysisCompletedListener extends Listener<AnalysisCompletedEvent> 
         needlesensation: needlesensation,
         burningsensation: burningsensation,
         numbsensation: numbsensation,
-        spinalpos: spinalpos,
+        painpositions: painpositions,
         diagnosis: diagnosis
       });
       try {
