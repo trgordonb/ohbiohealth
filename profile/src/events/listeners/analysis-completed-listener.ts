@@ -19,13 +19,13 @@ export class AnalysisCompletedListener extends Listener<AnalysisCompletedEvent> 
     const exitstingPainConditions = await PainConditions.findById(userId);
     if (exitstingPainConditions) {
       console.log('Already done analysis');
-      exitstingPainConditions.muscleache = muscleache
-      exitstingPainConditions.needlesensation = needlesensation
-      exitstingPainConditions.burningsensation = burningsensation
-      exitstingPainConditions.numbsensation = numbsensation
-      exitstingPainConditions.painpositions = painpositions
-      exitstingPainConditions.diagnosis = diagnosis
-      await exitstingPainConditions.save()
+      //exitstingPainConditions.muscleache = muscleache
+      //exitstingPainConditions.needlesensation = needlesensation
+      //exitstingPainConditions.burningsensation = burningsensation
+      //exitstingPainConditions.numbsensation = numbsensation
+      //exitstingPainConditions.painpositions = painpositions
+      //exitstingPainConditions.diagnosis = diagnosis
+      //await exitstingPainConditions.save()
       msg.ack();
     } else {
       const painConditions = PainConditions.build({
