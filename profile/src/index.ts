@@ -40,8 +40,8 @@ const start = async () => {
     //new DeviceUpdatedListener(natsWrapper.client).listen();
     //new AnalysisCompletedListener(natsWrapper.client).listen();
 
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log('Connected to MongoDb');
+    //await mongoose.connect(process.env.MONGO_URI);
+    //console.log('Connected to MongoDb');
   } catch (err) {
     console.error(err);
   }
