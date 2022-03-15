@@ -1,7 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
-  content: ['./pages/**/*.{js,ts,jsx,tsx}','./components/**/*.{js,ts,jsx,tsx}'],
+  content: ['./pages/**/*.{js,ts,jsx,tsx}','./components/**/*.{js,ts,jsx,tsx}','./node_modules/tw-elements/dist/js/*.js'],
   theme: {
     fontSize: {
       xs: '0.75rem',
@@ -52,5 +52,5 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [require('@tailwindcss/forms'), require('tw-elements/dist/plugin')],
 };

@@ -40,6 +40,7 @@
     "reactjs-popup": "^2.0.5",
     "stripe": "^8.202.0",
     "styled-jsx-plugin-postcss": "^4.0.1",
+    "tw-elements": "^1.0.0-alpha11",
     "uuid": "^8.3.2",
     "validator": "^13.7.0"
   },
