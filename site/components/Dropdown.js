@@ -10,7 +10,7 @@ export default function DropDown({ title, items, short, links, isLanguageMenu=fa
     }
 
     return (
-        <div className="relative group">
+        <div className="relative group z-50">
             {
                 isLanguageMenu &&
                 <button className="mt-1 block px-2 py-1 text-white font-semibold rounded group-hover:bg-gray-800 sm:mt-0 sm:ml-2">

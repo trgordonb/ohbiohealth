@@ -3,17 +3,10 @@ import Hero from '@/components/Hero'
 import { Section } from '../components/Section'
 import { VerticalFeatureRow } from '../components/VerticalFeatureRow'
 import 'react-toastify/dist/ReactToastify.css'
-import { ToastContainer, toast } from 'react-toastify'
-import Link from 'next/link'
+import { ToastContainer } from 'react-toastify'
 import Image from 'next/image'
-import Chatbot from 'react-chatbot-kit'
 import CookieConsent from "react-cookie-consent";
 import { useTranslation } from 'react-i18next'
-import Popup from 'reactjs-popup'
-import config from '../chatbot/config'
-import MessageParser from '../chatbot/MessageParser'
-import ActionProvider from '../chatbot/ActionProvider'
-import { createChatBotMessage } from 'react-chatbot-kit';
 import NewsletterSubscribe from '../components/NewsletterSubscribe'
 
 HomePage.getInitialProps = async (ctx) => {
@@ -69,8 +62,6 @@ HomePage.getInitialProps = async (ctx) => {
 }
 
 export default function HomePage({ currentUser, data }) {
-  const [showChatBot, setShowChatBot] = useState(true)
-  const [chatbotConfig, setChatBotConfig] = useState(config)
   const { t, i18n } = useTranslation()
   const [aboutContent, setAboutContent] = useState(data.about[i18n.language])
   const [technologyContent, setTechnologyContent] = useState(data.technology[i18n.language])
@@ -89,35 +80,11 @@ export default function HomePage({ currentUser, data }) {
     setBESContent(data.BES[i18n.language])
     setSEGContent(data.SEG[i18n.language])
     setContactContent(data.contact[i18n.language])
-
-    if (currentUser) {
-      setShowChatBot(true)    
-      if (currentUser.id) {
-        setChatBotConfig({
-          ...config,
-          state : {
-            ...config.state,
-            userId: currentUser.id,
-            language: i18n.language,
-            t: t
-          }
-        })
-      }  
-    } else {
-      setChatBotConfig({
-        ...config,
-        state: {
-          ...config.state,
-          language: i18n.language,
-          t: t
-        }
-      })
-    }
-  },[i18n.language, currentUser])
+  },[i18n.language])
 
   return (
     <div>
-      <Hero />
+      <Hero currentUser={currentUser}/>
       <ToastContainer />
       <CookieConsent
         buttonText={t('ok')}
@@ -176,73 +143,6 @@ export default function HomePage({ currentUser, data }) {
           />   
         </div>
       </Section>
-      <div id="chatbot" className='items-center text-center'>
-        {
-          showChatBot &&
-          <Popup
-            position={'center top'}
-            trigger={open => (
-            <button>
-              <div className="bg-gradient-to-r from-cyan-500 via-indigo-300 to-indigo-500 rounded-lg shadow-lg">
-                <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
-                  <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl px-6">
-                    <span className="block text-gray-700">{t('pain1')}</span>
-                  </h2>
-                  <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-                    <div className="inline-flex rounded-md shadow">
-                      <Link
-                        href="/#chatbot"
-                      ><a className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-bold rounded-md text-white bg-gray-700 hover:bg-indigo-700">
-                        {t('getstart')}
-                      </a></Link>
-                    <div className="ml-3 inline-flex rounded-md shadow">
-                      <Link
-                        href="/#chatbot"
-                      ><a className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-bold rounded-md text-indigo-600 bg-white hover:bg-indigo-50">
-                        {t('learn')}
-                      </a></Link>
-                    </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </button>
-            )}
-            closeOnDocumentClick
-          >
-            {
-              currentUser ?
-              <Chatbot
-                config={{
-                  ...chatbotConfig, 
-                  initialMessages: [
-                    createChatBotMessage(t('surveyintro')),
-                    createChatBotMessage(t('q1'), {
-                        withAvatar: false,
-                        delay: 500,
-                        widget: "yesno"
-                    })
-                  ]
-                }}
-                messageParser={MessageParser}
-                actionProvider={ActionProvider}
-                placeholderText={t('enterresponse')}
-              />:
-              <Chatbot
-                config={{
-                  ...chatbotConfig,
-                  initialMessages: [
-                    createChatBotMessage(t('plslogin'))
-                  ]}}
-                  messageParser={MessageParser}
-                  actionProvider={ActionProvider}
-                  placeholderText={t('enterresponse')}
-                />
-            }
-            
-          </Popup>
-        }
-      </div>
       <div id="services" className='flex flex-wrap'>
         <div className="w-full sm:w-1/2 mt-20 text-center sm:px-6">
             <h3 className="text-3xl text-gray-900 font-semibold">{t('services')}</h3>

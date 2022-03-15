@@ -85,9 +85,9 @@ export default function Header({ currentUser }) {
             <Link href='/#about'><a className="block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800">{t('aboutus')}</a></Link>
             <Link href='/#technology'><a className="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">{t('technology')}</a></Link>
             <div className="hidden sm:block">
-              <DropDown title={t('products')} items={['BM','QM','BES','SEG',t('pain1')]} short={false} links={['/#productsBM','/#productsQM','/#productsBES','/#productsSEG','/#chatbot']}/>
+              <DropDown title={t('products')} items={['BM','QM','BES','SEG']} short={false} links={['/#productsBM','/#productsQM','/#productsBES','/#productsSEG']}/>
             </div>
-            <DropDownResponsive title={t('products')} items={['BM','QM','BES','SEG',t('pain1')]} links={['/#productsBM','/#productsQM','/#productsBES','/#productsSEG','/#chatbot']}/>
+            <DropDownResponsive title={t('products')} items={['BM','QM','BES','SEG']} links={['/#productsBM','/#productsQM','/#productsBES','/#productsSEG']}/>
             <Link href='/#services'><a className="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">{t('service')}</a></Link>
             <Link href='/shop'><a className="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">{t('shop')}</a></Link>
             <div className="hidden sm:block">

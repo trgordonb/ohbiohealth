@@ -1,8 +1,41 @@
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Script from 'next/script'
+import Link from 'next/link'
+import Popup from 'reactjs-popup'
+import Chatbot from 'react-chatbot-kit'
+import config from '../chatbot/config'
+import MessageParser from '../chatbot/MessageParser'
+import ActionProvider from '../chatbot/ActionProvider'
+import { createChatBotMessage } from 'react-chatbot-kit'
 
-export default function Hero() {
-  const { t } = useTranslation()
+
+export default function Hero({ currentUser }) {
+  const { t, i18n } = useTranslation()
+  const [chatbotConfig, setChatBotConfig] = useState(config)
+
+  useEffect(() => {
+    if (currentUser && currentUser.id) {
+      setChatBotConfig({
+        ...config,
+        state : {
+          ...config.state,
+          userId: currentUser.id,
+          language: i18n.language,
+          t: t
+        }
+      })
+    } else {
+      setChatBotConfig({
+        ...config,
+        state: {
+          ...config.state,
+          language: i18n.language,
+          t: t
+        }
+      })
+    }
+  },[i18n.language, currentUser])
 
   return (
   <>
@@ -34,8 +67,10 @@ export default function Hero() {
             alt="..."
           />
           <div className="carousel-caption absolute text-center">
-            <h5 className="text-3xl">{t('welcome')}</h5>
-            <p>{t('energy')}</p>
+            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl px-6">
+              <span className="block text-gray-200">{t('welcome')}</span>
+            </h2>            
+            <h5 className='mt-20 font-bold'>{t('energy')}</h5>
           </div>
         </div>
         <div className="carousel-item relative float-left w-full">
@@ -45,8 +80,39 @@ export default function Hero() {
             alt="..."
           />
           <div className="carousel-caption absolute text-center">
-            <h5 className="text-3xl">{t('welcome')}</h5>
-            <p>{t('energy')}</p>
+            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl px-6">
+              <span className="block text-gray-200">{t('pain1')}</span>
+            </h2>
+            <Popup
+              position={'bottom center'}
+              closeOnDocumentClick
+              trigger={open => (
+                <button>
+                  <div className="inline-flex rounded-md shadow">
+                      <a className="inline-flex items-center justify-center mt-10 px-5 py-3 border border-transparent text-base font-bold rounded-md text-white bg-gray-700 hover:bg-indigo-700">
+                        {t('getstart')}
+                      </a>
+                    </div>
+                </button>
+              )}
+            >
+              <Chatbot
+                config={{
+                  ...chatbotConfig, 
+                  initialMessages: [
+                    createChatBotMessage(t('surveyintro')),
+                    createChatBotMessage(t('q1'), {
+                      withAvatar: false,
+                      delay: 500,
+                      widget: "yesno"
+                    })
+                  ]
+                }}
+                messageParser={MessageParser}
+                actionProvider={ActionProvider}
+                placeholderText={t('enterresponse')}
+              />
+            </Popup>
           </div>
         </div>
         <div className="carousel-item relative float-left w-full">
@@ -55,10 +121,12 @@ export default function Hero() {
             className="block w-full h-96 font-black"
             alt="..."
           />
-          <div className="carousel-caption absolute text-center">
-            <h5 className="text-3xl">{t('welcome')}</h5>
-            <p>{t('energy')}</p>
-          </div>
+            <div className="carousel-caption absolute text-center">
+              <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl px-6">
+                <span className="block text-gray-200">{t('welcome')}</span>
+              </h2>            
+              <h5 className='mt-20 font-bold'>{t('energy')}</h5>
+            </div>
         </div>
       </div>
       <button
