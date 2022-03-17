@@ -67,10 +67,10 @@ export default function Hero({ currentUser }) {
             alt="..."
           />
           <div className="carousel-caption absolute text-center">
-            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl px-6">
+            <h1 className="text-5xl font-extrabold tracking-tight text-gray-900 sm:text-4xl px-6">
               <span className="block text-gray-200">{t('welcome')}</span>
-            </h2>            
-            <h5 className='mt-20 font-bold'>{t('energy')}</h5>
+            </h1>            
+            <h3 className='text-2xl mt-20 mb-8 font-bold'>{t('energy')}</h3>
           </div>
         </div>
         <div className="carousel-item relative float-left w-full">
@@ -80,9 +80,9 @@ export default function Hero({ currentUser }) {
             alt="..."
           />
           <div className="carousel-caption absolute text-center">
-            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl px-6">
+            <h1 className="text-5xl font-extrabold tracking-tight text-gray-900 sm:text-4xl px-6 mb-8">
               <span className="block text-gray-200">{t('pain1')}</span>
-            </h2>
+            </h1>
             <Popup
               position={'bottom center'}
               closeOnDocumentClick
@@ -122,10 +122,10 @@ export default function Hero({ currentUser }) {
             alt="..."
           />
             <div className="carousel-caption absolute text-center">
-              <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl px-6">
+              <h1 className="text-5xl font-extrabold tracking-tight text-gray-900 sm:text-4xl px-6">
                 <span className="block text-gray-200">{t('welcome')}</span>
-              </h2>            
-              <h5 className='mt-20 font-bold'>{t('energy')}</h5>
+              </h1>            
+              <h3 className='text-2xl mt-20 mb-8 font-bold'>{t('energy')}</h3>
             </div>
         </div>
       </div>

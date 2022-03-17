@@ -129,7 +129,7 @@ const CartItemsContainer = () => {
 						</div>
 					</div>
 					<div className="grid grid-cols-1 xl:grid-cols-4 gap-0 xl:gap-4 mb-5">
-						<table className="cart-products table-auto col-span-3 mb-5">
+							<table className="cart-products table-auto col-span-3 mb-5">
 								<thead className="text-left">
 								<tr className="woo-next-cart-head-container">
 									<th className="woo-next-cart-heading-el" scope="col"/>
@@ -155,7 +155,6 @@ const CartItemsContainer = () => {
 								) }
 								</tbody>
 							</table>
-
 						{/*Cart Total*/ }
 						<div className="row woo-next-cart-total-container border p-5 bg-gray-200">
 							<div className="">
