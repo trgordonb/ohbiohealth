@@ -64,6 +64,6 @@ const FAQ = (props) => {
           </div>
         </section>        
       </div>
-);
+)}
 
-export { FAQ };
+export { FAQ }
