@@ -78,7 +78,7 @@ const CartItem = ( {
 					type="number"
 					min="1"
 					data-cart-key={ item.cartKey }
-					className={ `woo-next-cart-qty-input w-1/2 form-control ${ updateCartProcessing ? 'opacity-25 cursor-not-allowed' : '' } ` }
+					className={ `woo-next-cart-qty-input w-2/3 form-control ${ updateCartProcessing ? 'opacity-25 cursor-not-allowed' : '' } ` }
 					value={ productCount }
 					onChange={ ( event ) => handleQtyChange( event, item.cartKey ) }
 				/>
