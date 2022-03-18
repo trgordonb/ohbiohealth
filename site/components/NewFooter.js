@@ -75,14 +75,14 @@ export default function NewFooter(props) {
               <FooterCopyright />
             </p>
             <ul className="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
-              <li>
-                <Link href="/#faq" className="text-sm text-gray-300 transition-colors duration-300">{t('faq')}</Link>
+              <li className='text-sm text-gray-300'>
+                <Link href="/#faq">{t('faq')}</Link>
               </li>
-              <li>
-                <Link href="/privacy" className="text-sm text-gray-300 transition-colors duration-300">{t('privacy')}</Link>
+              <li className='text-gray-300'>
+                <Link href="/privacy">{t('privacy')}</Link>
               </li>
-              <li>
-                <Link href="/terms" className="text-sm text-gray-300 transition-colors duration-300">{t('terms')}</Link>
+              <li className='text-gray-300'>
+                <Link href="/terms">{t('terms')}</Link>
               </li>
             </ul>
           </div>
