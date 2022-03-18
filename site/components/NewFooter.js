@@ -13,7 +13,7 @@ export default function NewFooter(props) {
           <div className="grid row-gap-10 mb-8 lg:grid-cols-2">
             <div className="grid gap-5 row-gap-8 lg:col-span-2 md:grid-cols-2">
 
-                <div className="space-y-2 text-sm">
+                <div id='contact' className="space-y-2 text-sm">
                     <p className="text-base font-bold tracking-wide text-gray-300">{t('contact')}</p>
                     <div className="flex">
                         <ReactMarkdown className="mt-2 text-base leading-2 whitespace-pre-wrap text-gray-300">
