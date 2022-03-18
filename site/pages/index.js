@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Hero from '@/components/Hero'
 import { Section } from '../components/Section'
+import ProductGallery from '../components/ProductGallery'
 import { VerticalFeatureRow } from '../components/VerticalFeatureRow'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
@@ -99,6 +100,7 @@ export default function HomePage({ currentUser, data }) {
         <div id="technology">
           <VerticalFeatureRow
             title={t('qtechnology')}
+            isProduct={false}
             description={technologyContent}
             image="/images/feature.svg"
             imageAlt="First feature alt text"
@@ -108,9 +110,10 @@ export default function HomePage({ currentUser, data }) {
         <div className='flex items-center'>
           <h1 className='text-gray-800 text-4xl mx-auto mt-20 font-bold'>{t('products')}</h1>
         </div>
-        <div id="productsBM">  
+        {/**<div id="productsBM">  
           <VerticalFeatureRow
             title='BM'
+            isProduct={true}
             description={BMContent}
             image="/images/BM.png"
             imageAlt="BM alt text"
@@ -120,6 +123,7 @@ export default function HomePage({ currentUser, data }) {
         <div id="productsQM">  
           <VerticalFeatureRow
             title='QM'
+            isProduct={true}
             description={QMContent}
             image="/images/QE.png"
             imageAlt="QM alt text"
@@ -128,6 +132,7 @@ export default function HomePage({ currentUser, data }) {
         <div id="productsBES">  
           <VerticalFeatureRow
             title='BES'
+            isProduct={true}
             description={BESContent}
             image="/images/BES.png"
             imageAlt="BES alt text"
@@ -137,12 +142,14 @@ export default function HomePage({ currentUser, data }) {
         <div id="productsSEG">  
           <VerticalFeatureRow
             title='SEG'
+            isProduct={true}
             description={SEGContent}
             image="/images/SEG.png"
             imageAlt="SEG alt text"
           />   
-        </div>
+        </div>*/}
       </Section>
+      <ProductGallery content={{BMContent: BMContent, QMContent: QMContent, BESContent: BESContent, SEGContent: SEGContent}} />
       <div id="services" className='flex flex-wrap'>
         <div className="w-full sm:w-1/2 mt-20 text-center sm:px-6">
             <h3 className="text-3xl text-gray-900 font-semibold">{t('services')}</h3>
