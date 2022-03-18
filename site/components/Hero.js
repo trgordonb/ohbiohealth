@@ -63,7 +63,7 @@ export default function Hero({ currentUser }) {
         <div className="carousel-item active relative float-left w-full">
           <img
             src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg"
-            className="block w-full h-96 font-black"
+            className="block w-full h-[600px] font-black"
             alt="..."
           />
           <div className="carousel-caption absolute text-center">
@@ -76,7 +76,7 @@ export default function Hero({ currentUser }) {
         <div className="carousel-item relative float-left w-full">
           <img
             src="https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg"
-            className="block w-full h-96 font-black"
+            className="block w-full h-[600px] font-black"
             alt="..."
           />
           <div className="carousel-caption absolute text-center">
@@ -118,7 +118,7 @@ export default function Hero({ currentUser }) {
         <div className="carousel-item relative float-left w-full">
           <img
             src="https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg"
-            className="block w-full h-96 font-black"
+            className="block w-full h-[600px] font-black"
             alt="..."
           />
             <div className="carousel-caption absolute text-center">
