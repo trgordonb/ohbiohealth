@@ -5,13 +5,13 @@ import buildClient from '../api/build-client'
 import { AppStateProvider } from '../hooks/use-appstate'
 import { CartProvider } from '../hooks/use-cart'
 import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import NewFooter from '@/components/NewFooter'
 import { appWithTranslation } from '../utils/i18n'
 import NextNProgress from 'nextjs-progressbar'
 import { ApolloProvider } from "@apollo/client"
 import client from '../data/client/ApolloClient'
 
-const AppComponent = ({ Component, pageProps, currentUser, footerData }) => {
+const AppComponent = ({ Component, pageProps, currentUser, contact }) => {
   return (
     <div>
       <AppStateProvider>
@@ -20,7 +20,7 @@ const AppComponent = ({ Component, pageProps, currentUser, footerData }) => {
             <NextNProgress />
             <Header currentUser={currentUser} />
             <Component currentUser={currentUser} {...pageProps} />
-            <Footer data={footerData} />
+            <NewFooter data={contact} />
           </ApolloProvider>
         </CartProvider>
       </AppStateProvider>
@@ -31,14 +31,27 @@ const AppComponent = ({ Component, pageProps, currentUser, footerData }) => {
 AppComponent.getInitialProps = async (appContext) => {
   const client = buildClient(appContext.ctx);
   const { data } = await client.get('/api/users/currentuser');
+  const options = {headers: new Headers({'Content-Type': 'application/json'})}
   let pageProps = {};
   if (appContext.Component.getInitialProps) {
     pageProps = await appContext.Component.getInitialProps(appContext.ctx, client, data.currentUser);
   }
+  const resEN = await fetch('https://cms.ohbiohealth.club/documents?type=contact', {
+    method: 'GET', ...options
+  })
+  const resZH = await fetch('https://cms.ohbiohealth.club/documents?type=contact&&_locale=zh-Hant&&', {
+    method: 'GET', ...options
+  })
+  const contactEN = await resEN.json()
+  const contactZH = await resZH.json()
 
   return {
     pageProps,
-    ...data
+    ...data,
+    contact: {
+      en: contactEN,
+      zh: contactZH
+    }
   }
 }
 

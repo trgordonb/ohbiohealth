@@ -8,7 +8,7 @@ export default function ProductGallery(content) {
   return (
   <>
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
-        <div className="relative mx-auto w-full">
+        <div id="productsBM" className="relative mx-auto w-full">
           <a href="#" className="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
             <div className="shadow p-4 rounded-lg bg-white">
               <div className="flex justify-center relative rounded-lg overflow-hidden h-[500px]">
@@ -24,7 +24,7 @@ export default function ProductGallery(content) {
           </a>
         </div>
 
-        <div className="relative mx-auto w-full">
+        <div id="productsQM" className="relative mx-auto w-full">
           <a href="#" className="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
             <div className="shadow p-4 rounded-lg bg-white">
               <div className="flex justify-center relative rounded-lg overflow-hidden h-[500px]">
@@ -40,7 +40,7 @@ export default function ProductGallery(content) {
           </a>
         </div>
 
-        <div className="relative mx-auto w-full">
+        <div id="productsBES" className="relative mx-auto w-full">
           <a href="#" className="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
             <div className="shadow p-4 rounded-lg bg-white">
               <div className="flex justify-center relative rounded-lg overflow-hidden h-[500px]">
@@ -56,7 +56,7 @@ export default function ProductGallery(content) {
           </a>
         </div>
 
-        <div className="relative mx-auto w-full">
+        <div id="productsSEG" className="relative mx-auto w-full">
           <a href="#" className="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
             <div className="shadow p-4 rounded-lg bg-white">
               <div className="flex justify-center relative rounded-lg overflow-hidden h-[500px]">

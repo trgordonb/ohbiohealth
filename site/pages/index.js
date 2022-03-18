@@ -180,17 +180,39 @@ export default function HomePage({ currentUser, data }) {
           description={faqContent}
         />
       </div>
-      <div id="contact">
+      {/**<div id="contact" className='flex flex-wrap'>
+        <div className="w-full sm:w-1/2 mt-20 text-center sm:px-6">
+          <Section
+            title={t('contact')}
+            description={contactContent}
+          />
+        </div>*/
+      }
+      {/** 
+        <div className="w-full sm:w-1/2 mt-20 text-center sm:px-6">
+          <Section>
+            <NewsletterSubscribe mailChimpUrl={data.link} />
+          </Section>
+        </div>
+      </div>
+      */}
+      {/** 
+        <div id="contact">
         <Section
           title={t('contact')}
           description={contactContent}
         />
-      </div>
-      <div> 
-        <Section>
-          <NewsletterSubscribe mailChimpUrl={data.link} />
-        </Section>
-      </div>
+        </div>*/
+      }
+      {
+        /**
+        <div> 
+          <Section>
+            <NewsletterSubscribe mailChimpUrl={data.link} />
+          </Section>
+        </div>
+         */
+      }
     </div>
   )
 }
