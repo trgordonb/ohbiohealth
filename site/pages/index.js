@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify'
 import Image from 'next/image'
 import CookieConsent from "react-cookie-consent";
 import { useTranslation } from 'react-i18next'
-import NewsletterSubscribe from '../components/NewsletterSubscribe'
+import { Faq } from '../components/Faq'
 
 HomePage.getInitialProps = async (ctx) => {
   const mailChimpUrl = process.env.NEXT_PUBLIC_MAILCHIMP_URL
@@ -20,8 +20,12 @@ HomePage.getInitialProps = async (ctx) => {
   const resZH = await fetch('https://cms.ohbiohealth.club/documents?_locale=zh-Hant&&', {
     method: 'GET', ...options
   })
+  const resFAQ = await fetch('https://cms.ohbiohealth.club/faqs', {
+    method: 'GET', ...options
+  })
   const dataEN = await resEN.json()
   const dataZH = await resZH.json()
+  const dataFAQ = await resFAQ.json()
 
   return { 
       data: {
@@ -55,9 +59,7 @@ HomePage.getInitialProps = async (ctx) => {
             en: dataEN.filter(item=> item.type==='contact')[0].text,
             zh: dataZH.filter(item=> item.type==='contact')[0].text
           },
-          faq: {
-            en: dataEN.filter(item => item.type==='faq')[0].text
-          }
+          faq: dataFAQ
       }
   }
 }
@@ -71,7 +73,6 @@ export default function HomePage({ currentUser, data }) {
   const [BESContent, setBESContent] = useState(data.BES[i18n.language])
   const [SEGContent, setSEGContent] = useState(data.SEG[i18n.language])
   const [contactContent, setContactContent] = useState(data.contact[i18n.language])
-  const [faqContent, setFAQContent] = useState(data.faq.en)
 
   useEffect(() => {
     setAboutContent(data.about[i18n.language])
@@ -174,12 +175,14 @@ export default function HomePage({ currentUser, data }) {
             </div>
         </div>
       </div>
+      <Faq data={data.faq}/>
+      {/** 
       <div id="faq">
         <Section
           title={t('faq')}
           description={faqContent}
         />
-      </div>
+      </div>8/}
       {/**<div id="contact" className='flex flex-wrap'>
         <div className="w-full sm:w-1/2 mt-20 text-center sm:px-6">
           <Section

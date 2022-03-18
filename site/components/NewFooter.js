@@ -5,7 +5,6 @@ import Link from 'next/link'
 
 export default function NewFooter(props) {
     const { t, i18n } = useTranslation()
-    console.log(props.data.en[0].text)
 
     return (
     <div className="bg-gray-900">
@@ -75,7 +74,7 @@ export default function NewFooter(props) {
               <FooterCopyright />
             </p>
             <ul className="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
-              <li className='text-sm text-gray-300'>
+              <li className='text-gray-300'>
                 <Link href="/#faq">{t('faq')}</Link>
               </li>
               <li className='text-gray-300'>
