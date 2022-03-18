@@ -47,7 +47,7 @@ export default function ProductGallery(content) {
                 <div className="transition-transform duration-500 transform ease-in-out hover:scale-105 w-full bg-gradient-to-r from-indigo-500 to-cyan-500 p-5 overflow-auto">
                   <h2 className="text-3xl text-gray-800 font-semibold px-5">BES</h2>
                     <img className='mx-auto object-center p-4 float-right bg-white ml-10' src={`${router.basePath}/images/BES.png`} alt='BES alt text' width={200} height={200}/>   
-                    <ReactMarkdown className="mt-6 text-base text-gray-800 leading-6 whitespace-pre-wrap list-disc px-5 overflow-scroll">
+                    <ReactMarkdown className="mt-6 text-base text-gray-800 leading-6 whitespace-pre-wrap list-disc px-5">
                       {content.content.BESContent}
                     </ReactMarkdown>
                 </div>
