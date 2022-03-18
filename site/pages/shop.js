@@ -6,14 +6,24 @@ import Product from '../components/Product'
 const ShopPage = ({ products }) => {
     const { t, i18n } = useTranslation()
     return (        
-        <div className="products container mx-auto my-32 px-4 xl:px-0">
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
-                { products.length ? (
-                    products.filter( product => {
-                        return (product.attributes.nodes[0].options[0] === i18n.language)
-                    }).map( product => <Product key={ product.id } product={ product } isPreOrder={product.attributes.nodes[1].options[0] === 'yes'}/> )
-                ) : '' }
-            </div>
+		<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
+			{
+				products.length ? (
+					products.filter(product => {
+							return (product.attributes.nodes[0].options[0] === i18n.language)
+						}).map(product => (
+							<div key={ product.id } className="relative mx-auto w-full">
+								<a href="#" className="relative inline-block w-full">
+									<div className="shadow p-4 rounded-lg bg-white">
+										<div className="flex justify-center relative rounded-lg overflow-hidden h-[700px]">
+											<Product product={ product } isPreOrder={product.attributes.nodes[1].options[0] === 'yes'}/>
+										</div>
+									</div>
+								</a>
+							</div>
+						))
+				): <></>
+			}
         </div>
     )
 }

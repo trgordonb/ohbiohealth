@@ -27,7 +27,7 @@ const Product = ( props ) => {
 						/>
 					</a>
 				</Link>
-				<div className="product-info">
+				<div className={`product-info`}>
 					<h3 className="product-title mt-3 font-medium text-gray-800">
 						{ product.name ? product.name : '' }
 					</h3>
