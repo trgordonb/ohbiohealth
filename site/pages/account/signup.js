@@ -68,7 +68,7 @@ export default function SignUpPage() {
                               name="email"
                               placeholder={t('email')}
                               value={email}
-                              onChange={(e) => setPassword(e.target.value)}
+                              onChange={(e) => setEmail(e.target.value)}
                             />
                           </div>
                           <div className="mb-4">
@@ -90,7 +90,7 @@ export default function SignUpPage() {
                               name="confirmpassword"
                               placeholder={t('confirmpwd')}
                               value={passwordConfirm}
-                              onChange={(e) => setPassword(e.target.value)}
+                              onChange={(e) => setPasswordConfirm(e.target.value)}
                             />
                           </div>
                           <div className="text-center pt-1 mb-12 pb-1">
