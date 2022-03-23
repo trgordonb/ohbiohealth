@@ -268,21 +268,25 @@ const SurveyPage = ({ currentUser }) => {
                 <div className="flex p-2 mt-4">
                     <div className="flex-auto flex flex-row-reverse">
                         {
-                            page <= 5 &&
+                            page < 5 &&
+                            <button     
+                                className="text-base hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer 
+                                    hover:bg-teal-200 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition"
+                                onClick={() => {setPage(page+1)}}
+                            >
+                                {t('next')}
+                            </button>
+                        }
+                        {
+                            page === 5 &&
                             <button     
                                 className="text-base hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer 
                                     hover:bg-teal-200 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition"
                                 data-bs-toggle="modal" 
                                 data-bs-target="#exampleModal"
-                                onClick={() => {
-                                    if (page < 5) {
-                                        setPage(page+1)
-                                    } else {
-                                        handleSubmit()
-                                    }}
-                                }
+                                onClick={() => {handleSubmit()}}
                             >
-                                {page < 5 ? t('next'): t('submit')}
+                                {t('submit')}
                             </button>
                         }
                     </div>
