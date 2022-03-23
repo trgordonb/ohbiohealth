@@ -11,7 +11,6 @@ import axios from 'axios'
 const SurveyPage = ({ currentUser }) => {
     const { t } = useTranslation()
     const [page, setPage] = useState(1)
-    const [messageHead, setMesaageHead] = useState(t('pain1'))
     const [messageContent, setMessageContent] = useState('')
     const [formResult, setFormResult] = useState({
         q1: 'n',
@@ -84,7 +83,7 @@ const SurveyPage = ({ currentUser }) => {
                 <div className="modal-dialog relative w-auto pointer-events-none">
                     <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
                         <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-                            <h5 className="text-xl font-medium leading-normal text-gray-800" id="exampleModalLabel">{messageHead}</h5>
+                            <h5 className="text-xl font-medium leading-normal text-gray-800" id="exampleModalLabel">{t('pain1')}</h5>
                             <button 
                                 type="button"
                                 className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
@@ -106,6 +105,7 @@ const SurveyPage = ({ currentUser }) => {
             </div>
             <div className="p-5">
                 <div className="mx-4 p-4">
+                    <div className="text-teal-600 text-2xl mt-10 mb-10">{t('pain2')}</div>
                     <div className="flex items-center">
                         <div className="flex items-center text-teal-600 relative">
                             <div className={`rounded-full text-bold text-3xl h-16 w-16 px-5 py-2 border-2 ${page===1 ? 'border-teal-600 text-teal-600': 'border-gray-300 text-gray-300'}`}>
