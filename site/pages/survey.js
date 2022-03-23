@@ -45,7 +45,7 @@ const SurveyPage = ({ currentUser }) => {
         <>
             <Script src='https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js'/>
             <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-                    id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog relative w-auto pointer-events-none">
                     <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
                         <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
@@ -150,10 +150,10 @@ const SurveyPage = ({ currentUser }) => {
                     <div className="mt-8 p-4 flex flex-wrap">
                         <div className="mx-2 mt-10 text-gray-800 font-bold w-full sm:w-1/2">
                             {t('p1')}
-                            <div class="flex flex-wrap mx-auto mt-10">
+                            <div className="flex flex-wrap mx-auto mt-10">
                                 {
-                                    [...Array(16).keys()].map(item => (
-                                        <div class="form-check form-check-inline">
+                                    [...Array(16).keys()].map((item,idx) => (
+                                        <div key={`P2.${idx}`} className="form-check form-check-inline">
                                             <input 
                                                 className="form-check-input appearance-none h-4 w-4 border mt-2 mx-2 
                                                 border-gray-600 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 
@@ -163,7 +163,7 @@ const SurveyPage = ({ currentUser }) => {
                                                 id={`cb_${page}.${item+1}`} 
                                                 onChange={(evt) => {handleCheckBoxResult(evt)}}
                                             />
-                                            <label className="form-check-label inline-block text-xl mx-2 mt-2 text-gray-800" for={`cb_${page}.${item+1}`}>{item+1}</label>
+                                            <label className="form-check-label inline-block text-xl mx-2 mt-2 text-gray-800" htmlFor={`cb_${page}.${item+1}`}>{item+1}</label>
                                         </div>
                                     ))
                                 }
@@ -179,10 +179,10 @@ const SurveyPage = ({ currentUser }) => {
                     <div className="mt-8 p-4 flex flex-wrap">
                         <div className="mx-2 mt-10 text-gray-800 font-bold w-full sm:w-1/2">
                             {t('p1')}
-                            <div class="flex flex-wrap mx-auto mt-10">
+                            <div className="flex flex-wrap mx-auto mt-10">
                                 {
                                     [...Array(14).keys()].map(item => (
-                                        <div class="form-check form-check-inline">
+                                        <div key={`P3.${idx}`} className="form-check form-check-inline">
                                             <input 
                                                 className="form-check-input appearance-none h-4 w-4 border mt-2 mx-2 border-gray-600 
                                                            rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none 
@@ -193,7 +193,7 @@ const SurveyPage = ({ currentUser }) => {
                                                 onChange={(evt) => {handleCheckBoxResult(evt)}}
                                                 value={`${page}.${item+1}`}
                                             />
-                                            <label className="form-check-label inline-block text-xl mx-2 mt-2 text-gray-800" for={`cb_${page}.${item+1}`}>{item+1}</label>
+                                            <label className="form-check-label inline-block text-xl mx-2 mt-2 text-gray-800" htmlFor={`cb_${page}.${item+1}`}>{item+1}</label>
                                         </div>
                                     ))
                                 }
@@ -209,10 +209,10 @@ const SurveyPage = ({ currentUser }) => {
                     <div className="mt-8 p-4 flex flex-wrap">
                         <div className="mx-2 mt-10 text-gray-800 font-bold w-full sm:w-1/2">
                             {t('p1')}
-                            <div class="flex flex-wrap mx-auto mt-10">
+                            <div className="flex flex-wrap mx-auto mt-10">
                                     {
                                         [...Array(8).keys()].map(item => (
-                                            <div class="form-check form-check-inline">
+                                            <div key={`P4.${idx}`} className="form-check form-check-inline">
                                                 <input 
                                                     className="form-check-input appearance-none h-4 w-4 border mt-2 mx-2 border-gray-600 
                                                                rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none 
@@ -223,7 +223,7 @@ const SurveyPage = ({ currentUser }) => {
                                                     onChange={(evt) => {handleCheckBoxResult(evt)}}
                                                     value={`${page}.${item+1}`}
                                                 />
-                                                <label className="form-check-label inline-block text-xl mx-2 mt-2 text-gray-800" for={`cb_${page}.${item+1}`}>{item+1}</label>
+                                                <label className="form-check-label inline-block text-xl mx-2 mt-2 text-gray-800" htmlFor={`cb_${page}.${item+1}`}>{item+1}</label>
                                             </div>
                                         ))
                                     }
@@ -239,10 +239,10 @@ const SurveyPage = ({ currentUser }) => {
                     <div className="mt-8 p-4 flex flex-wrap">
                         <div className="mx-2 mt-10 text-gray-800 font-bold w-full sm:w-1/2">
                             {t('p1')}
-                            <div class="flex flex-wrap mx-auto mt-10">
+                            <div className="flex flex-wrap mx-auto mt-10">
                                 {
                                     [...Array(8).keys()].map(item => (
-                                        <div class="form-check form-check-inline">
+                                        <div key={`P2.${idx}`} className="form-check form-check-inline">
                                             <input 
                                                 className="form-check-input appearance-none h-4 w-4 border mt-2 mx-2 border-gray-600 
                                                            rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 
@@ -253,7 +253,7 @@ const SurveyPage = ({ currentUser }) => {
                                                 onChange={(evt) => {handleCheckBoxResult(evt)}}
                                                 value={`${page}.${item+1}`}
                                                 />
-                                            <label className="form-check-label inline-block text-xl mx-2 mt-2 text-gray-800" for={`cb_${page}.${item+1}`}>{item+1}</label>
+                                            <label className="form-check-label inline-block text-xl mx-2 mt-2 text-gray-800" htmlFor={`cb_${page}.${item+1}`}>{item+1}</label>
                                         </div>
                                     ))
                                 }
