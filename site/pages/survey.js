@@ -181,7 +181,7 @@ const SurveyPage = ({ currentUser }) => {
                             {t('p1')}
                             <div className="flex flex-wrap mx-auto mt-10">
                                 {
-                                    [...Array(14).keys()].map(item => (
+                                    [...Array(14).keys()].map((item,idx) => (
                                         <div key={`P3.${idx}`} className="form-check form-check-inline">
                                             <input 
                                                 className="form-check-input appearance-none h-4 w-4 border mt-2 mx-2 border-gray-600 
@@ -211,7 +211,7 @@ const SurveyPage = ({ currentUser }) => {
                             {t('p1')}
                             <div className="flex flex-wrap mx-auto mt-10">
                                     {
-                                        [...Array(8).keys()].map(item => (
+                                        [...Array(8).keys()].map((item, idx) => (
                                             <div key={`P4.${idx}`} className="form-check form-check-inline">
                                                 <input 
                                                     className="form-check-input appearance-none h-4 w-4 border mt-2 mx-2 border-gray-600 
@@ -241,7 +241,7 @@ const SurveyPage = ({ currentUser }) => {
                             {t('p1')}
                             <div className="flex flex-wrap mx-auto mt-10">
                                 {
-                                    [...Array(8).keys()].map(item => (
+                                    [...Array(8).keys()].map((item, idx) => (
                                         <div key={`P2.${idx}`} className="form-check form-check-inline">
                                             <input 
                                                 className="form-check-input appearance-none h-4 w-4 border mt-2 mx-2 border-gray-600 
