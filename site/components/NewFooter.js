@@ -1,7 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import { FooterCopyright } from './FooterCopyright'
+import Image from 'next/image'
 import ReactMarkdown from 'react-markdown'
 import Link from 'next/link'
+import IOSApp from '../public/images/IOSqrcode.png'
+import AndroidApp from '../public/images/Androidqrcode.png'
 
 export default function NewFooter(props) {
     const { t, i18n } = useTranslation()
@@ -10,7 +13,7 @@ export default function NewFooter(props) {
     <div className="bg-gray-900">
         <div className="px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
           <div className="grid row-gap-10 mb-8 lg:grid-cols-2">
-            <div className="grid gap-5 row-gap-8 lg:col-span-2 md:grid-cols-2">
+            <div className="grid gap-5 row-gap-8 lg:col-span-3 md:grid-cols-3">
 
                 <div id='contact' className="space-y-2 text-sm">
                     <p className="text-base font-bold tracking-wide text-gray-300">{t('contact')}</p>
@@ -18,6 +21,19 @@ export default function NewFooter(props) {
                         <ReactMarkdown className="mt-2 text-base leading-2 whitespace-pre-wrap text-gray-300">
                             {i18n.language === 'en' ? props.data.en[0].text: props.data.zh[0].text}
                         </ReactMarkdown>
+                    </div>
+                </div>
+                <div className='space-y-2 text-sm'>
+                    <p className="text-base font-bold tracking-wide text-gray-300">{t('mobile')}</p>
+                    <div className='flex flex-wrap'>
+                        <div>
+                            <p className='text-base text-gray-300'>IOS</p>
+                            <Image src={IOSApp} alt='IOS App QRCode' width={120} height={120} />
+                        </div>
+                        <div className='px-10'>
+                            <p className='text-base text-gray-300'>Android</p>
+                            <Image src={AndroidApp} alt='Android App QRCode' width={120} height={120} />
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -63,7 +79,6 @@ export default function NewFooter(props) {
                             </button>
                         </form>
                     </div>
-                    
                 </div>
             </div>
           </div>
