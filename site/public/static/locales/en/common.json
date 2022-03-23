@@ -141,5 +141,8 @@
     "charcater": "characters",
     "city": "City",
     "morediagram": "Now check for this diagram",
-    "social": "Social Media"
+    "social": "Social Media",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close"
 }

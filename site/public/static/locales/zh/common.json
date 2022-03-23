@@ -141,5 +141,8 @@
     "character": "字符",
     "city": "城市",
     "morediagram": "請看看這一張",
-    "social": "社交媒體"
+    "social": "社交媒體",
+    "next": "下一個",
+    "previous": "上一個",
+    "close": "關閉"
 }
