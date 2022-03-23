@@ -86,7 +86,7 @@ export default function SigninPage() {
                               type="button"
                               data-mdb-ripple="true"
                               data-mdb-ripple-color="light"
-                              onClick={()=> handleSubmit()}
+                              onClick={handleSubmit}
                             >
                               {t('submit')}
                             </button>

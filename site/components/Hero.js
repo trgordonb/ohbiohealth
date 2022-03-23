@@ -83,7 +83,15 @@ export default function Hero({ currentUser }) {
             <h1 className="text-5xl font-extrabold tracking-tight text-gray-900 sm:text-4xl px-6 mb-8">
               <span className="block text-gray-200">{t('pain1')}</span>
             </h1>
-            <Popup
+            <button>
+              <div className="inline-flex rounded-md shadow">
+                <div className="inline-flex items-center justify-center mt-10 px-5 py-3 border border-transparent text-base font-bold rounded-md text-white bg-gray-700 hover:bg-indigo-700">
+                    <Link href='/survey'>{t('getstart')}</Link>
+                </div>
+              </div>
+            </button>
+            {
+             /**  <Popup
               position={'bottom center'}
               closeOnDocumentClick
               trigger={open => (
@@ -112,7 +120,9 @@ export default function Hero({ currentUser }) {
                 actionProvider={ActionProvider}
                 placeholderText={t('enterresponse')}
               />
-            </Popup>
+            </Popup>*/
+            }
+            
           </div>
         </div>
         <div className="carousel-item relative float-left w-full">

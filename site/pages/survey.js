@@ -1,4 +1,4 @@
-import {useState, useEffect, useContext} from "react";
+import { useState } from "react";
 import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
 import Script from 'next/script'
@@ -6,9 +6,10 @@ import bodyback from '../public/images/bodyback.jpg'
 import bodyfront from '../public/images/bodyfront.jpg'
 import bodyLeft from '../public/images/bodyleft.jpg'
 import bodyRight from '../public/images/bodyright.jpg'
+import axios from 'axios'
 
 const SurveyPage = ({ currentUser }) => {
-    const { t, i18n } = useTranslation()
+    const { t } = useTranslation()
     const [page, setPage] = useState(1)
     const [messageHead, setMesaageHead] = useState(t('pain1'))
     const [messageContent, setMessageContent] = useState('')
@@ -21,11 +22,45 @@ const SurveyPage = ({ currentUser }) => {
     })
 
     const handleSubmit = () => {
-        console.log(formResult)
-        console.log(currentUser)
         if (!currentUser) {
             setMessageContent(t('plslogin'))
-            setShowModal(true)
+        } else {
+            let arr1 = []
+            let arr2 = []
+            let arr3 = []
+            let arr4 = []
+            formResult.painPoints.forEach(point => {
+                let items = point.split('.')
+                if (items[0] === '2') {
+                    arr1.push(parseInt(items[1]))
+                } else
+                if (items[0] === '3') {
+                    arr2.push(parseInt(items[1]))
+                } else
+                if (items[0] === '4') {
+                    arr3.push(parseInt(items[1]))
+                } else
+                if (items[0] === '5') {
+                    arr4.push(parseInt(items[1]))
+                }
+            })
+            let payload = {
+                muscleache: formResult.q1 === 'y',
+                needlesensation: formResult.q2 === 'y',
+                burningsensation: formResult.q3 === 'y',
+                numbsensation: formResult.q4 === 'y',
+                painpositions: [arr1, arr2, arr3, arr4]
+            }
+            axios['post']('/api/engine/painanalysis', payload)
+            .then(response => {
+                if (response.statusText === 'OK') {
+                    let resultstr = response.data.map(result => t(result)).join(',')
+                    const message = `${t('possible')}${resultstr}`
+                    setMessageContent(message)
+                } else {
+                    setMessageContent(t('noresult'))
+                }
+            })
         }
     }
 
