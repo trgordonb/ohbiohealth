@@ -1,0 +1,31 @@
+#comment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: identity-redis-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: identity-redis
+  template:
+    metadata:
+      labels:
+        app: identity-redis
+    spec:
+      containers:
+        - name: identity-redis
+          image: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: identity-redis-srv
+spec:
+  selector:
+    app: identity-redis
+  ports:
+    - name: db
+      protocol: TCP
+      port: 6379
+      targetPort: 6379

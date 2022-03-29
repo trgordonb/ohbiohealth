@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: identity-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: identity
+  template:
+    metadata:
+      labels:
+        app: identity
+    spec:
+      containers:
+        - name: identity
+          image: ohbiohealth/identity
+          env:
+            - name: REDIS_HOST
+              value: identity-redis-srv
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: identity-srv
+spec:
+  selector:
+    app: identity
+  ports:
+    - name: identity
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

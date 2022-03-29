@@ -49,4 +49,12 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: ohbiohealth/identity
+      context: identity
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
 
