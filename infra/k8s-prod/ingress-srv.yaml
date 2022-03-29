@@ -44,7 +44,7 @@ spec:
                 name: engine-srv
                 port:
                   number: 3000
-          - path: /identities/?(.*)
+          - path: /api/identities/?(.*)
             pathType: Prefix
             backend:
               service:
