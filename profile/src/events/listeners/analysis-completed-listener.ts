@@ -28,7 +28,7 @@ export class AnalysisCompletedListener extends Listener<AnalysisCompletedEvent> 
       await exitstingPainConditions.save()
       msg.ack();
     } else {
-      const painConditions = PainConditions.build({
+      /**const painConditions = PainConditions.build({
         _id: userId,
         muscleache: muscleache,
         needlesensation: needlesensation,
@@ -45,7 +45,7 @@ export class AnalysisCompletedListener extends Listener<AnalysisCompletedEvent> 
         await profile.save()
       } catch (err) {
         console.error(err)
-      }
+      }*/
       msg.ack();
     }
   }

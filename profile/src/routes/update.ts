@@ -11,6 +11,7 @@ import {
 import { Profile } from '../models/profile';
 import { ProfileCompletedPublisher } from '../events/publishers/profile-completed-publisher';
 import { natsWrapper } from '../nats-wrapper';
+import axios from 'axios'
 
 const router = express.Router();
 
@@ -39,11 +40,25 @@ router.put(
       throw new NotAuthorizedError();
     }
 
+    let profileId = ''
+
+    if (!req.body.groupId || req.body.groupId === '') {
+      const response = await axios.post(process.env.IDENTITY_SERVICE_URL!, {
+        groupId: 'portal'
+      })
+      if (response.data && response.data.sequence) {
+          profileId = response.data.sequence
+      }
+    } else {
+      profileId = req.body.groupId
+    }
+
     profile.set({
       gender: req.body.gender,
       dateOfBirth: req.body.dateOfBirth,
       weight: req.body.weight,
-      height: req.body.height
+      height: req.body.height,
+      profileId: profileId
     });
     await profile.save();
 

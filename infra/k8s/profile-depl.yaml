@@ -26,6 +26,8 @@ spec:
               value: healthnet
             - name: MONGO_URI
               value: 'mongodb://profile-mongo-srv:27017/profile'
+            - name: IDENTITY_SERVICE_URL
+              value: 'https://ohbiohealth.xyz/api/identities'
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:

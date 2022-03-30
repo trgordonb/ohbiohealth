@@ -24,7 +24,7 @@ interface PainConditionsModel extends mongoose.Model<PainConditionsDoc> {
     build(attrs: PainConditionsAttrs): PainConditionsDoc;
 }
 
-const painConditionsSchema = new mongoose.Schema(
+const painConditionsSchema = new mongoose.Schema<PainConditionsDoc,PainConditionsModel>(
     {
         _id: {
             type: String,

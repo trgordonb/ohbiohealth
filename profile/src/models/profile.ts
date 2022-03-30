@@ -7,6 +7,7 @@ import { PainConditionsDoc } from './painconditions'
 interface ProfileAttrs {
     userId: string;
     email: string;
+    profileId?: string;
     gender?: Gender;
     dateOfBirth?: Date;
     weight?: Number;
@@ -19,6 +20,7 @@ interface ProfileAttrs {
 interface ProfileDoc extends mongoose.Document {
     userId: string;
     email: string;
+    profileId?: string;
     gender?: Gender;
     dateOfBirth?: Date;
     weight?: Number;
@@ -41,6 +43,9 @@ const profileSchema = new mongoose.Schema(
     email: {
         type: String,
         required: true
+    },
+    profileId: {
+        type: String,
     },
     gender: {
         type: String,

@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 
 interface OrderAttrs {
     _id: string;
-    orderDate: Date;
-    total: Number;
+    orderDate?: Date;
+    total?: Number;
     items: [
         {
             product: {
@@ -19,8 +19,8 @@ interface OrderAttrs {
 
 export interface OrderDoc extends mongoose.Document {
     _id: string;
-    orderDate: Date;
-    total: Number;
+    orderDate?: Date;
+    total?: Number;
     items: [
         {
             product: {
@@ -38,7 +38,7 @@ interface OrderModel extends mongoose.Model<OrderDoc> {
     build(attrs: OrderAttrs): OrderDoc;
 }
 
-const orderSchema = new mongoose.Schema(
+const orderSchema = new mongoose.Schema<OrderDoc, OrderModel>(
     {
         _id: {
             type: String,

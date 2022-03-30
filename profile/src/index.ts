@@ -22,6 +22,9 @@ const start = async () => {
   if (!process.env.NATS_CLUSTER_ID) {
     throw new Error('NATS_CLUSTER_ID must be defined');
   }
+  if (!process.env.IDENTITY_SERVICE_URL) {
+    throw new Error('IDENTITY_SERVICE_URL must be defined')
+  }
 
   try {
     await natsWrapper.connect(

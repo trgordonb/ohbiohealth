@@ -145,5 +145,6 @@
     "next": "Next",
     "previous": "Previous",
     "close": "Close",
-    "mobile": "Mobile App"
+    "mobile": "Mobile App",
+    "groupId": "OH Center Member Id (Optional)"
 }
