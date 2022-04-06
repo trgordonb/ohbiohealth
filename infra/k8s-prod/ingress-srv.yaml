@@ -11,8 +11,19 @@ spec:
   tls:
     - hosts:
       - ohbiohealth.xyz
+      - ensembletech.xyz
       secretName: cert-tls
   rules:
+    - host: ensembletech.xyz
+      http:
+        paths:
+          - path: /api/identities/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: identity-srv
+                port:
+                  number: 3000
     - host: ohbiohealth.xyz
       http:
         paths:
@@ -27,35 +38,28 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: devices-srv
+                name: devices-oh-srv
                 port:
                   number: 3000
           - path: /api/profiles/?(.*)
             pathType: Prefix
             backend:
               service:
-                name: profile-srv
+                name: profile-oh-srv
                 port:
                   number: 3000
           - path: /api/engine/?(.*)
             pathType: Prefix
             backend:
               service:
-                name: engine-srv
-                port:
-                  number: 3000
-          - path: /api/identities/?(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: identity-srv
+                name: engine-oh-srv
                 port:
                   number: 3000
           - path: /?(.*)
             pathType: Prefix
             backend:
               service:
-                name: site-srv
+                name: site-oh-srv
                 port:
                   number: 3000
 ---

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devices-oh-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devices-oh
+  template:
+    metadata:
+      labels:
+        app: devices-oh
+    spec:
+      containers:
+        - name: devices-oh
+          image: ohbiohealth/devices-oh
+          env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: healthnet
+            - name: MONGO_URI
+              value: 'mongodb://devices-oh-mongo-srv:27017/devices'
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: devices-oh-srv
+spec:
+  selector:
+    app: devices
+  ports:
+    - name: devices
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

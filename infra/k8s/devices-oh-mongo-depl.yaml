@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devices-oh-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devices-oh-mongo
+  template:
+    metadata:
+      labels:
+        app: devices-oh-mongo
+    spec:
+      containers:
+        - name: devices-oh-mongo
+          image: mongo
+          volumeMounts:
+            - name: mongodb-storage-devices-oh
+              mountPath: /data/db
+              subPath: devices
+      volumes:
+        - name: mongodb-storage-devices-oh
+          persistentVolumeClaim:
+            claimName: mongodb-pv-claim-devices-oh
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: devices-oh-mongo-srv
+spec:
+  selector:
+    app: devices-oh-mongo
+  ports:
+    - name: db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-pv-claim-devices-oh
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi

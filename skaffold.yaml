@@ -17,32 +17,32 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: ohbiohealth/site
-      context: site
+    - image: ohbiohealth/site-oh
+      context: site-oh
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: '**/*.js'
             dest: .
-    - image: ohbiohealth/devices
-      context: devices
+    - image: ohbiohealth/devices-oh
+      context: devices-oh
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: ohbiohealth/profile
-      context: profile
+    - image: ohbiohealth/profile-oh
+      context: profile-oh
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: ohbiohealth/engine
-      context: engine
+    - image: ohbiohealth/engine-oh
+      context: engine-oh
       docker:
         dockerfile: Dockerfile
       sync:

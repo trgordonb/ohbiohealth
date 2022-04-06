@@ -1,0 +1,25 @@
+name: deploy-site-oh
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'site-oh/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - run: cd site-oh && docker build -t ohbiohealth/site-oh .
+      - run: docker push ohbiohealth/site-oh
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - run: doctl kubernetes cluster kubeconfig save ohbiohealth
+      - run: kubectl rollout restart deployment site-oh-depl
