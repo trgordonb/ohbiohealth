@@ -30,6 +30,7 @@ router.put(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
+    console.log('UserId:', req.params.userId)
     const profile = await Profile.findOne({ userId: req.params.userId });
 
     if (!profile) {
