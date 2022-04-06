@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth-depl
+  name: auth-oh-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: auth
+      app: auth-oh
   template:
     metadata:
       labels:
-        app: auth
+        app: auth-oh
     spec:
       containers:
-        - name: auth
-          image: ohbiohealth/auth
+        - name: auth-oh
+          image: ohbiohealth/auth-oh
           env:
             - name: JWT_KEY
               valueFrom:
@@ -27,7 +27,7 @@ spec:
                   name: admin-password
                   key: ADMIN_PASSWORD
             - name: MONGO_URI
-              value: 'mongodb://auth-mongo-srv:27017/auth'
+              value: 'mongodb://auth-oh-mongo-srv:27017/auth'
             - name: NATS_CLIENT_ID
               valueFrom:
                 fieldRef:
@@ -40,12 +40,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-srv
+  name: auth-oh-srv
 spec:
   selector:
-    app: auth
+    app: auth-oh
   ports:
-    - name: auth
+    - name: auth-oh
       protocol: TCP
       port: 3000
       targetPort: 3000

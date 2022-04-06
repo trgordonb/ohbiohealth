@@ -17,7 +17,8 @@ export default function SignUpPage() {
       method: 'post',
       body: {
         email,
-        password
+        password,
+        groupId: 'oh'
       },
       onSuccess: () => Router.push({
         pathname: '/account/profile',

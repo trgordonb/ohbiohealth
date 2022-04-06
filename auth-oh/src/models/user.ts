@@ -6,6 +6,7 @@ import { Password } from '../services/password';
 interface UserAttrs {
   email: string;
   password: string;
+  groupId: string;
   usertype?: string;
   hasProvidedInfo?: boolean;
   hasBoughtDevice?: boolean;
@@ -24,6 +25,7 @@ interface UserModel extends mongoose.Model<UserDoc> {
 interface UserDoc extends mongoose.Document {
   email: string;
   password: string;
+  groupId: string;
   usertype?: string;
   hasProvidedInfo?: boolean;
   hasBoughtDevice?: boolean;
@@ -37,6 +39,10 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   password: {
+    type: String,
+    required: true
+  },
+  groupId: {
     type: String,
     required: true
   },

@@ -16,7 +16,8 @@ export default function SigninPage() {
     method: 'post',
     body: {
       email,
-      password
+      password,
+      groupId: 'oh'
     },
     onSuccess: (user) => {
       if (user && user.hasProvidedInfo) {

@@ -31,7 +31,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: auth-srv
+                name: auth-oh-srv
                 port:
                   number: 3000
           - path: /api/devices/?(.*)

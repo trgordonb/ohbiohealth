@@ -16,18 +16,19 @@ router.post('/api/users/signup', [
       .trim()
       .isLength({ min: 4, max: 20 })
       .withMessage('Password must be between 4 and 20 characters'),
+    body('groupId').trim().notEmpty().withMessage('GroupId must not be empty')
   ], 
   validateRequest,
   async (req: Request, res: Response) => {
-    const { email, password } = req.body;
+    const { email, password, groupId } = req.body;
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email, groupId });
 
     if (existingUser) {
       throw new BadRequestError('Email in use');
     }
     
-    const user = User.build({ email, password });
+    const user = User.build({ email, password, groupId });
     await user.save();
 
     // Generate JWT
@@ -35,6 +36,7 @@ router.post('/api/users/signup', [
     const userJwt = jwt.sign({
       id: user.id,
       email: user.email,
+      groupId: user.groupId,
       usertype: user.usertype,
       hasProvidedInfo: user.hasProvidedInfo,
       hasRegDevice: user.hasRegDevice,

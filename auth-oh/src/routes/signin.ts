@@ -16,12 +16,13 @@ router.post(
       .trim()
       .notEmpty()
       .withMessage('You must supply a password'),
+    body('groupId').trim().notEmpty().withMessage('GroupId must not be empty')
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { email, password } = req.body;
+    const { email, password, groupId } = req.body;
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email, groupId });
     if (!existingUser) {
       throw new BadRequestError('Invalid credentials');
     }
@@ -39,6 +40,7 @@ router.post(
       {
         id: existingUser.id,
         email: existingUser.email,
+        groupId: existingUser.groupId,
         usertype: existingUser.usertype,
         hasProvidedInfo: existingUser.hasProvidedInfo,
         hasRegDevice: existingUser.hasRegDevice,

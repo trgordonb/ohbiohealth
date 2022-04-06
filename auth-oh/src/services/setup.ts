@@ -4,6 +4,7 @@ export const addAdmin = async () => {
     const user = User.build({
         email: 'admin@ohbiohealth.com',
         password: process.env.ADMIN_PASSWORD || 'admin',
+        groupId: 'oh',
         usertype: 'admin',
         hasProvidedInfo: true,
         hasFinishedSurvey: true,
