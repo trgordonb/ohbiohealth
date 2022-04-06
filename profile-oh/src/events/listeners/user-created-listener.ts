@@ -9,6 +9,7 @@ export class UserCreatedListener extends Listener<UserCreatedEvent> {
 
   async onMessage(data: UserCreatedEvent['data'], msg: Message) {
     const { userId, email } = data;
+    console.log('UserCreatedEvent data:', [userId, email])
 
     const profile = Profile.build({
       userId,
