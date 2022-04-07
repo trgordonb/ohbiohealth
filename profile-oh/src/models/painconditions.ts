@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
 interface PainConditionsAttrs {
-    _id: string,
     muscleache: boolean,
     needlesensation: boolean,
     burningsensation: boolean,
@@ -11,7 +10,6 @@ interface PainConditionsAttrs {
 }
 
 export interface PainConditionsDoc extends mongoose.Document {
-    _id: string,
     muscleache: boolean,
     needlesensation: boolean,
     burningsensation: boolean,
@@ -20,16 +18,12 @@ export interface PainConditionsDoc extends mongoose.Document {
     diagnosis: string[]
 }
 
-interface PainConditionsModel extends mongoose.Model<PainConditionsDoc> {
+export interface PainConditionsModel extends mongoose.Model<PainConditionsDoc> {
     build(attrs: PainConditionsAttrs): PainConditionsDoc;
 }
 
 const painConditionsSchema = new mongoose.Schema<PainConditionsDoc,PainConditionsModel>(
     {
-        _id: {
-            type: String,
-            required: true,
-        },
         muscleache: {
             type: Boolean,
             required: true,
@@ -61,9 +55,6 @@ const painConditionsSchema = new mongoose.Schema<PainConditionsDoc,PainCondition
             default: []
         }
     },
-    {
-        _id: false   
-    }
 );
 
 painConditionsSchema.statics.build = (attrs: PainConditionsAttrs) => {

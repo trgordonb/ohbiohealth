@@ -31,27 +31,14 @@ router.put(
   validateRequest,
   async (req: Request, res: Response) => {
     console.log('UserId:', req.params.userId)
-    const profile = await Profile.findOne({ userId: req.params.userId });
+    const profile = await Profile.findById(req.params.userId);
 
     if (!profile) {
       throw new NotFoundError();
     }
 
-    if (profile.userId !== req.currentUser!.id) {
+    if (profile._id !== req.currentUser!.id) {
       throw new NotAuthorizedError();
-    }
-
-    let profileId = ''
-
-    if (!req.body.groupId || req.body.groupId === '') {
-      const response = await axios.post(process.env.IDENTITY_SERVICE_URL!, {
-        groupId: 'ohportal'
-      })
-      if (response.data && response.data.sequence) {
-          profileId = response.data.sequence
-      }
-    } else {
-      profileId = req.body.groupId
     }
 
     profile.set({
@@ -59,7 +46,6 @@ router.put(
       dateOfBirth: req.body.dateOfBirth,
       weight: req.body.weight,
       height: req.body.height,
-      profileId: profileId
     });
     await profile.save();
 

@@ -4,7 +4,8 @@ import jwt from 'jsonwebtoken';
 import { UserCreatedPublisher } from '../events/publishers/user-created-publisher';
 import { User } from '../models/user';
 import { natsWrapper } from '../nats-wrapper';
-import { validateRequest, BadRequestError } from "@ohbiohealth/common";
+import { validateRequest, BadRequestError } from "@ohbiohealth/common"
+import axios from 'axios'
 
 const router = express.Router();
 
@@ -27,8 +28,16 @@ router.post('/api/users/signup', [
     if (existingUser) {
       throw new BadRequestError('Email in use');
     }
+
+    let _id = ''
+    const IdServerResponse = await axios.post(process.env.IDENTITY_SERVICE_URL!, {
+        groupId: groupId
+    })
+    if (IdServerResponse.data && IdServerResponse.data.sequence) {
+      _id = IdServerResponse.data.sequence
+    }
     
-    const user = User.build({ email, password, groupId });
+    const user = User.build({ _id, email, password, groupId });
     await user.save();
 
     // Generate JWT

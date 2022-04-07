@@ -18,7 +18,7 @@ export class DeviceUpdatedListener extends Listener<DeviceUpdatedEvent> {
     });
     await device.save();
 
-    const profile = await Profile.findOne({ userId: userId })
+    const profile = await Profile.findById(userId)
 
     if (!profile) {
         throw new Error('Profile not found');

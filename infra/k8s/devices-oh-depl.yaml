@@ -38,9 +38,9 @@ metadata:
   name: devices-oh-srv
 spec:
   selector:
-    app: devices
+    app: devices-oh
   ports:
-    - name: devices
+    - name: devices-oh
       protocol: TCP
       port: 3000
       targetPort: 3000

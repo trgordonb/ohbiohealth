@@ -10,13 +10,13 @@ export class AnalysisCompletedListener extends Listener<AnalysisCompletedEvent> 
 
   async onMessage(data: AnalysisCompletedEvent['data'], msg: Message) {
     const { userId, muscleache, burningsensation, numbsensation, needlesensation, painpositions, diagnosis } = data;
-    const profile = await Profile.findOne({ userId });
+    const profile = await Profile.findById(userId);
 
     if (!profile) {
         throw new NotFoundError()
     }
 
-    const exitstingPainConditions = await PainConditions.findById(userId);
+    const exitstingPainConditions = await PainConditions.findById(profile.painconditions);
     if (exitstingPainConditions) {
       console.log('Already done analysis');
       exitstingPainConditions.muscleache = muscleache
@@ -28,8 +28,7 @@ export class AnalysisCompletedListener extends Listener<AnalysisCompletedEvent> 
       await exitstingPainConditions.save()
       msg.ack();
     } else {
-      /**const painConditions = PainConditions.build({
-        _id: userId,
+      const painConditions = PainConditions.build({
         muscleache: muscleache,
         needlesensation: needlesensation,
         burningsensation: burningsensation,
@@ -40,12 +39,13 @@ export class AnalysisCompletedListener extends Listener<AnalysisCompletedEvent> 
       try {
         await painConditions.save();
         profile.set({
-          painConditions: userId
+          painconditions: painConditions._id
         })
         await profile.save()
+        console.log(profile)
       } catch (err) {
         console.error(err)
-      }*/
+      }
       msg.ack();
     }
   }

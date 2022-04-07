@@ -2,12 +2,11 @@ import mongoose from 'mongoose';
 import { Gender } from '@ohbiohealth/common';
 import { DeviceDoc } from './device'
 import { OrderDoc } from './order'
-import { PainConditionsDoc } from './painconditions'
+import { PainConditionsDoc, PainConditionsModel } from './painconditions'
 
 interface ProfileAttrs {
-    userId: string;
+    _id: string;
     email: string;
-    profileId?: string;
     gender?: Gender;
     dateOfBirth?: Date;
     weight?: Number;
@@ -18,9 +17,8 @@ interface ProfileAttrs {
 }
 
 interface ProfileDoc extends mongoose.Document {
-    userId: string;
+    _id: string;
     email: string;
-    profileId?: string;
     gender?: Gender;
     dateOfBirth?: Date;
     weight?: Number;
@@ -34,18 +32,15 @@ interface ProfileModel extends mongoose.Model<ProfileDoc> {
     build(attrs: ProfileAttrs): ProfileDoc;
 }
 
-const profileSchema = new mongoose.Schema(
+const profileSchema = new mongoose.Schema<ProfileDoc, ProfileModel, PainConditionsDoc>(
   {
-    userId: {
+    _id: {
         type: String,
         required: true,
     },
     email: {
         type: String,
         required: true
-    },
-    profileId: {
-        type: String,
     },
     gender: {
         type: String,
@@ -68,12 +63,13 @@ const profileSchema = new mongoose.Schema(
         type: String,
         ref: 'Order'
     }],
-    painConditions: {
-        type: String,
+    painconditions: {
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'PainConditions'
     }
   },
   {
+    _id: false,
     toJSON: {
       transform(doc, ret) {
         ret.id = ret._id;

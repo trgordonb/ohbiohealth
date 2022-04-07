@@ -27,7 +27,7 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const profile = await Profile.findOne({ userId: req.currentUser!.id });
+    const profile = await Profile.findById(req.currentUser!.id);
 
     if (!profile) {
       throw new NotFoundError();

@@ -4,6 +4,7 @@ import { Password } from '../services/password';
 // An interface that describes the properties
 // that are requried to create a new User
 interface UserAttrs {
+  _id: string,
   email: string;
   password: string;
   groupId: string;
@@ -23,6 +24,7 @@ interface UserModel extends mongoose.Model<UserDoc> {
 // An interface that describes the properties
 // that a User Document has
 interface UserDoc extends mongoose.Document {
+  _id: string
   email: string;
   password: string;
   groupId: string;
@@ -33,7 +35,11 @@ interface UserDoc extends mongoose.Document {
   hasFinishedSurvey?: boolean;
 }
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema<UserDoc, UserModel>({
+  _id: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     required: true
@@ -67,6 +73,7 @@ const userSchema = new mongoose.Schema({
     default: false
   }},
   {
+    _id: false,
     toJSON: {
       transform(doc, ret) {
         ret.id = ret._id;

@@ -5,7 +5,7 @@ import { Profile } from '../models/profile';
 const router = express.Router();
 
 router.get('/api/profiles', requireAuth, async (req: Request, res: Response) => {
-  const profiles = await Profile.findOne({ userId: req.currentUser!.id }).populate('painConditions')
+  const profiles = await Profile.findById(req.currentUser!.id).populate('painconditions')
 
   res.send(profiles);
 });

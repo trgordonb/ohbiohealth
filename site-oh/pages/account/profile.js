@@ -10,7 +10,6 @@ export default function ProfilePage({ currentUser }) {
     const [height, setHeight] = useState()
     const [dateOfBirth, setDateOfBirth] = useState()
     const [gender, setGender] = useState()
-    const [groupId, setGroupId] = useState('')
     const { t, i18n } = useTranslation()
 
     const { doRequest, errors } = useRequest({
@@ -21,7 +20,6 @@ export default function ProfilePage({ currentUser }) {
             height,
             gender,
             dateOfBirth,
-            groupId
         },
         onSuccess: () => Router.push({
             pathname: '/',
@@ -196,27 +194,6 @@ export default function ProfilePage({ currentUser }) {
                                         </div>
                                     </div>
                                 </div>
-                            </label>
-                            <label className='block mb-6'>
-                                <span className='text-gray-700'>{t('groupId')}</span>
-                                <input
-                                    id='groupId'
-                                    name='groupId'
-                                    value={groupId}
-                                    className="
-                                        block
-                                        w-full
-                                        mt-1
-                                        border-gray-300
-                                        rounded-md
-                                        shadow-sm
-                                        focus:border-indigo-300
-                                        focus:ring
-                                        focus:ring-indigo-200
-                                        focus:ring-opacity-50
-                                    "
-                                    onChange={(e) => setGroupId(e.target.value)}
-                                />
                             </label>
                         </div>
                         <input 

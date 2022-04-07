@@ -36,6 +36,8 @@ spec:
               value: 'http://nats-srv:4222'
             - name: NATS_CLUSTER_ID
               value: healthnet
+            - name: IDENTITY_SERVICE_URL
+              value: 'http://identity-srv:3000/api/identities'
 ---
 apiVersion: v1
 kind: Service
