@@ -24,6 +24,13 @@ spec:
                 name: identity-srv
                 port:
                   number: 3000
+          - path: /api/datalake/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: datalake-srv
+                port:
+                  number: 3000
     - host: ohbiohealth.xyz
       http:
         paths:

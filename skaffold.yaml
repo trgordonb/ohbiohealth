@@ -57,4 +57,12 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: ohbiohealth/datalake
+      context: datalake
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
 

@@ -79,7 +79,6 @@ const profileSchema = new mongoose.Schema<ProfileDoc, ProfileModel, PainConditio
   }
 );
 
-
 profileSchema.statics.build = (attrs: ProfileAttrs) => {
   return new Profile(attrs);
 };

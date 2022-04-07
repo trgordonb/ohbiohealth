@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datalake-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: datalake
+  template:
+    metadata:
+      labels:
+        app: datalake
+    spec:
+      containers:
+        - name: datalake
+          image: ohbiohealth/datalake
+          env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: healthnet
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: datalake-srv
+spec:
+  selector:
+    app: datalake
+  ports:
+    - name: datalake
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
