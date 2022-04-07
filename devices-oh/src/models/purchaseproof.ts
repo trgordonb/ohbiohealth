@@ -19,7 +19,7 @@ interface PurchaseProofModel extends mongoose.Model<PurchaseProofAttrs> {
   build(attrs: PurchaseProofAttrs): PurchaseProofDoc;
 }
 
-const purchaseProofSchema = new mongoose.Schema(
+const purchaseProofSchema = new mongoose.Schema<PurchaseProofDoc, PurchaseProofModel>(
   {
     _id: {
         type: String,
