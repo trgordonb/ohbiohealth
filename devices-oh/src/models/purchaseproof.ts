@@ -5,14 +5,19 @@ interface PurchaseProofAttrs {
     _id: string;
     userId: string;
     email: string;
-    purchaseProofUrl: string;
+    purchaseProofUrl?: string;
+    status: string;
+    warrantyExpireAt?: string;
+
 }
 
 export interface PurchaseProofDoc extends mongoose.Document {
     _id: string;
     userId: string;
     email: string;
-    purchaseProofUrl: string;
+    purchaseProofUrl?: string;
+    status: string;
+    warrantyExpireAt?: string;
 }
 
 interface PurchaseProofModel extends mongoose.Model<PurchaseProofAttrs> {
@@ -35,7 +40,6 @@ const purchaseProofSchema = new mongoose.Schema<PurchaseProofDoc, PurchaseProofM
     },
     purchaseProofUrl: {
         type: String,
-        required: true,
     },  
     status: {
         type: String,
