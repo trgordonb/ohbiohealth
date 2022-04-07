@@ -6,7 +6,7 @@ interface PurchaseProofAttrs {
     userId: string;
     email: string;
     purchaseProofUrl?: string;
-    status: string;
+    status?: string;
     warrantyExpireAt?: string;
 
 }
@@ -16,7 +16,7 @@ export interface PurchaseProofDoc extends mongoose.Document {
     userId: string;
     email: string;
     purchaseProofUrl?: string;
-    status: string;
+    status?: string;
     warrantyExpireAt?: string;
 }
 
