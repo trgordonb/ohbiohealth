@@ -49,7 +49,7 @@ const start = async () => {
     new DeviceUpdatedListener(natsWrapper.client).listen();
     new AnalysisCompletedListener(natsWrapper.client).listen();
 
-    const mongoURI = `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@${process.env.MONGO_SRV}:27017/profile?authSource=admin`
+    const mongoURI = `mongodb://${process.env.MONGO_SRV}:27017/profile`
     console.log(mongoURI)
     await mongoose.connect(mongoURI);
   } catch (err) {

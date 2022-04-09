@@ -28,16 +28,6 @@ spec:
               value: profile-oh-mongo-srv
             - name: IDENTITY_SERVICE_URL
               value: 'http://identity-srv:3000/api/identities'
-            - name: MONGO_INITDB_ROOT_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-creds
-                  key: username
-            - name: MONGO_INITDB_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-creds
-                  key: password
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
