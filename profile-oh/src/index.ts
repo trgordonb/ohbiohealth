@@ -25,12 +25,6 @@ const start = async () => {
   if (!process.env.MONGO_SRV) {
     throw new Error('MONGO_SRV must be defined')
   }
-  if (!process.env.MONGO_INITDB_ROOT_USERNAME) {
-    throw new Error('MONGO_INITDB_ROOT_USERNAME must be defined')
-  }
-  if (!process.env.MONGO_INITDB_ROOT_PASSWORD) {
-    throw new Error('MONGO_INITDB_ROOT_PASSWORD must be defined')
-  }
 
   try {
     await natsWrapper.connect(
