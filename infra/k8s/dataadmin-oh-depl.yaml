@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dataadmin-oh-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dataadmin-oh
+  template:
+    metadata:
+      labels:
+        app: dataadmin-oh
+    spec:
+      containers:
+        - name: dataadmin-oh
+          image: ohbiohealth/dataadmin-oh
+          env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: healthnet
+            - name: MONGO_URI
+              value: 'mongodb://dataadmin-oh-mongo-srv:27017/painprofile'
+            - name: IDENTITY_SERVICE_URL
+              value: 'http://identity-srv:3000/api/identities'
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: admin-password
+                  key: ADMIN_PASSWORD
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dataadmin-oh-srv
+spec:
+  selector:
+    app: dataadmin-oh
+  ports:
+    - name: dataadmin-oh
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

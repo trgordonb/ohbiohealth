@@ -62,6 +62,13 @@ spec:
                 name: engine-oh-srv
                 port:
                   number: 3000
+          - path: /data-portal/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: dataadmin-oh-srv
+                port:
+                  number: 3000
           - path: /?(.*)
             pathType: Prefix
             backend:

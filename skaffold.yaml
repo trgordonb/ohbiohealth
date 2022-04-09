@@ -65,4 +65,12 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: ohbiohealth/dataadmin-oh
+      context: dataadmin-oh
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.js"
+            dest: .
 
