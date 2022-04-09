@@ -44,7 +44,6 @@ const start = async () => {
   new PainConditionsSavedListener(natsWrapper.client).listen();
 
   const mongoURI = `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@${process.env.MONGO_SRV}:27017/datalake?authSource=admin`
-  console.log(mongoURI)
   await mongoose.connect(mongoURI);
   console.log('Connected to MongoDb');
 

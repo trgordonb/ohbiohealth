@@ -10,9 +10,6 @@ const start = async () => {
   if (!process.env.JWT_KEY) {
     throw new Error('JWT_KEY must be defined');
   }
-  if (!process.env.MONGO_URI) {
-    throw new Error('MONGO_URI must be defined');
-  }
   if (!process.env.NATS_CLIENT_ID) {
     throw new Error('NATS_CLIENT_ID must be defined');
   }
@@ -24,6 +21,15 @@ const start = async () => {
   }
   if (!process.env.IDENTITY_SERVICE_URL) {
     throw new Error('IDENTITY_SERVICE_URL must be defined')
+  }
+  if (!process.env.MONGO_SRV) {
+    throw new Error('MONGO_SRV must be defined')
+  }
+  if (!process.env.MONGO_INITDB_ROOT_USERNAME) {
+    throw new Error('MONGO_INITDB_ROOT_USERNAME must be defined')
+  }
+  if (!process.env.MONGO_INITDB_ROOT_PASSWORD) {
+    throw new Error('MONGO_INITDB_ROOT_PASSWORD must be defined')
   }
 
   try {
@@ -43,8 +49,8 @@ const start = async () => {
     new DeviceUpdatedListener(natsWrapper.client).listen();
     new AnalysisCompletedListener(natsWrapper.client).listen();
 
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log('Connected to MongoDb');
+    const mongoURI = `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@${process.env.MONGO_SRV}:27017/profile?authSource=admin`
+    await mongoose.connect(mongoURI);
   } catch (err) {
     console.error(err);
   }
