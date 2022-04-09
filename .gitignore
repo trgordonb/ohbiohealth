@@ -2,3 +2,4 @@ node_modules
 common
 .next
 .DS_Store
+infra/secrets

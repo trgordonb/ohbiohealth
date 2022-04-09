@@ -19,7 +19,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@ohbiohealth/common": "^1.0.22",
+    "@ohbiohealth/common": "^1.0.25",
     "@types/cookie-session": "^2.0.43",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.12",

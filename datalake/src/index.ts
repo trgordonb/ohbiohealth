@@ -1,5 +1,8 @@
 import { app } from './app';
+import mongoose from 'mongoose'
 import { natsWrapper } from './nats-wrapper';
+import { ProfileSavedListener } from './events/listeners/profile-saved-listener'
+import { PainConditionsSavedListener } from './events/listeners/painconditions-saved-listener'
 
 const start = async () => {
   console.log('Starting up Datalake Service....');
@@ -11,6 +14,15 @@ const start = async () => {
   }
   if (!process.env.NATS_CLUSTER_ID) {
     throw new Error('NATS_CLUSTER_ID must be defined');
+  }
+  if (!process.env.MONGO_SRV) {
+    throw new Error('MONGO_SRV must be defined')
+  }
+  if (!process.env.MONGO_INITDB_ROOT_USERNAME) {
+    throw new Error('MONGO_INITDB_ROOT_USERNAME must be defined')
+  }
+  if (!process.env.MONGO_INITDB_ROOT_PASSWORD) {
+    throw new Error('MONGO_INITDB_ROOT_PASSWORD must be defined')
   }
 
   try {
@@ -28,6 +40,13 @@ const start = async () => {
   } catch (err) {
     console.error(err);
   }
+  new ProfileSavedListener(natsWrapper.client).listen();
+  new PainConditionsSavedListener(natsWrapper.client).listen();
+
+  const mongoURI = `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@${process.env.MONGO_SRV}:27017/datalake?authSource=admin`
+  console.log(mongoURI)
+  await mongoose.connect(mongoURI);
+  console.log('Connected to MongoDb');
 
   app.listen(3000, () => {
     console.log('Listening on port 3000!!!!!!!!');

@@ -30,7 +30,6 @@ kind: Service
 metadata:
   name: profile-oh-mongo-srv
 spec:
-  type: LoadBalancer
   selector:
     app: profile-oh-mongo
   ports:

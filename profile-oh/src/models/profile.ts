@@ -3,6 +3,8 @@ import { Gender } from '@ohbiohealth/common';
 import { DeviceDoc } from './device'
 import { OrderDoc } from './order'
 import { PainConditionsDoc, PainConditionsModel } from './painconditions'
+import { ProfileSavedPublisher } from '../events/publishers/profile-saved-publisher'
+import { natsWrapper } from '../nats-wrapper'
 
 interface ProfileAttrs {
     _id: string;
@@ -82,6 +84,26 @@ const profileSchema = new mongoose.Schema<ProfileDoc, ProfileModel, PainConditio
 profileSchema.statics.build = (attrs: ProfileAttrs) => {
   return new Profile(attrs);
 };
+
+profileSchema.post('save', async function(doc, next){
+  let result = JSON.parse(JSON.stringify(doc))
+  delete result.email
+  delete result.__v
+  result.groupId = 'oh'
+  if (result.gender && result.weight && result.height && result.dateOfBirth) {
+    await new ProfileSavedPublisher(natsWrapper.client).publish({
+      _id: result.id,
+      groupId: 'oh',
+      gender: result.gender,
+      dateOfBirth: new Date(result.dateOfBirth),
+      weight: result.weight,
+      height: result.height,
+      painconditions: result.painconditions ? result.painconditions.toString() : ''
+    })
+  }
+  next()
+})
+
 
 const Profile = mongoose.model<ProfileDoc, ProfileModel>('Profile', profileSchema);
 
