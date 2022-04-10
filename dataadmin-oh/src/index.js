@@ -3,8 +3,9 @@ const AdminJSExpress = require('@adminjs/express')
 const AdminJsMongoose = require('@adminjs/mongoose')
 const bcrypt = require('bcrypt')
 const axios = require('axios').default
-const adminExists = require('./services/check')
-const addAdmin = require('./services/setup')
+const natsWrapper = require('./nats-wrapper')
+const check = require('./services/check')
+const setup = require('./services/setup')
 AdminJS.registerAdapter(AdminJsMongoose)
 
 const mongoose = require('mongoose')
@@ -148,16 +149,15 @@ const adminJs = new AdminJS({
           resource: ClientModel, options: {
               parent: menu.client,
               properties: {
-                  clientId: {
-                      type: 'string',
-                      isVisible: { list: true, filter: false, show: true, edit: false },
-                  },
-                  birthdate: {
-                      type: 'date',
-                  },
-                  firstconsultdate: {
-                      type: 'date',
-                  },
+                    _id: {
+                        isVisible: { list: true, filter: false, show: true, edit: false },
+                    },    
+                    birthdate: {
+                        type: 'date',
+                    },
+                    firstconsultdate: {
+                        type: 'date',
+                    },
               },
               actions: {
                   new: {
@@ -166,12 +166,12 @@ const adminJs = new AdminJS({
                               //get ClientId from OH microservices
                               const { currentAdmin } = context
                               const response = await axios.post(process.env.IDENTITY_SERVICE_URL, {
-                                  groupId: currentAdmin.groupId
+                                  groupId: 'oh'
                               })
                               if (response.data && response.data.sequence) {
                                   request.payload = {
                                       ...request.payload,
-                                      clientId: response.data.sequence
+                                      _id: response.data.sequence
                                   }
                               }
                           }
@@ -179,9 +179,9 @@ const adminJs = new AdminJS({
                       }
                   }
               },
-              listProperties: ['clientId', 'gender', 'birthdate', 'firstconsultdate', 'occupation'],
-              showProperties: ['clientId', 'gender', 'birthdate', 'firstconsultdate', 'occupation', 'painlocations', 'painconsequences', 'paincause', 'paincategory', 'QE_positions', 'BEM_positions'],
-              filterProperties: ['clientId','gender', 'birthdate', 'firstconsultdate', 'occupation', 'painlocations', 'painconsequences', 'paincause', 'paincategory', 'QE_positions', 'BEM_positions'],
+              listProperties: ['_id', 'gender', 'birthdate', 'firstconsultdate', 'occupation'],
+              showProperties: ['_id', 'gender', 'birthdate', 'firstconsultdate', 'occupation', 'painlocations', 'painconsequences', 'paincause', 'paincategory', 'QE_positions', 'BEM_positions'],
+              filterProperties: ['_id','gender', 'birthdate', 'firstconsultdate', 'occupation', 'painlocations', 'painconsequences', 'paincause', 'paincategory', 'QE_positions', 'BEM_positions'],
               editProperties: ['gender', 'birthdate', 'firstconsultdate', 'occupation', 'painlocations', 'painconsequences', 'paincause', 'paincategory', 'QE_positions', 'BEM_positions'],
           }
       },
@@ -364,14 +364,38 @@ const router = AdminJSExpress.buildAuthenticatedRouter(
 app.use(adminJs.options.rootPath, router)
 
 const run = async () => {
-  await mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true
-  })
-  const isAdminExists = await adminExists();
+  try {
+    await natsWrapper.connect(
+      process.env.NATS_CLUSTER_ID,
+      process.env.NATS_CLIENT_ID,
+      process.env.NATS_URL
+    );
+    natsWrapper.client.on('close', () => {
+      console.log('NATS connection closed!');
+      process.exit();
+    });
+    process.on('SIGINT', () => natsWrapper.client.close());
+    process.on('SIGTERM', () => natsWrapper.client.close());
+
+    await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true});
+    console.log('Connected to MongoDb');
+  } catch (err) {
+    console.error(err);
+  }
+
+  const isStaticDataExists = await check.staticDataExists();
+  if (isStaticDataExists) {
+      console.log('Static data exists')
+  } else {
+      console.log('Static data absent, adding...')
+      await setup.addStaticData()
+  }
+  
+  const isAdminExists = await check.adminExists();
     if (isAdminExists) {
       console.log('Admin user exists');
     } else {
-      console.log('Admin user absent, adding one ...');
+      console.log('Admin user absent, adding one...');
       let _id = ''
       const IdServerResponse = await axios.post(process.env.IDENTITY_SERVICE_URL, {
         groupId: 'oh'
@@ -379,7 +403,7 @@ const run = async () => {
       if (IdServerResponse.data && IdServerResponse.data.sequence) {
         _id = IdServerResponse.data.sequence
       }
-      await addAdmin(_id);
+      await setup.addAdmin(_id);
       console.log('Admin user sucessfully added');
     }
   await app.listen(3000, () => {

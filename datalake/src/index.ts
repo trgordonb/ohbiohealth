@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import { natsWrapper } from './nats-wrapper';
 import { ProfileSavedListener } from './events/listeners/profile-saved-listener'
 import { PainConditionsSavedListener } from './events/listeners/painconditions-saved-listener'
+import { PatientProfileSavedListener } from './events/listeners/patientprofile-saved-listener'
 
 const start = async () => {
   console.log('Starting up Datalake Service....');
@@ -42,6 +43,7 @@ const start = async () => {
   }
   new ProfileSavedListener(natsWrapper.client).listen();
   new PainConditionsSavedListener(natsWrapper.client).listen();
+  new PatientProfileSavedListener(natsWrapper.client).listen();
 
   const mongoURI = `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@${process.env.MONGO_SRV}:27017/datalake?authSource=admin`
   await mongoose.connect(mongoURI);
