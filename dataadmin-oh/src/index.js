@@ -30,6 +30,7 @@ const adminJs = new AdminJS({
   databases: [mongoose],
   rootPath: '/data-portal',
   loginPath: '/data-portal/login',
+  logoutPath: '/data-portal/login',
   dashboard: {
       component: AdminJS.bundle('./components/CustomDashboard')
   },
