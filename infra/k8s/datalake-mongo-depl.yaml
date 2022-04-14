@@ -40,7 +40,6 @@ kind: Service
 metadata:
   name: datalake-mongo-srv
 spec:
-  type: LoadBalancer
   selector:
     app: datalake-mongo
   ports:
