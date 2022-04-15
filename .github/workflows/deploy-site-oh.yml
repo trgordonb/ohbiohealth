@@ -11,15 +11,35 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build, Tag and Push Image to DokcerHub
+        id: build-image
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      - run: cd site-oh && docker build -t ohbiohealth/site-oh .
-      - run: docker push ohbiohealth/site-oh
-      - uses: digitalocean/action-doctl@v2
+        run: 
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          cd site-oh && docker build -t ohbiohealth/site-oh .
+          docker push ohbiohealth/site-oh
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-      - run: doctl kubernetes cluster kubeconfig save ohbiohealth
-      - run: kubectl rollout restart deployment site-oh-depl
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Trigger deploy
+        uses: APina03/EKSKUBECTL@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: rollout restart deployment site-oh-depl
+
+      #- uses: digitalocean/action-doctl@v2
+      #  with:
+      #    token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      #- run: doctl kubernetes cluster kubeconfig save ohbiohealth
+      #- run: kubectl rollout restart deployment site-oh-depl
