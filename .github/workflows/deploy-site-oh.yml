@@ -32,7 +32,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Trigger deploy
-        uses: APina03/EKSKUBECTL@master
+        uses: APina03/EKSKUBECTL@main
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
