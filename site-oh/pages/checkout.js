@@ -20,16 +20,3 @@ CheckoutPage.getInitialProps = async () => {
 
 export default CheckoutPage;
 
-/**export async function getStaticProps() {
-	const { data } = await client.query({
-		query: GET_COUNTRIES
-	});
-
-	return {
-		props: {
-			data: data || {}
-		},
-		revalidate: 1
-	};
-
-}*/
