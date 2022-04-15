@@ -11,28 +11,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Build, Tag and Push Image to DokcerHub
-        id: build-image
+      - uses: actions/checkout@v2        
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        run: 
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          cd site-oh && docker build -t ohbiohealth/site-oh .
-          docker push ohbiohealth/site-oh
+      - run: cd site-oh && docker build -t ohbiohealth/site-oh .
+      - run: docker push ohbiohealth/site-oh
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      - uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Trigger deploy
-        uses: APina03/EKSKUBECTL@main
+      - uses: APina03/EKSKUBECTL@main
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
