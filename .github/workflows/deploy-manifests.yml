@@ -12,8 +12,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: digitalocean/action-doctl@v2
+
+      - uses: statsig-io/kubectl-via-eksctl@main
+        env:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: us-east-1
+          cluster: ${{ secrets.CLUSTER_NAME }}
         with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-      - run: doctl kubernetes cluster kubeconfig save ohbiohealth
-      - run: kubectl apply -f infra/k8s && kubectl apply -f infra/k8s-prod
+          args: apply -f infra/k8s 
+
+      - uses: statsig-io/kubectl-via-eksctl@main
+        env:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: us-east-1
+          cluster: ${{ secrets.CLUSTER_NAME }}
+        with:
+          args: apply -f infra/k8s-prod
+      

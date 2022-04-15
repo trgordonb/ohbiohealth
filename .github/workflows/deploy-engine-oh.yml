@@ -18,8 +18,12 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - run: cd engine-oh && docker build -t ohbiohealth/engine-oh .
       - run: docker push ohbiohealth/engine-oh
-      - uses: digitalocean/action-doctl@v2
+
+      - uses: statsig-io/kubectl-via-eksctl@main
+        env:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: us-east-1
+          cluster: ${{ secrets.CLUSTER_NAME }}
         with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-      - run: doctl kubernetes cluster kubeconfig save ohbiohealth
-      - run: kubectl rollout restart deployment engine-oh-depl
+          args: rollout restart deployment engine-oh-depl
