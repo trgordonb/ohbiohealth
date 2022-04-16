@@ -17,6 +17,13 @@ spec:
     - host: ensembletech.xyz
       http:
         paths:
+          - path: /kubernetes/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: kubernetes-dashboard
+                port: 
+                  number: 443
           - path: /api/identities/?(.*)
             pathType: Prefix
             backend:
