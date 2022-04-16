@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-oh-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-oh-mongo
+  template:
+    metadata:
+      labels:
+        app: auth-oh-mongo
+    spec:
+      containers:
+        - name: auth-oh-mongo
+          image: mongo
+          volumeMounts:
+            - name: mongodb-storage-auth-oh
+              mountPath: /data/db
+              subPath: auth
+      volumes:
+        - name: mongodb-storage-auth-oh
+          persistentVolumeClaim:
+            claimName: mongodb-pv-claim-auth-oh
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-oh-mongo-srv
+spec:
+  selector:
+    app: auth-oh-mongo
+  ports:
+    - name: db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-pv-claim-auth-oh
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { Password } from '../services/password';
+import { v4 as uuidv4 } from 'uuid';
 
 // An interface that describes the properties
 // that are requried to create a new User
@@ -9,6 +10,8 @@ interface UserAttrs {
   password: string;
   groupId: string;
   usertype?: string;
+  verificationHash?: string;
+  hasVerifiedEmail?: boolean;
   hasProvidedInfo?: boolean;
   hasBoughtDevice?: boolean;
   hasRegDevice?: boolean;
@@ -29,6 +32,8 @@ interface UserDoc extends mongoose.Document {
   password: string;
   groupId: string;
   usertype?: string;
+  verificationHash?: string;
+  hasVerifiedEmail?: boolean;
   hasProvidedInfo?: boolean;
   hasBoughtDevice?: boolean;
   hasRegDevice?: boolean;
@@ -55,6 +60,14 @@ const userSchema = new mongoose.Schema<UserDoc, UserModel>({
   usertype: {
     type: String,
     default: 'client'
+  },
+  verificationHash: {
+    type: String,
+    default: uuidv4()
+  },
+  hasVerifiedEmail: {
+    type: Boolean,
+    default: false
   },
   hasProvidedInfo: {
     type: Boolean,

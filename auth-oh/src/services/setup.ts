@@ -12,12 +12,14 @@ export const addAdmin = async () => {
     const user = User.build({
         _id: _id,
         email: 'admin@ohbiohealth.com',
-        password: process.env.ADMIN_PASSWORD || 'admin',
+        password: process.env.ADMIN_PASSWORD || 'password123',
         groupId: 'oh',
         usertype: 'admin',
+        hasVerifiedEmail: true,
         hasProvidedInfo: true,
         hasFinishedSurvey: true,
         hasRegDevice: false
     });
+    console.log(user)
     await user.save();
 }

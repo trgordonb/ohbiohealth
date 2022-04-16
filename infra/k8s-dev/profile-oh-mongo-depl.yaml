@@ -1,0 +1,50 @@
+#comment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profile-oh-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: profile-oh-mongo
+  template:
+    metadata:
+      labels:
+        app: profile-oh-mongo
+    spec:
+      containers:
+        - name: profile-oh-mongo
+          image: mongo
+          volumeMounts:
+            - name: mongodb-storage-profile-oh
+              mountPath: /data/db
+              subPath: profile
+      volumes:
+        - name: mongodb-storage-profile-oh
+          persistentVolumeClaim:
+            claimName: mongodb-pv-claim-profile-oh
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: profile-oh-mongo-srv
+spec:
+  selector:
+    app: profile-oh-mongo
+  ports:
+    - name: db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-pv-claim-profile-oh
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
