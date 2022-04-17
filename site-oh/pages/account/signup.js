@@ -10,7 +10,7 @@ export default function SignUpPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const { doRequest, errors } = useRequest({
       url: '/api/users/signup',
@@ -20,16 +20,21 @@ export default function SignUpPage() {
         password,
         groupId: 'oh'
       },
-      onSuccess: () => Router.push({
-        pathname: '/account/profile',
-      })
-    });
+      onSuccess: () => doSignout()
+  });
+
+  const { doRequest: doSignout } = useRequest({
+    url: '/api/users/signout',
+    method: 'post',
+    body: {},
+    onSuccess: () => Router.push('/account/toactivate')
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
     if (password !== passwordConfirm) {
-      toast.error('Passwords do not match!')
+      toast.error(t('nopwdmatch'))
       return
     }
 

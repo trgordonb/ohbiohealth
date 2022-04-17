@@ -38,6 +38,17 @@ spec:
               value: healthnet
             - name: IDENTITY_SERVICE_URL
               value: 'http://identity-srv:3000/api/identities'
+            - name: SMTP_HOST
+              value: web179.dnchosting.com
+            - name: SMTP_ACCOUNT
+              value: gordon@ensembletechs.com
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-password
+                  key: SMTP_PASSWORD
+            - name: DOMAIN
+              value: https://linkaiq.xyz
 ---
 apiVersion: v1
 kind: Service

@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next'
 export default function SigninPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const { doRequest, errors } = useRequest({
     url: '/api/users/signin',
@@ -19,26 +19,60 @@ export default function SigninPage() {
       password,
       groupId: 'oh'
     },
-    onSuccess: (user) => {
-      if (user && user.hasProvidedInfo) {
-        Router.push('/')
-      } else {
-        Router.push('/account/profile')
+    onSuccess: async (user) => {
+      if (user) {
+        if (!user.hasVerifiedEmail) {
+          await doSignout()
+        }
+        else if (!user.hasProvidedInfo) {
+          Router.push('/account/profile')
+        } else {
+          Router.push('/')
+        }
       }
     }
   });
 
+  const { doRequest: doSignout } = useRequest({
+    url: '/api/users/signout',
+    method: 'post',
+    body: {},
+    onSuccess: () => Router.push('/account/toactivate')
+  });
+
+  const { doRequest:doReset, errors:resetErrors } = useRequest({
+    url: '/api/users/request-reset',
+    method: 'post',
+    body: { email },
+    onSuccess: () => {
+      toast.info(t('clickreset'))
+      setEmail('')
+    }
+  })
+
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
     await doRequest()
+  }
+
+  const handleReset = async (e) => {
+    e.preventDefault()
+    if (!email) {
+      toast.error('Please enter your email')
+    } else {
+      await doReset()
+    }
   }
 
   useEffect(() => {
     if (errors) {
       toast.error(errors)
     }
-  },[errors])
+    if (resetErrors) {
+      toast.error(resetErrors)
+    }
+  },[errors, resetErrors])
 
   return (
     <section className="h-full gradient-form bg-gray-200 md:h-screen">
@@ -102,7 +136,18 @@ export default function SigninPage() {
                             >
                               <Link href='/account/signup'>{t('register')}</Link>
                             </button>
-                            
+                          </div>
+                          <div className="flex items-center justify-between pb-6">
+                            <p className="mb-0 mr-2">{t('forgetpwd')}</p>
+                            <button
+                              type="button"
+                              className="inline-block px-6 py-2 border-2 border-cyan-600 text-cyan-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                              data-mdb-ripple="true"
+                              data-mdb-ripple-color="light"
+                              onClick={handleReset}
+                            >
+                              {t('reset')}
+                            </button>
                           </div>
                         </form>
                       </div>

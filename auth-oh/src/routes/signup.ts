@@ -1,11 +1,13 @@
 import express, { Request, Response } from 'express';
-import { body, validationResult } from 'express-validator'
+import { body } from 'express-validator'
 import jwt from 'jsonwebtoken';
 import { UserCreatedPublisher } from '../events/publishers/user-created-publisher';
 import { User } from '../models/user';
 import { natsWrapper } from '../nats-wrapper';
 import { validateRequest, BadRequestError } from "@ohbiohealth/common"
 import axios from 'axios'
+import { sendConfirmationEmail } from '../services/mail'
+import { v4 as uuidv4 } from 'uuid';
 
 const router = express.Router();
 
@@ -38,10 +40,13 @@ router.post('/api/users/signup', [
     }
     
     const user = User.build({ _id, email, password, groupId });
+    user.verificationHash = uuidv4()
     await user.save();
 
-    // Generate JWT
+    //send email verification
+    await sendConfirmationEmail(user);
 
+    // Generate JWT
     const userJwt = jwt.sign({
       id: user.id,
       email: user.email,

@@ -146,5 +146,14 @@
     "previous": "Previous",
     "close": "Close",
     "mobile": "Mobile App",
-    "groupId": "OH Center Member Id (Optional)"
+    "groupId": "OH Center Member Id (Optional)",
+    "novalidate": "Cannot validate your account, sorry",
+    "okvalidate": "Your account has been validated",
+    "resetpwd": "Reset your password here",
+    "tovalidate": "Please click the account activation link from the welcome email",
+    "forgetpwd": "Forget password?",
+    "reset": "Reset",
+    "clickreset": "Please click the reset password link from your email",
+    "nopwdmatch": "Password does not match",
+    "resetok": "Account reset ok, please use new password to login"
 }

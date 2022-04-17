@@ -146,5 +146,14 @@
     "previous": "上一個",
     "close": "關閉",
     "mobile": "流動應用程式",
-    "groupId": "譽康中心會員識別號 (可選填)"
+    "groupId": "譽康中心會員識別號 (可選填)",
+    "novalidate": "無法驗證您的帳戶",
+    "okvalidate": "您的帳戶已通過驗證",
+    "resetpwd": "重置您的密碼",
+    "tovalidate": "請按電子郵件中的帳戶激活鏈接",
+    "forgetpwd": "忘記密碼?",
+    "reset": "重置",
+    "clickreset": "請點擊您電子郵件中的重置密碼鏈接",
+    "nopwdmatch": "密碼不匹配",
+    "resetok": "賬戶重置成功，請使用新密碼登錄"
 }

@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-oh-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-oh
+  template:
+    metadata:
+      labels:
+        app: auth-oh
+    spec:
+      containers:
+        - name: auth-oh
+          image: ohbiohealth/auth-oh
+          env:
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: admin-password
+                  key: ADMIN_PASSWORD
+            - name: MONGO_URI
+              value: 'mongodb://auth-oh-mongo-srv:27017/auth'
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: healthnet
+            - name: IDENTITY_SERVICE_URL
+              value: 'http://identity-srv:3000/api/identities'
+            - name: SMTP_HOST
+              value: web179.dnchosting.com
+            - name: SMTP_ACCOUNT
+              value: gordon@ensembletechs.com
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-password
+                  key: SMTP_PASSWORD
+            - name: DOMAIN
+              value: http://ohbiohealth.abc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-oh-srv
+spec:
+  selector:
+    app: auth-oh
+  ports:
+    - name: auth-oh
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

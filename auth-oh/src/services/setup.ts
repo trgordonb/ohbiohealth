@@ -20,6 +20,5 @@ export const addAdmin = async () => {
         hasFinishedSurvey: true,
         hasRegDevice: false
     });
-    console.log(user)
     await user.save();
 }
