@@ -29,6 +29,7 @@ spec:
           - containerPort: 5432 
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
+              subPath: ensemble
               name: postgres-storage-cms
       volumes:
         - name: postgres-storage-cms
