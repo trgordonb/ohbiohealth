@@ -15,7 +15,6 @@ spec:
       containers:
         - name: cms-postgres
           image: postgres:10.1
-          imagePullPolicy: IfNotPresent
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:
