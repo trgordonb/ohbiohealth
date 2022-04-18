@@ -46,6 +46,20 @@ spec:
               secretKeyRef:
                 name: strapi-secrets
                 key: jwtsecret
+          - name: AWS_REGION
+            value: "us-east-1"
+          - name: AWS_BUCKET
+            value: "ensemble-cms"
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                name: aws-secrets
+                key: accesskey
+          - name: AWS_ACCESS_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: aws-secrets
+                key: accesssecret
           - name: DATABASE_HOST
             value: cms-postgres-srv
           - name: DATABASE_PORT
