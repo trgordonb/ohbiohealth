@@ -1,0 +1,29 @@
+name: deploy-cms
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'cms/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - run: cd cms && docker build -t ohbiohealth/cms .
+      - run: docker push ohbiohealth/cms
+
+      - uses: statsig-io/kubectl-via-eksctl@main
+        env:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: us-east-1
+          cluster: ${{ secrets.CLUSTER_NAME }}
+        with:
+          args: rollout restart deployment cms-depl

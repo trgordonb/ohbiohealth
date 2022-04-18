@@ -28,6 +28,13 @@ spec:
                 name: datalake-srv
                 port:
                   number: 3000
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: cms-srv
+                port:
+                  number: 1337
     - host: linkaiq.xyz
       http:
         paths:

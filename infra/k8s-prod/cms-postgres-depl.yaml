@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cms-postgres-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cms-postgres
+  template:
+    metadata:
+      labels:
+        app: cms-postgres
+    spec:
+      containers:
+        - name: cms-postgres
+          image: postgres:10.1
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret-config
+                  key: password
+            - name: POSTGRES_DB
+              value: ensemble
+            - name: POSTGRES_USER
+              value: ensemble
+          ports:
+          - containerPort: 5432 
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-storage-cms
+      volumes:
+        - name: postgres-storage-cms
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim-cms
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cms-postgres-srv
+spec:
+  selector:
+    app: cms-postgres
+  ports:
+    - name: db
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pv-claim-cms
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ebs-sc
+  resources:
+    requests:
+      storage: 2Gi

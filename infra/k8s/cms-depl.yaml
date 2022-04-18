@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cms-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cms
+  template:
+    metadata:
+      labels:
+        app: cms
+    spec:
+      containers:
+      - name: cms
+        image: ohbiohealth/cms
+        env:
+          - name: APP_KEY1
+            valueFrom:
+              secretKeyRef:
+                name: strapi-secrets
+                key: appkey1
+          - name: APP_KEY2
+            valueFrom:
+              secretKeyRef:
+                name: strapi-secrets
+                key: appkey2
+          - name: APP_KEY3
+            valueFrom:
+              secretKeyRef:
+                name: strapi-secrets
+                key: appkey3
+          - name: APP_KEY4
+            valueFrom:
+              secretKeyRef:
+                name: strapi-secrets
+                key: appkey4
+          - name: API_TOKEN_SALT
+            valueFrom:
+              secretKeyRef:
+                name: strapi-secrets
+                key: tokensalt
+          - name: ADMIN_JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: strapi-secrets
+                key: jwtsecret
+          - name: DATABASE_HOST
+            value: cms-postgres-srv
+          - name: DATABASE_PORT
+            value: "5432"
+          - name: DATABASE_NAME
+            value: ensemble
+          - name: DATABASE_USERNAME
+            value: ensemble
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret-config
+                key: password
+        ports:
+          - containerPort: 1337
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cms-srv
+spec:
+  selector:
+    app: cms
+  ports:
+    - name: cms
+      protocol: TCP
+      port: 1337
+      targetPort: 1337
