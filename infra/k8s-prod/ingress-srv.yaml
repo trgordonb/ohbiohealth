@@ -73,6 +73,13 @@ spec:
                 name: dataadmin-oh-srv
                 port:
                   number: 3000
+          - path: /practitioner-portal/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: practitioner-site-oh-srv
+                port:
+                  number: 3000
           - path: /?(.*)
             pathType: Prefix
             backend:

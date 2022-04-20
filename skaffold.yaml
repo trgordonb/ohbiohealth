@@ -81,4 +81,13 @@ build:
         manual:
           - src: "src/**/*.js" 
             dest: .
+    - image: ohbiohealth/practitioner-site-oh
+      context: practitioner-site-oh
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.js" 
+            dest: .
+        
 
