@@ -3,10 +3,9 @@ const { DataTypes, UUIDV4 } = require('sequelize');
 const buildUser = (sequelize) => {
   const User = sequelize.define('User', {
         entityId: {
-            type: DataTypes.UUID,
+            type: DataTypes.STRING,
             allowNull: false,
             primaryKey: true,
-            defaultValue: DataTypes.UUIDV4
         },
         email: {
             type: DataTypes.STRING,

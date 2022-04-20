@@ -4,7 +4,7 @@ const axios = require('axios')
 const UserResource = {
     //parent: menu.painProfileMaster,
     properties: {
-        id: {
+        entityId: {
             isVisible: { list: true, filter: false, show: true, edit: false },
         },
         encryptedPassword: {
