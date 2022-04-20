@@ -26,6 +26,17 @@ spec:
               value: healthnet
             - name: IDENTITY_SERVICE_URL
               value: 'http://identity-srv:3000/api/identities'
+            - name: MYSQL_HOST
+              value: practitioner-site-oh-mysql-srv
+            - name: MYSQL_DB
+              value: oh
+            - name: MYSQL_USER
+              value: ensemble
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: ADMIN_USER_PASSWORD
             - name: ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:

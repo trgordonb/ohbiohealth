@@ -3,8 +3,8 @@ const Sequelize = require('sequelize')
 const buildUser = require('./models/users.model')
 
 const connect = async () => {
-    const sequelize = new Sequelize('oh', 'ensemble', 'Hereftrr2022', {
-        host: 'dataadmin-oh-mysql-srv',
+    const sequelize = new Sequelize(process.env.MYSQL_DB, process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, {
+        host: process.env.MYSQL_HOST,
         dialect: 'mysql',
         dialectOptions: {
           // Your mysql2 options here

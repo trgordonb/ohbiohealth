@@ -1,27 +1,26 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: dataadmin-oh-mysql-srv
+  name: practitioner-site-oh-mysql-srv
   labels:
-    app: dataadmin-oh-mysql
+    app: practitioner-site-oh-mysql
 spec:
   ports:
     - port: 3306
       targetPort: 3306
   selector:
-    app: dataadmin-oh-mysql
+    app: practitioner-site-oh-mysql
     tier: mysql
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-pv-claim-dataadmin-oh
+  name: mysql-pv-claim-practitioner-site-oh
   labels:
-    app: dataadmin-oh-mysql
+    app: practitioner-site-oh-mysql
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: ebs-sc
   resources:
     requests:
       storage: 2Gi
@@ -29,20 +28,20 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dataadmin-oh-mysql-depl
+  name: practitioner-site-oh-mysql-depl
   labels:
-    app: dataadmin-oh-mysql
+    app: practitioner-site-oh-mysql
 spec:
   selector:
     matchLabels:
-      app: dataadmin-oh-mysql
+      app: practitioner-site-oh-mysql
       tier: mysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: dataadmin-oh-mysql
+        app: practitioner-site-oh-mysql
         tier: mysql
     spec:
       containers:
@@ -67,9 +66,9 @@ spec:
         - containerPort: 3306
           name: mysql
         volumeMounts:
-        - name: mysql-dataadmin-oh-storage
+        - name: mysql-practitioner-site-oh-storage
           mountPath: /var/lib/mysql
       volumes:
-      - name: mysql-dataadmin-oh-storage
+      - name: mysql-practitioner-site-oh-storage
         persistentVolumeClaim:
-          claimName: mysql-pv-claim-dataadmin-oh
+          claimName: mysql-pv-claim-practitioner-site-oh
