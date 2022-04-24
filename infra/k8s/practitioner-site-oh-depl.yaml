@@ -15,14 +15,14 @@ spec:
       initContainers:
       - name: wait-for-mysql
         image: busybox:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         command: ['sh', '-c', 'until nc -vz ${POD_SVC} 3306; do echo "Waiting for mysql..."; sleep 3; done;']
         env:
           - name: POD_SVC
             value: practitioner-site-oh-mysql-srv
       - name: db-migrations
         image: ohbiohealth/dbmigrations
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         command: ['npm', 'run', "db:migrate"]
         env:
           - name: MYSQL_HOST
