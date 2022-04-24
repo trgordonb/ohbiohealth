@@ -1,4 +1,4 @@
-name: deploy-dataadmin-oh
+name: deploy-practitioner-site-oh
 
 on:
   push:
