@@ -1,19 +1,25 @@
-const { DataTypes, UUIDV4 } = require('sequelize');
+const { DataTypes } = require('sequelize');
 
 const buildUser = (sequelize) => {
   const User = sequelize.define('User', {
-        entityId: {
-            type: DataTypes.STRING,
-            allowNull: false,
+        userId: {
+            type: DataTypes.UUID,
             primaryKey: true,
+            defaultValue: DataTypes.UUIDV4
         },
         email: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        groupId: {
-            type: DataTypes.ENUM("groupA","groupB","groupC","oh"),
-            defaultValue: "oh"
+        branch_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: {
+                    tableName: 'tbl_branch'
+                },
+                key: 'branch_id'
+            }
         },
         role: {
             type: DataTypes.ENUM("admin", "user"),
@@ -22,7 +28,10 @@ const buildUser = (sequelize) => {
         encryptedPassword: {
             type: DataTypes.STRING
         },
-    }, {})
+    }, { 
+        tableName: 'tbl_user',
+        modelName: 'User'
+    })
 
   return User
 }

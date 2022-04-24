@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: data-etl
+spec:
+  schedule: '*0 0 * * *'
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: data-etl
+            image: ohbiohealth/dataetl
+            imagePullPolicy: Always
+            command: ["python3", "app.py"]
+            env:
+              - name: AWS_ACCESS_KEY_ID
+                valueFrom:
+                  secretKeyRef:
+                    name: aws-secrets
+                    key: accesskey
+              - name: AWS_SECRET_ACCESS_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: aws-secrets
+                    key: accesssecret
+              - name: MYSQL_USER
+                value: ensemble
+              - name: MYSQL_DB
+                value: oh
+              - name: MYSQL_HOST
+                value: practitioner-site-oh-mysql-srv
+              - name: MYSQL_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: mysql-secrets
+                    key: ADMIN_USER_PASSWORD
+          restartPolicy: Never
