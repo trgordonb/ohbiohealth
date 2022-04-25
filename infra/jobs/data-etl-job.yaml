@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: data-etl
 spec:
-  schedule: '0 0 * * *'
+  schedule: '44 16 * * *'
   jobTemplate:
     spec:
       template:
@@ -12,7 +12,6 @@ spec:
           - name: data-etl
             image: ohbiohealth/dataetl
             imagePullPolicy: Always
-            command: ["python3", "app.py"]
             env:
               - name: AWS_ACCESS_KEY_ID
                 valueFrom:
@@ -24,6 +23,10 @@ spec:
                   secretKeyRef:
                     name: aws-secrets
                     key: accesssecret
+              - name: MONGO_HOST
+                value: profile-oh-mongo-srv
+              - name: MONGO_DB
+                value: profile
               - name: MYSQL_USER
                 value: ensemble
               - name: MYSQL_DB

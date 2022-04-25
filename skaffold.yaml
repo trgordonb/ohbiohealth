@@ -73,5 +73,12 @@ build:
         manual:
           - src: "src/**/*.js" 
             dest: .
-        
+    - image: ohbiohealth/dbmigrations
+      context: practitioner-site-db-migration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: "migrations/*.js"
 

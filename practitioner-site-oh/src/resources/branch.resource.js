@@ -4,8 +4,7 @@ const BranchResource = {
             isTitle: true
         },
         branch_id: {
-            isVisible: true,
-            position: 2
+            isVisible: false,
         },
         createdAt: {
             isVisible: false

@@ -13,8 +13,14 @@ module.exports = {
         allowNull: false
       },
       branch_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: {
+            tableName: 'tbl_branch'
+          },
+          key: 'branch_id'
+        }
       },
       role: {
         type: Sequelize.ENUM("admin","user")

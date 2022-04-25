@@ -15,7 +15,7 @@ const buildDiagnosis = (sequelize) => {
             }
         },
         branch_id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUID,
             allowNull: false,
             references: {
                 model: {

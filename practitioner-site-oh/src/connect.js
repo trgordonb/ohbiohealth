@@ -31,7 +31,7 @@ const connect = async () => {
     const Visit = buildVisit(sequelize)
     const Diagnosis = buildDiagnosis(sequelize)
 
-    await Branch.sync({ alter: true })
+    await Branch.sync()
     await User.sync()
     await Entity.sync()
     await BodyLoc.sync({ alter: true })

@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true
       },
       branch_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false,
         primaryKey: true,
         references: {

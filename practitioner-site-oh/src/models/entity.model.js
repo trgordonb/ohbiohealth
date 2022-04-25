@@ -10,7 +10,7 @@ const buildEntity = (sequelize) => {
           primaryKey: true
         },
         branch_id: {
-          type: DataTypes.INTEGER,
+          type: DataTypes.UUID,
           references: {
             model: {
               tableName: 'tbl_branch'

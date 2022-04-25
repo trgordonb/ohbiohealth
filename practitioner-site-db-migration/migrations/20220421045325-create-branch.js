@@ -3,9 +3,10 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('tbl_branch', {
       branch_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false,
         primaryKey: true,
+        defaultValue: Sequelize.UUIDV4
       },
       description: {
         type: Sequelize.STRING
