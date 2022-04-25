@@ -22,7 +22,7 @@ spec:
             value: practitioner-site-oh-mysql-srv
       - name: db-migrations
         image: ohbiohealth/dbmigrations
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         command: ['npm', 'run', "db:migrate:cleanall"]
         env:
           - name: MYSQL_HOST
