@@ -5,6 +5,8 @@ import jwt from 'jsonwebtoken';
 import { Password } from '../services/password';
 import { User } from '../models/user';
 import { BadRequestError, validateRequest } from '@ohbiohealth/common';
+import { PNTokenSubmittedPublisher } from '../events/publishers/pntoken-submitted-publisher';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -35,6 +37,13 @@ router.post(
       throw new BadRequestError('Invalid Credentials');
     }
 
+    if (req.body.token) {
+      //send a receive mobile device PN token event
+      await new PNTokenSubmittedPublisher(natsWrapper.client).publish({
+        userId: existingUser._id,
+        token: req.body.token
+      })
+    }
     // Generate JWT
     const userJwt = jwt.sign(
       {

@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { app } from './app';
 import { natsWrapper } from './nats-wrapper';
+import { TokenSubmittedListener } from './events/listeners/token-submitted-listener';
 
 const start = async () => {
   console.log("Device service starting...")
@@ -32,6 +33,8 @@ const start = async () => {
     });
     process.on('SIGINT', () => natsWrapper.client.close());
     process.on('SIGTERM', () => natsWrapper.client.close());
+
+    new TokenSubmittedListener(natsWrapper.client).listen()
 
     await mongoose.connect(process.env.MONGO_URI);
     console.log('Connected to MongoDb');
