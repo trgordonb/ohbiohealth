@@ -43,7 +43,8 @@ def backup_mongo_to_S3(collection, file_name, isProfile):
             del df['email']
             del df['devices']
             del df['orders']
-            df['painconditions']=[str(x) for x in df['painconditions']]
+            if 'painconditions' in df.columns:
+                df['painconditions']=[str(x) for x in df['painconditions']]
         else:
             df['_id'] = [str(x) for x in df['_id']]
         table = pa.Table.from_pandas(df,preserve_index=False)
