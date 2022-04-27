@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: practitioner-site-oh-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: practitioner-site-oh
+  template:
+    metadata:
+      labels:
+        app: practitioner-site-oh
+    spec:
+      initContainers:
+      - name: wait-for-mysql
+        image: busybox:latest
+        imagePullPolicy: IfNotPresent
+        command: ['sh', '-c', 'until nc -vz ${POD_SVC} 3306; do echo "Waiting for mysql..."; sleep 3; done;']
+        env:
+          - name: POD_SVC
+            value: practitioner-site-oh-mysql-srv
+      containers:
+        - name: practitioner-site-oh
+          image: ohbiohealth/practitioner-site-oh
+          env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: healthnet
+            - name: IDENTITY_SERVICE_URL
+              value: 'http://identity-srv:3000/api/identities'
+            - name: MYSQL_HOST
+              value: practitioner-site-oh-mysql-srv
+            - name: MYSQL_DB
+              value: oh
+            - name: MYSQL_USER
+              value: ensemble
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: ADMIN_USER_PASSWORD
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: admin-password
+                  key: ADMIN_PASSWORD
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: healthnet
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: practitioner-site-oh-srv
+spec:
+  selector:
+    app: practitioner-site-oh
+  ports:
+    - name: practitioner-site-oh
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
