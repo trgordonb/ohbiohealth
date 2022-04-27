@@ -28,7 +28,7 @@
     "prop-types": "^15.8.1",
     "react": "17.0.2",
     "react-chatbot-kit": "^2.0.1",
-    "react-cloudinary-upload-widget": "^1.5.0",
+    "react-cloudinary-upload-widget": "^1.4.3",
     "react-conditionally-render": "^1.0.2",
     "react-cookie-consent": "^7.0.1",
     "react-dom": "17.0.2",
