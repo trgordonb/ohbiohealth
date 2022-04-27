@@ -36,10 +36,10 @@ AppComponent.getInitialProps = async (appContext) => {
   if (appContext.Component.getInitialProps) {
     pageProps = await appContext.Component.getInitialProps(appContext.ctx, client, data.currentUser);
   }
-  const resEN = await fetch('https://cms.ohbiohealth.club/documents?type=contact', {
+  const resEN = await fetch('http://ensemble-tech.xyz/api/documents/?filters[type]=contact&&filters[client]=oh', {
     method: 'GET', ...options
   })
-  const resZH = await fetch('https://cms.ohbiohealth.club/documents?type=contact&&_locale=zh-Hant&&', {
+  const resZH = await fetch('http://ensemble-tech.xyz/api/documents/?locale=zh-Hant-HK&&filters[type]=contact&&filters[client]=oh', {
     method: 'GET', ...options
   })
   const contactEN = await resEN.json()
@@ -49,8 +49,8 @@ AppComponent.getInitialProps = async (appContext) => {
     pageProps,
     ...data,
     contact: {
-      en: contactEN,
-      zh: contactZH
+      en: contactEN.data[0].attributes,
+      zh: contactZH.data[0].attributes
     }
   }
 }

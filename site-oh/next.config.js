@@ -7,7 +7,9 @@ module.exports = {
   images: {
     domains: [
       'cms.ohbiohealth.club',
-      'ohbiohealth.shop'
+      'ohbiohealth.shop',
+      'ensemble-tech.xyz',
+      'ensemble-cms.s3.amazonaws.com'
     ]
   }
 };

@@ -59,8 +59,8 @@ export const Faq = (data) => {
               {
                   data.data.map(item => (
                   <>
-                    <Item title={item.question}>
-                        {item.answer}
+                    <Item title={item.attributes.question}>
+                        {item.attributes.answer}
                     </Item>
                   </>))
               }

@@ -19,7 +19,7 @@ export default function NewFooter(props) {
                     <p className="text-base font-bold tracking-wide text-gray-300">{t('contact')}</p>
                     <div className="flex">
                         <ReactMarkdown className="mt-2 text-base leading-2 whitespace-pre-wrap text-gray-300">
-                            {i18n.language === 'en' ? props.data.en[0].text: props.data.zh[0].text}
+                            {i18n.language === 'en' ? props.data.en.text: props.data.zh.text}
                         </ReactMarkdown>
                     </div>
                 </div>

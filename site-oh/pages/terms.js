@@ -2,12 +2,12 @@ import ReactMarkdown from 'react-markdown';
 
 TermsPage.getInitialProps = async (ctx) => {
     const options = { headers: new Headers({'Content-Type': 'application/json'}) }
-    const res = await fetch('https://cms.ohbiohealth.club/documents?type=termsofuse', {
+    const res = await fetch('http://ensemble-tech.xyz/api/documents/?filters[type]=termsofuse&&filters[client]=oh', {
         method: 'GET', ...options
     })
     const data = await res.json()
     return {
-        data: data[0].text
+        data: data.data[0].attributes.text
     }
 }
 
