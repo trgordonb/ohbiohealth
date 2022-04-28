@@ -2,7 +2,7 @@ import ReactMarkdown from 'react-markdown';
 
 PrivacyPage.getInitialProps = async (ctx) => {
     const options = { headers: new Headers({'Content-Type': 'application/json'}) }
-    const res = await fetch('http://ensemble-tech.xyz/api/documents/?filters[type]=privacy&&filters[client]=oh', {
+    const res = await fetch('https://ensemble-tech.xyz/api/documents/?filters[type]=privacy&&filters[client]=oh', {
         method: 'GET', ...options
     })
     const data = await res.json()

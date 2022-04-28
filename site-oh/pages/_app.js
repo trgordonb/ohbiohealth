@@ -36,10 +36,10 @@ AppComponent.getInitialProps = async (appContext) => {
   if (appContext.Component.getInitialProps) {
     pageProps = await appContext.Component.getInitialProps(appContext.ctx, client, data.currentUser);
   }
-  const resEN = await fetch('http://ensemble-tech.xyz/api/documents/?filters[type]=contact&&filters[client]=oh', {
+  const resEN = await fetch('https://ensemble-tech.xyz/api/documents/?filters[type]=contact&&filters[client]=oh', {
     method: 'GET', ...options
   })
-  const resZH = await fetch('http://ensemble-tech.xyz/api/documents/?locale=zh-Hant-HK&&filters[type]=contact&&filters[client]=oh', {
+  const resZH = await fetch('https://ensemble-tech.xyz/api/documents/?locale=zh-Hant-HK&&filters[type]=contact&&filters[client]=oh', {
     method: 'GET', ...options
   })
   const contactEN = await resEN.json()

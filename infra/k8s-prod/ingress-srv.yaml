@@ -77,3 +77,6 @@ spec:
   - hosts:
     - linkaiq.xyz
     secretName: linkaiq-xyz-tls
+  - hosts:
+    - ensemble-tech.xyz
+    secretName: ensemble-xyz-tls

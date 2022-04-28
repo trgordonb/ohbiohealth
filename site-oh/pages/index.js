@@ -14,13 +14,13 @@ HomePage.getInitialProps = async (ctx) => {
   const mailChimpUrl = process.env.NEXT_PUBLIC_MAILCHIMP_URL
   const storeId = process.env.NEXT_PUBLIC_ECWID_STOREID
   const options = {headers: new Headers({'Content-Type': 'application/json'})}
-  const resEN = await fetch('http://ensemble-tech.xyz/api/documents/?filters[client]=oh', {
+  const resEN = await fetch('https://ensemble-tech.xyz/api/documents/?filters[client]=oh', {
     method: 'GET', ...options
   })
-  const resZH = await fetch('http://ensemble-tech.xyz/api/documents/?locale=zh-Hant-HK&&filters[client]=oh', {
+  const resZH = await fetch('https://ensemble-tech.xyz/api/documents/?locale=zh-Hant-HK&&filters[client]=oh', {
     method: 'GET', ...options
   })
-  const resFAQ = await fetch('http://ensemble-tech.xyz/api/faqs/?filters[client]=oh', {
+  const resFAQ = await fetch('https://ensemble-tech.xyz/api/faqs/?filters[client]=oh', {
     method: 'GET', ...options
   })
   const dataEN = await resEN.json()
@@ -156,10 +156,10 @@ export default function HomePage({ currentUser, data }) {
             <h3 className="text-3xl text-gray-900 font-semibold">{t('services')}</h3>
             <div className='mt-20 flex flex-wrap'>
               <div className="w-full sm:w-1/2 m-15 mx-auto my-auto">
-                <Image className='mx-auto my-auto' src="http://ensemble-cms.s3.amazonaws.com/Onour_0072e04b3b.png?updated_at=2022-04-27T05:27:34.083Z" width={200} height={200}/>
+                <Image className='mx-auto my-auto' src="https://ensemble-cms.s3.amazonaws.com/Onour_0072e04b3b.png?updated_at=2022-04-27T05:27:34.083Z" width={200} height={200}/>
               </div>
               <div className="w-full sm:w-1/2 m-15 mx-auto my-auto">
-                <Image className='mx-auto my-auto' src="http://ensemble-cms.s3.amazonaws.com/woopie_905b0cf195.png?updated_at=2022-04-27T05:27:34.462Z" width={200} height={200}/>
+                <Image className='mx-auto my-auto' src="https://ensemble-cms.s3.amazonaws.com/woopie_905b0cf195.png?updated_at=2022-04-27T05:27:34.462Z" width={200} height={200}/>
               </div>
             </div> 
         </div>
@@ -167,10 +167,10 @@ export default function HomePage({ currentUser, data }) {
             <h3 className="text-3xl text-gray-900 font-semibold">{t('partners')}</h3>
             <div className='mt-20 flex flex-wrap'>
               <div className="w-full sm:w-1/2 m-15 mx-auto my-auto">
-                <Image className='mx-auto my-auto' src="http://ensemble-cms.s3.amazonaws.com/cyberport_145c5db3d0.png?updated_at=2022-04-27T05:27:34.426Z" width={200} height={200}/>
+                <Image className='mx-auto my-auto' src="https://ensemble-cms.s3.amazonaws.com/cyberport_145c5db3d0.png?updated_at=2022-04-27T05:27:34.426Z" width={200} height={200}/>
               </div>
               <div className="w-full sm:w-1/2 m-15 mx-auto my-auto">
-                <Image className='mx-auto my-auto' src="http://ensemble-cms.s3.amazonaws.com/jade_679f58d26e.png?updated_at=2022-04-27T05:27:34.422Z" width={200} height={200}/>
+                <Image className='mx-auto my-auto' src="https://ensemble-cms.s3.amazonaws.com/jade_679f58d26e.png?updated_at=2022-04-27T05:27:34.422Z" width={200} height={200}/>
               </div>
             </div>
         </div>
