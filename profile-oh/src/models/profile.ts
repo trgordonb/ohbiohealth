@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import { Gender } from '@ohbiohealth/common';
 import { DeviceDoc } from './device'
 import { OrderDoc } from './order'
+import { CertDoc } from './cert'
 import { PainConditionsDoc, PainConditionsModel } from './painconditions'
 import { ProfileSavedPublisher } from '../events/publishers/profile-saved-publisher'
 import { natsWrapper } from '../nats-wrapper'
@@ -15,6 +16,7 @@ interface ProfileAttrs {
     height?: Number;
     devices?: [DeviceDoc];
     orders?: [OrderDoc];
+    certs?: [CertDoc];
     painconditions?: PainConditionsDoc;
 }
 
@@ -27,6 +29,7 @@ interface ProfileDoc extends mongoose.Document {
     height?: Number;
     devices?: [DeviceDoc];
     orders?: [OrderDoc];
+    certs?: [CertDoc];
     painconditions?: PainConditionsDoc;
 }
 
@@ -59,11 +62,15 @@ const profileSchema = new mongoose.Schema<ProfileDoc, ProfileModel, PainConditio
     }, 
     devices: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Device',
+        ref: 'Device'
     }],
     orders: [{
         type: String,
         ref: 'Order'
+    }],
+    certs: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Cert'
     }],
     painconditions: {
         type: mongoose.Schema.Types.ObjectId,

@@ -8,6 +8,7 @@ import { indexProfileRouter } from './routes/index';
 import { updateProfileRouter } from './routes/update';
 import { showProfileRouter } from './routes/show';
 import { newOrderRouter } from './routes/neworder';
+import { newCertRouter } from './routes/newcert';
 
 const app = express();
 app.set('trust proxy', true);
@@ -24,6 +25,7 @@ app.use(indexProfileRouter);
 app.use(updateProfileRouter);
 app.use(showProfileRouter);
 app.use(newOrderRouter);
+app.use(newCertRouter);
 
 app.all('*', async (req, res) => {
   throw new NotFoundError();

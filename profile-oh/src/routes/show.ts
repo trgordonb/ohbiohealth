@@ -12,7 +12,7 @@ router.get(
   '/api/profiles/:userId',
   requireAuth,
   async (req: Request, res: Response) => {
-    const profile = await Profile.findById(req.params.userId).populate('devices').populate('orders').populate('painconditions')
+    const profile = await Profile.findById(req.params.userId).populate('devices').populate('orders').populate('painconditions').populate('certs')
 
     if (!profile) {
       throw new NotFoundError();
