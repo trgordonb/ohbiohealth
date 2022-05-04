@@ -7,6 +7,16 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
+    - host: linkaiq.abc
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: wp-srv
+                port:
+                  number: 80
     - host: ensembletech.abc
       http:
         paths:

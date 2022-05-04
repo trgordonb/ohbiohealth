@@ -11,6 +11,16 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   rules:
+    - host: ensemble-tech.shop
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: wp-srv
+                port:
+                  number: 80
     - host: ensemble-tech.xyz
       http:
         paths:
@@ -80,3 +90,6 @@ spec:
   - hosts:
     - ensemble-tech.xyz
     secretName: ensemble-xyz-tls
+  - hosts:
+    - ensemble-tech.shop
+    secretName: ensemble-shop-tls
