@@ -69,6 +69,7 @@ spec:
         volumeMounts:
         - name: mysql-wp-storage
           mountPath: /var/lib/mysql
+          subPath: ensemble
       volumes:
       - name: mysql-wp-storage
         persistentVolumeClaim:
