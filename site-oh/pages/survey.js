@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
 import Script from 'next/script'
-import bodyback from '../public/images/bodyback.jpg'
-import bodyfront from '../public/images/bodyfront.jpg'
-import bodyLeft from '../public/images/bodyleft.jpg'
-import bodyRight from '../public/images/bodyright.jpg'
+import bodyback from '/images/bodyback.jpg'
+import bodyfront from '/images/bodyfront.jpg'
+import bodyLeft from '/images/bodyleft.jpg'
+import bodyRight from '/images/bodyright.jpg'
 import axios from 'axios'
 
 const SurveyPage = ({ currentUser }) => {
