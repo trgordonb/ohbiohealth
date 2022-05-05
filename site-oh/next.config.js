@@ -9,7 +9,8 @@ module.exports = {
       'cms.ohbiohealth.club',
       'ohbiohealth.shop',
       'ensemble-tech.xyz',
-      'ensemble-cms.s3.amazonaws.com'
+      'ensemble-cms.s3.amazonaws.com',
+      'ensemble-tech.shop'
     ]
   }
 };

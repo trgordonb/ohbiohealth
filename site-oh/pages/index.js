@@ -12,7 +12,6 @@ import { Faq } from '../components/Faq'
 
 HomePage.getInitialProps = async (ctx) => {
   const mailChimpUrl = process.env.NEXT_PUBLIC_MAILCHIMP_URL
-  const storeId = process.env.NEXT_PUBLIC_ECWID_STOREID
   const options = {headers: new Headers({'Content-Type': 'application/json'})}
   const resEN = await fetch('https://ensemble-tech.xyz/api/documents/?filters[client]=oh', {
     method: 'GET', ...options
@@ -26,11 +25,9 @@ HomePage.getInitialProps = async (ctx) => {
   const dataEN = await resEN.json()
   const dataZH = await resZH.json()
   const dataFAQ = await resFAQ.json()
-  console.log('aboutus:', dataFAQ.data)
   return { 
       data: {
           link: mailChimpUrl,
-          storeId: storeId,
           about: {
             en: dataEN.data.filter(item=> item.attributes.type==='aboutus')[0].attributes.text,
             zh: dataZH.data.filter(item=> item.attributes.type==='aboutus')[0].attributes.text
