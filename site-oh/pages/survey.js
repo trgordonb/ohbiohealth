@@ -2,11 +2,17 @@ import { useState } from "react";
 import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
 import Script from 'next/script'
-import bodyback from '/images/bodyback.jpg'
-import bodyfront from '/images/bodyfront.jpg'
-import bodyLeft from '/images/bodyleft.jpg'
-import bodyRight from '/images/bodyright.jpg'
+//import bodyback from '/images/bodyback.jpg'
+//import bodyfront from '/images/bodyfront.jpg'
+//import bodyLeft from '/images/bodyleft.jpg'
+//import bodyRight from '/images/bodyright.jpg'
 import axios from 'axios'
+
+const bodyback = 'https://ensemble-cms.s3.amazonaws.com/bodyback_53bf1d3b44.jpg?updated_at=2022-05-06T01:59:57.846Z'
+const bodyfront = 'https://ensemble-cms.s3.amazonaws.com/bodyfront_f087c52bb1.jpg?updated_at=2022-05-06T01:59:57.958Z'
+const bodyLeft = 'https://ensemble-cms.s3.amazonaws.com/bodyleft_ec1e30dc20.jpg?updated_at=2022-05-06T01:59:57.980Z'
+const bodyRight = 'https://ensemble-cms.s3.amazonaws.com/bodyright_edf6ad9653.jpg?updated_at=2022-05-06T01:59:58.056Z'
+
 
 const SurveyPage = ({ currentUser }) => {
     const { t } = useTranslation()
