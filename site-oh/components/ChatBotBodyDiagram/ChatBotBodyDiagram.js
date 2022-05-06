@@ -3,10 +3,11 @@ import ConditionallyRender from 'react-conditionally-render'
 import ChatBotInfoBox from "../ChatBotInfoBox/ChatBotInfoBox"
 import styles from './ChatBotBodyDiagram.module.css'
 import Image from "next/image";
-import bodyback from '../../public/images/bodyback.jpg'
-import bodyfront from '../../public/images/bodyfront.jpg'
-import bodyLeft from '../../public/images/bodyleft.jpg'
-import bodyRight from '../../public/images/bodyright.jpg'
+
+const bodyback = 'https://ensemble-cms.s3.amazonaws.com/bodyback_53bf1d3b44.jpg?updated_at=2022-05-06T01:59:57.846Z'
+const bodyfront = 'https://ensemble-cms.s3.amazonaws.com/bodyfront_f087c52bb1.jpg?updated_at=2022-05-06T01:59:57.958Z'
+const bodyLeft = 'https://ensemble-cms.s3.amazonaws.com/bodyleft_ec1e30dc20.jpg?updated_at=2022-05-06T01:59:57.980Z'
+const bodyRight = 'https://ensemble-cms.s3.amazonaws.com/bodyright_edf6ad9653.jpg?updated_at=2022-05-06T01:59:58.056Z'
 
 const ChatBotBodyDiagram = ({ infoBox, bodyPart, setState }) => {
   useEffect(() => {

@@ -2,10 +2,6 @@ import { useState } from "react";
 import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
 import Script from 'next/script'
-//import bodyback from '/images/bodyback.jpg'
-//import bodyfront from '/images/bodyfront.jpg'
-//import bodyLeft from '/images/bodyleft.jpg'
-//import bodyRight from '/images/bodyright.jpg'
 import axios from 'axios'
 
 const bodyback = 'https://ensemble-cms.s3.amazonaws.com/bodyback_53bf1d3b44.jpg?updated_at=2022-05-06T01:59:57.846Z'
