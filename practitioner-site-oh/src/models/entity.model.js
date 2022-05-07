@@ -18,6 +18,10 @@ const buildEntity = (sequelize) => {
             key: 'branch_id'
           },
         },
+        entityName: {
+          type: DataTypes.STRING(60),
+          allowNull: false
+        },
         gender: {
           type: DataTypes.ENUM('M','F'),
           allowNull: false
@@ -29,6 +33,15 @@ const buildEntity = (sequelize) => {
         occupation: {
           type: DataTypes.STRING(45),
           allowNull: false
+        },
+        bpSystolic: {
+          type: DataTypes.INTEGER
+        },
+        bpDiastolic: {
+          type: DataTypes.INTEGER
+        },
+        bloodSugarLevel: {
+          type: DataTypes.FLOAT
         },
         enteredBy: {
           type: DataTypes.UUID,

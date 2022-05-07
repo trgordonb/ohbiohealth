@@ -14,8 +14,9 @@ const DiagnosisResource = {
         },
         date: {
             isVisible: {
-                list: false, filter: false, show: true, edit: false
+                list: true, filter: false, show: true, edit: false
             },
+            type: 'date',
             position: 3
         },
         category: {
@@ -90,6 +91,13 @@ const DiagnosisResource = {
             },
             position: 15
         },
+        remark: {
+            isVisible: {
+                list: false, filter: false, show: true, edit: true
+            },
+            position: 16,
+            type: 'textarea',
+        },
         createdAt: {
             isVisible: false
         },
@@ -111,7 +119,8 @@ const DiagnosisResource = {
                     enteredBy: currentAdmin.userId
                 }
                 return request
-            }
+            },
+            showInDrawer: true
         },
         list: {
             before: async (request, context) => {
@@ -128,6 +137,12 @@ const DiagnosisResource = {
                     return request
                 }           
             }
+        },
+        edit: {
+            showInDrawer: true
+        },
+        show: {
+            showInDrawer: true
         }
     }
 }

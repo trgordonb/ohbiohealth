@@ -133,6 +133,9 @@ const buildDiagnosis = (sequelize) => {
               key: 'acupt_id'
             },
         },
+        remark: {
+          type: DataTypes.TEXT
+        },
         enteredBy: {
           type: DataTypes.UUID,
         }

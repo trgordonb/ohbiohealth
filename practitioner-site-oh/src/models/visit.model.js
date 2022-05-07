@@ -72,6 +72,9 @@ const buildVisit = (sequelize) => {
         symptom_raise: {
             type: DataTypes.INTEGER
         },
+        remark: {
+            type: DataTypes.TEXT
+        },
         enteredBy: {
             type: DataTypes.UUID,
         }

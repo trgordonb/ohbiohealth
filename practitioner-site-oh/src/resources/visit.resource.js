@@ -14,9 +14,10 @@ const VisitResource = {
         },
         date: {
             isVisible: {
-                list: false, filter: false, show: true, edit: false
+                list: true, filter: false, show: true, edit: false
             },
-            position: 3
+            position: 3,
+            type: 'date',
         },
         duration: {
             isVisible: {
@@ -54,6 +55,13 @@ const VisitResource = {
             },
             position: 9
         },
+        remark: {
+            isVisible: {
+                list: false, filter: false, show: true, edit: true
+            },
+            position: 10,
+            type: 'textarea',
+        },
         createdAt: {
             isVisible: false
         },
@@ -75,7 +83,8 @@ const VisitResource = {
                     enteredBy: currentAdmin.userId
                 }
                 return request
-            }
+            },
+            showInDrawer: true
         },
         list: {
             before: async (request, context) => {
@@ -92,6 +101,12 @@ const VisitResource = {
                     return request
                 }           
             }
+        },
+        edit: {
+            showInDrawer: true
+        },
+        show: {
+            showInDrawer: true
         }
     }
 }

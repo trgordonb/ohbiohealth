@@ -85,7 +85,11 @@ const run = async () => {
     branding: {
       logo: false,
       companyName: 'OH Biohealth',
-      softwareBrothers: false
+      softwareBrothers: false,
+      theme: {
+        fontSizes: 'md',
+        lineHeights: 'md'
+      }
     },
     locale: {
       translations: {
@@ -130,12 +134,15 @@ const run = async () => {
               logout: '登出',
               confirmRemovalMany: '確認刪除 {{count}} 條記錄',
               confirmRemovalMany_plural: '確認刪除 {{count}} 條記錄',
+              createFirstRecord: '添加新記錄'
           },
           messages: {
               theseRecordsWillBeRemoved: '以下記錄將被刪除',
               confirmDelete: '你真的要刪除這個項目嗎?',
               invalidCredentials: '錯誤的電子郵件和/或密碼',
               loginWelcome: 'OH Biohealth 客戶痛症記錄系統',
+              noRecordsInResource: '此項目中沒有記錄',
+              noRecords: '無記錄',
           },
           resources: {
               Dashboard: {
@@ -146,10 +153,14 @@ const run = async () => {
               tbl_entity: {
                   properties: {
                     entity_id: '客戶編號',
+                    entityName: '姓名',
                     branch_id: '群組',
                     gender: '性别 (M/F)',
                     birthyear: '出生年',
-                    occupation: '職業'
+                    occupation: '職業',
+                    bpSystolic: '上壓',
+                    bpDiastolic: '下壓',
+                    bloodSugarLevel: '血糖水平'
                   }
               },
               tbl_visit: {
@@ -158,6 +169,7 @@ const run = async () => {
                       branch_id: '群組',
                       duration: '經歷痛楚達(月份)',
                       date: '日期',
+                      remark: '備註',
                       symptom_loc1: '痛部位1',
                       symptom_loc2: '痛部位2',
                       symptom_cause: '痛因',
@@ -171,6 +183,7 @@ const run = async () => {
                       branch_id: '群組',
                       date: '日期',
                       category: '痛類別',
+                      remark: '備註',
                       apply_minute: '儀器使用時間(分鐘)',
                       qe_acupt_1: '經絡儀位置1',
                       qe_acupt_2: '經絡儀位置2',

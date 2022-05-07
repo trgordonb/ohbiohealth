@@ -100,6 +100,13 @@ sql_engine = create_engine(mysql_conn_str)
 backup_mysql_to_S3('''SELECT * from tbl_entity''', sql_engine, 'entity.parquet')
 backup_mysql_to_S3('''SELECT * from tbl_visit''', sql_engine, 'visit.parquet')
 backup_mysql_to_S3('''SELECT * from tbl_visit_diag''', sql_engine, 'visit.diag.parquet')
+backup_mysql_to_S3('''SELECT * from tbl_branch''', sql_engine, 'branch.parquet')
+backup_mysql_to_S3('''SELECT * from tbl_acupt''', sql_engine, 'acupt.parquet')
+backup_mysql_to_S3('''SELECT * from tbl_bodyloc''', sql_engine, 'bodyloc.parquet')
+backup_mysql_to_S3('''SELECT * from tbl_cause''', sql_engine, 'cause.parquet')
+backup_mysql_to_S3('''SELECT * from tbl_cat''', sql_engine, 'category.parquet')
+backup_mysql_to_S3('''SELECT * from tbl_consq''', sql_engine, 'consequence.parquet')
+
 
 mongo_uri = 'mongodb://{host}:27017'.format(host=mongohost)
 mongo_client = MongoClient(mongo_uri)

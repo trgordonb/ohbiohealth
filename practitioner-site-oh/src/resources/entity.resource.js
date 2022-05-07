@@ -8,17 +8,33 @@ const EntityResource = {
             isVisible: { list: true, filter: true, show: true, edit: true },
             position: 2
         },
-        gender: {
+        entityName: {
             isVisible: { list: true, filter: true, show: true, edit: true },
             position: 3
         },
-        birthyear: {
+        gender: {
             isVisible: { list: true, filter: true, show: true, edit: true },
             position: 4
         },
-        occupation: {
+        birthyear: {
             isVisible: { list: true, filter: true, show: true, edit: true },
             position: 5
+        },
+        occupation: {
+            isVisible: { list: true, filter: true, show: true, edit: true },
+            position: 6
+        },
+        bpSystolic: {
+            isVisible: { list: false, filter: true, show: true, edit: true },
+            position: 7
+        },
+        bpDiastolic: {
+            isVisible: { list: false, filter: true, show: true, edit: true },
+            position: 8
+        },
+        bloodSugarLevel: {
+            isVisible: { list: false, filter: true, show: true, edit: true },
+            position: 9
         },
         createdAt: {
             isVisible: false
@@ -41,7 +57,8 @@ const EntityResource = {
                     enteredBy: currentAdmin.userId
                 }
                 return request
-            }
+            },
+            showInDrawer: true
         },
         list: {
             before: async (request, context) => {
@@ -57,7 +74,13 @@ const EntityResource = {
                 } else {
                     return request
                 }           
-            }
+            },
+        },
+        edit: {
+            showInDrawer: true
+        },
+        show: {
+            showInDrawer: true
         }
     }
 }

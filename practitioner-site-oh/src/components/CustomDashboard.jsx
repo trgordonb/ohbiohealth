@@ -1,14 +1,11 @@
-import { Box, H3 } from '@adminjs/design-system'
+import { Box, H1 } from '@adminjs/design-system'
 
 const CustomDashboard = () => {
 
   return (
     <Box variant="grey">
-      <Box variant="white">
-        <H3>Here you can specify a totally custom dashboard</H3>
-        <Box>
-          <p>This is some random text</p>
-        </Box>
+      <Box flex variant="white" style={{justifyContent: 'center'}}>
+        <H1>OH 客戶痛症記錄系統</H1>
       </Box>
     </Box>
   )
