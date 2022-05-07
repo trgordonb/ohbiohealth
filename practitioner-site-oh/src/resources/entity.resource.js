@@ -10,7 +10,8 @@ const EntityResource = {
         },
         entityName: {
             isVisible: { list: true, filter: true, show: true, edit: true },
-            position: 3
+            position: 3,
+            isTitle: true
         },
         gender: {
             isVisible: { list: true, filter: true, show: true, edit: true },
