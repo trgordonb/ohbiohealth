@@ -108,6 +108,7 @@ const run = async () => {
               navigation: '選單',
               selectedRecords: '已選 ({{selected}})',
               loginWelcome: '歡迎',
+              dashboard: '控制台'
           },
           properties: {
               length: '長',
