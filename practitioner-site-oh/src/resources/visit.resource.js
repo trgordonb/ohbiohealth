@@ -17,7 +17,7 @@ const VisitResource = {
         },
         date: {
             isVisible: {
-                list: true, filter: false, show: true, edit: false
+                list: true, filter: false, show: true, edit: true
             },
             position: 3,
             type: 'date',

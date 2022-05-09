@@ -17,7 +17,7 @@ const DiagnosisResource = {
         },
         date: {
             isVisible: {
-                list: true, filter: false, show: true, edit: false
+                list: true, filter: false, show: true, edit: true
             },
             type: 'date',
             position: 3
