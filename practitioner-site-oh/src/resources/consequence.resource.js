@@ -22,7 +22,7 @@ const ConsequenceResource = {
             isAccessible: ({ currentAdmin }) => currentAdmin && currentAdmin.role === 'admin',
         },
         list: {
-            isAccessible: true
+            isAccessible: false
         },
         delete: {
             isAccessible: ({ currentAdmin }) => currentAdmin && currentAdmin.role === 'admin',

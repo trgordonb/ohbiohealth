@@ -1,5 +1,8 @@
 const DiagnosisResource = {
     properties: {
+        _id: {
+            isVisible: false
+        },
         entity_id: {
             isVisible: {
                 list: true, filter: true, show: true, edit: true
@@ -33,61 +36,61 @@ const DiagnosisResource = {
         },
         qe_acupt_1: {
             isVisible: {
-                list: false, filter: true, show: true, edit: true
+                list: false, filter: false, show: true, edit: true
             },
             position: 6
         },
         qe_acupt_2: {
             isVisible: {
-                list: false, filter: true, show: true, edit: true
+                list: false, filter: false, show: true, edit: true
             },
             position: 7
         },
         qe_acupt_3: {
             isVisible: {
-                list: false, filter: true, show: true, edit: true
+                list: false, filter: false, show: true, edit: true
             },
             position: 8
         },
         bem_acupt_1: {
             isVisible: {
-                list: false, filter: true, show: true, edit: true
+                list: false, filter: false, show: true, edit: true
             },
             position: 9
         },
         bem_acupt_2: {
             isVisible: {
-                list: false, filter: true, show: true, edit: true
+                list: false, filter: false, show: true, edit: true
             },
             position: 10
         },
         bem_acupt_3: {
             isVisible: {
-                list: false, filter: true, show: true, edit: true
+                list: false, filter: false, show: true, edit: true
             },
             position: 11
         },
         bem_acupt_4: {
             isVisible: {
-                list: false, filter: true, show: true, edit: true
+                list: false, filter: false, show: true, edit: true
             },
             position: 12
         },
         bem_acupt_5: {
             isVisible: {
-                list: false, filter: true, show: true, edit: true
+                list: false, filter: false, show: true, edit: true
             },
             position: 13
         },
         bem_acupt_6: {
             isVisible: {
-                list: false, filter: true, show: true, edit: true
+                list: false, filter: false, show: true, edit: true
             },
             position: 14
         },
         bem_acupt_7: {
             isVisible: {
-                list: false, filter: true, show: true, edit: true
+                list: false, filter: false, show: true, edit: true
             },
             position: 15
         },
@@ -106,7 +109,7 @@ const DiagnosisResource = {
         },
         enteredBy: {
             isVisible: {
-                list: false, filter: true, show: false, edit: false
+                list: false, filter: false, show: false, edit: false
             }
         }
     },

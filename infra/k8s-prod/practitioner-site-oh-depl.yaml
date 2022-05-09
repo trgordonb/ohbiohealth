@@ -20,6 +20,27 @@ spec:
         env:
           - name: POD_SVC
             value: practitioner-site-oh-mysql-srv
+      - name: db-migrations
+        image: ohbiohealth/dbmigrations
+        imagePullPolicy: IfNotPresent
+        command: ['npm', 'run', "db:migrate:cleanall"]
+        env:
+          - name: MYSQL_HOST
+            value: practitioner-site-oh-mysql-srv
+          - name: MYSQL_DB
+            value: oh
+          - name: MYSQL_USER
+            value: ensemble
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secrets
+                key: ADMIN_USER_PASSWORD
+          - name: ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: admin-password
+                key: ADMIN_PASSWORD
       containers:
         - name: practitioner-site-oh
           image: ohbiohealth/practitioner-site-oh

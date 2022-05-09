@@ -4,15 +4,21 @@ const VisitSavedPublisher = require('../events/publishers/visit-saved-publisher'
 
 const buildVisit = (sequelize) => {
     const Visit = sequelize.define('Visit', {
+        _id: {
+            type: DataTypes.UUID,
+            allowNull: false,
+            primaryKey: true,
+            defaultValue: DataTypes.UUIDV4
+        },
         entity_id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUID,
             allowNull: false,
             references: {
                 model: {
                     tableName: 'tbl_entity'
                 },
                 key: 'entity_id'
-            }
+            },
         },
         branch_id: {
             type: DataTypes.UUID,
@@ -26,7 +32,6 @@ const buildVisit = (sequelize) => {
         },
         date: {
             type: DataTypes.DATE,
-            primaryKey: true,
             defaultValue: DataTypes.NOW
         },
         duration: {
@@ -71,6 +76,15 @@ const buildVisit = (sequelize) => {
         },
         symptom_raise: {
             type: DataTypes.INTEGER
+        },
+        bpSystolic: {
+            type: DataTypes.INTEGER
+        },
+        bpDiastolic: {
+            type: DataTypes.INTEGER
+        },
+        bloodSugarLevel: {
+            type: DataTypes.FLOAT
         },
         remark: {
             type: DataTypes.TEXT

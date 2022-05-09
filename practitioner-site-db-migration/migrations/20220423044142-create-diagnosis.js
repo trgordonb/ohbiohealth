@@ -2,9 +2,14 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('tbl_visit_diag', {
-      entity_id: {
-        type: Sequelize.INTEGER,
+      _id: {
+        type: Sequelize.UUID,
+        allowNull: false,
         primaryKey: true,
+        defaultValue: Sequelize.UUIDV4
+      },
+      entity_id: {
+        type: Sequelize.UUID,
         allowNull: false,
         references: {
           model: {
@@ -15,7 +20,6 @@ module.exports = {
       },
       branch_id: {
         type: Sequelize.UUID,
-        primaryKey: true,
         allowNull: false,
         references: {
           model: {
@@ -26,7 +30,6 @@ module.exports = {
       },
       date: {
         type: Sequelize.DATE,
-        primaryKey: true,
         allowNull: false
       },
       category: {
@@ -132,6 +135,9 @@ module.exports = {
           },
           key: 'acupt_id'
         },
+      },
+      remark: {
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,

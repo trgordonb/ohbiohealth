@@ -83,7 +83,7 @@ const run = async () => {
       app: '1.0.0'
     },
     branding: {
-      logo: false,
+      logo: 'https://ensemble-cms.s3.amazonaws.com/OH_Logo_6ccea87c39.jpg?updated_at=2022-05-09T14:14:22.925Z',
       companyName: 'OH Biohealth',
       softwareBrothers: false,
       theme: {
@@ -144,6 +144,7 @@ const run = async () => {
               loginWelcome: 'OH Biohealth 客戶痛症記錄系統',
               noRecordsInResource: '此項目中沒有記錄',
               noRecords: '無記錄',
+              successfullyCreated: '成功保存新紀錄',
           },
           resources: {
               Dashboard: {
@@ -159,14 +160,11 @@ const run = async () => {
                     gender: '性别 (M/F)',
                     birthyear: '出生年',
                     occupation: '職業',
-                    bpSystolic: '上壓',
-                    bpDiastolic: '下壓',
-                    bloodSugarLevel: '血糖水平'
                   }
               },
               tbl_visit: {
                   properties: {
-                      entity_id: '客戶編號',
+                      entity_id: '客戶',
                       branch_id: '群組',
                       duration: '經歷痛楚達(月份)',
                       date: '日期',
@@ -175,12 +173,15 @@ const run = async () => {
                       symptom_loc2: '痛部位2',
                       symptom_cause: '痛因',
                       symptom_consq: '痛後果',
-                      symptom_raise: '手或腳最多提昇角度'
+                      symptom_raise: '手或腳最多提昇角度',
+                      bpSystolic: '上壓',
+                      bpDiastolic: '下壓',
+                      bloodSugarLevel: '血糖水平'
                   }
               },
               tbl_visit_diag: {
                   properties: {
-                      entity_id: '客戶編號',
+                      entity_id: '客戶',
                       branch_id: '群組',
                       date: '日期',
                       category: '痛類別',

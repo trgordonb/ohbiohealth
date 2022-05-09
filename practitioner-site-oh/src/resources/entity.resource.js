@@ -1,7 +1,7 @@
 const EntityResource = {
     properties: {
         entity_id: {
-            isVisible: { list: true, filter: true, show: true, edit: false },
+            isVisible: false,
             position: 1
         },
         branch_id: {
@@ -25,18 +25,6 @@ const EntityResource = {
             isVisible: { list: true, filter: true, show: true, edit: true },
             position: 6
         },
-        bpSystolic: {
-            isVisible: { list: false, filter: true, show: true, edit: true },
-            position: 7
-        },
-        bpDiastolic: {
-            isVisible: { list: false, filter: true, show: true, edit: true },
-            position: 8
-        },
-        bloodSugarLevel: {
-            isVisible: { list: false, filter: true, show: true, edit: true },
-            position: 9
-        },
         createdAt: {
             isVisible: false
         },
@@ -45,7 +33,7 @@ const EntityResource = {
         },
         enteredBy: {
             isVisible: {
-                list: false, filter: true, show: false, edit: false
+                list: false, filter: false, show: false, edit: false
             }
         }
     },

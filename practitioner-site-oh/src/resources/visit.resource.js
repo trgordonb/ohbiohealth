@@ -1,5 +1,8 @@
 const VisitResource = {
     properties: {
+        _id: {
+            isVisible: false
+        },
         entity_id: {
             isVisible: {
                 list: true, filter: true, show: true, edit: true
@@ -55,11 +58,23 @@ const VisitResource = {
             },
             position: 9
         },
+        bpSystolic: {
+            isVisible: { list: false, filter: true, show: true, edit: true },
+            position: 10
+        },
+        bpDiastolic: {
+            isVisible: { list: false, filter: true, show: true, edit: true },
+            position: 11
+        },
+        bloodSugarLevel: {
+            isVisible: { list: false, filter: true, show: true, edit: true },
+            position: 12
+        },
         remark: {
             isVisible: {
                 list: false, filter: false, show: true, edit: true
             },
-            position: 10,
+            position: 13,
             type: 'textarea',
         },
         createdAt: {
@@ -70,7 +85,7 @@ const VisitResource = {
         },
         enteredBy: {
             isVisible: {
-                list: false, filter: true, show: false, edit: false
+                list: false, filter: false, show: false, edit: false
             }
         }
     },

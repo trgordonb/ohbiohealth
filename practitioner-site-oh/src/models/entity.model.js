@@ -5,9 +5,10 @@ const EntitySavedPublisher = require('../events/publishers/entity-saved-publishe
 const buildEntity = (sequelize) => {
     const Entity = sequelize.define('Entity', {
         entity_id : {
-          type: DataTypes.INTEGER,
-          autoIncrement: true,
-          primaryKey: true
+          type: DataTypes.UUID,
+          allowNull: false,
+          primaryKey: true,
+          defaultValue: DataTypes.UUIDV4
         },
         branch_id: {
           type: DataTypes.UUID,
@@ -33,15 +34,6 @@ const buildEntity = (sequelize) => {
         occupation: {
           type: DataTypes.STRING(45),
           allowNull: false
-        },
-        bpSystolic: {
-          type: DataTypes.INTEGER
-        },
-        bpDiastolic: {
-          type: DataTypes.INTEGER
-        },
-        bloodSugarLevel: {
-          type: DataTypes.FLOAT
         },
         enteredBy: {
           type: DataTypes.UUID,

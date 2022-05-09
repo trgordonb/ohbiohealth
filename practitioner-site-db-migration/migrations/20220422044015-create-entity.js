@@ -3,21 +3,24 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('tbl_entity', {
       entity_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        defaultValue: Sequelize.UUIDV4
       },
       branch_id: {
         type: Sequelize.UUID,
         allowNull: false,
-        primaryKey: true,
         references: {
           model: {
             tableName: 'tbl_branch'
           },
           key: 'branch_id'
         }
+      },
+      entityName: {
+        type: Sequelize.STRING(60),
+        allowNull: false
       },
       gender: {
         type: Sequelize.ENUM('M','F')
