@@ -6,7 +6,7 @@ const UserResource = {
             isVisible: false
         },
         password: {
-            type: 'string',
+            type: 'password',
             isVisible: {
                 list: false, edit: true, filter: false, show: false,
             }
